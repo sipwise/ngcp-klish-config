@@ -15,10 +15,9 @@ BASIC HOW-TO:
 
 1) Clone & Install NGCP-CLISH (https://github.com/sipwise/klish) and verify its working
 
-2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (launch script + directories)
+2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (launch script + clish directory)
     # /etc/cli.sh
     # /etc/clish
-    # /etc/clish-enable
     
 3) Add execution permisions to the launcher, ie:
     # chmod +x /etc/cli.sh

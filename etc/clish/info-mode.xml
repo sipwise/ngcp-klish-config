@@ -20,7 +20,7 @@
 		help="Turn on privileged commands"
 		lock="false"
 		interrupt="true">
-		<ACTION>su -l -c "clish -x /etc/clish-enable"</ACTION>
+		<ACTION>su -l -c "clish -x /etc/clish/clish-enable"</ACTION>
 	</COMMAND>
 
 </VIEW>
