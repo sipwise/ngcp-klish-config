@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+
+<STARTUP view="info-view">
+        <DETAIL>
+
+                    #######
+               #################
+             ######         ######
+            ####                ####
+           ###                    ###
+          ##                     EEEEEEEE
+          ##                   EEEEE  EEEEE
+          ##                  EEE        EEE
+          ##                  EE          EED
+           ###               EEE           EE
+            ###              EEE           EE
+             ## ####        ##EE          EEE
+             ##################EE        EEE
+            #####    #####     EEEEEE  EEEE
+            ####                 EEEEEEEE
+            ###                    EEEEEE
+            ##                        EEE
+     ####  ##  #####       E    E   E  EE    EEE   EEEEEE
+   ###### ### #######  ##  EE  EE  EEE EEE EEEEEE EEEEEEE
+   ######  ## ######## ##  EE  EE  EEE EEE EEEEED EEEEEEE
+   ####    ## ###   ## ##  EE  EE  EEE EEE EEE    EEE
+   ######  ## ###   ##     EE  EE  EEE EEE EEEEEE EEEEEE
+     ####  ## ###   ##     EE  EE  EEE EEE    EEE EEE
+    #####  ## ######## ##  EEEEEEEEEEE EEE   EEEE EEEEEEE
+   ######  ## #######  ##  EEEEEEEEEEE EEE EEEEEE  EEEEEE
+    ###     # ###            EEEEEEEE   E   EEE     DEEEE
+              ###
+
+  SIPWISE NGCP CE: Command Line (NGCLI)
+        </DETAIL>
+        <ACTION>echo "Welcome `whoami` it is `date`";echo</ACTION>
+</STARTUP>
+
+</CLISH_MODULE>
