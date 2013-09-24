@@ -14,7 +14,7 @@ HOW-TO:
 ======
 
 1) Clone & Install NGCP-CLISH (https://github.com/sipwise/klish) and verify its working
-2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (includes startup script & configuration files)
+2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (launch script + directories)
 3) Add execution permisions to the launcher, ie:
     # chmod +x /etc/cli.sh
 4) Create a dedicated system user (ie: cliuser) with password and default shell: /etc/cli.sh
