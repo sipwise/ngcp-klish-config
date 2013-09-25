@@ -1,0 +1,72 @@
+ngcp-klish-config 
+=================
+
+Sipwise NGCP shell based on klish/clish
+
+
+WARNING:
+=======
+
+The status is work-in-progress. Do not expect a full blown shell just yet!
+
+
+BASIC HOW-TO:
+============
+
+1) Clone & Install NGCP-CLISH (https://github.com/sipwise/klish) and verify its working
+
+2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (launch script + clish directory)
+    # /etc/cli.sh
+    # /etc/clish
+    
+3) Add execution permisions to the launcher, ie:
+    # chmod +x /etc/cli.sh
+
+4) Create a dedicated system user (ie: cliuser) with password and default shell: /etc/cli.sh
+    # cliuser:x:1001:1001:,,,:/dev/null:/etc/cli.sh
+
+5) SSH to the system as 'cliuser' using the new account
+
+6) Enter ENABLE mode by using the system's root password when asked
+
+cliuser@localhost's password:
+Linux sipx 3.2.0-4-amd64 #1 SMP Debian 3.2.46-1 x86_64
+
+
+
+                    #######
+               #################
+             ######         ######
+            ####                ####
+           ###                    ###
+          ##                     EEEEEEEE
+          ##                   EEEEE  EEEEE
+          ##                  EEE        EEE
+          ##                  EE          EED
+           ###               EEE           EE
+            ###              EEE           EE
+             ## ####        ##EE          EEE
+             ##################EE        EEE
+            #####    #####     EEEEEE  EEEE
+            ####                 EEEEEEEE
+            ###                    EEEEEE
+            ##                        EEE
+     ####  ##  #####       E    E   E  EE    EEE   EEEEEE
+   ###### ### #######  ##  EE  EE  EEE EEE EEEEEE EEEEEEE
+   ######  ## ######## ##  EE  EE  EEE EEE EEEEED EEEEEEE
+   ####    ## ###   ## ##  EE  EE  EEE EEE EEE    EEE
+   ######  ## ###   ##     EE  EE  EEE EEE EEEEEE EEEEEE
+     ####  ## ###   ##     EE  EE  EEE EEE    EEE EEE
+    #####  ## ######## ##  EEEEEEEEEEE EEE   EEEE EEEEEEE
+   ######  ## #######  ##  EEEEEEEEEEE EEE EEEEEE  EEEEEE
+    ###     # ###            EEEEEEEE   E   EEE     DEEEE
+              ###
+
+  SIPWISE NGCP CE: Command Line (NGCLI)
+
+Welcome cliuser it is Tue Sep 24 19:36:17 CEST 2013
+
+> enable
+Password: (root password)
+# 
+
