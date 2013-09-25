@@ -8,7 +8,6 @@ Section: shells
 Homepage: https://github.com/sipwise/ngcp-klish-config
 
 Package: ngcp-klish-config
-Provides: klish-config
 Section: shells
 Architecture: any
 Depends: klish,
