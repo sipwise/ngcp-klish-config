@@ -11,6 +11,7 @@ Package: ngcp-klish-config
 Section: shells
 Architecture: any
 Depends: klish,
+         lua-ngcp-klish,
          ${shlibs:Depends},
          ${misc:Depends}
 Conflicts: klish-default-config
@@ -20,8 +21,7 @@ Description: NGCP config for klish
 Package: lua-ngcp-klish
 Section: libs
 Architecture: any
-Depends: lua-ngcp-kamailio,
-         ${shlibs:Depends},
+Depends: ${shlibs:Depends},
          ${misc:Depends}
 Description: lua libs for ngcp-klish-config
  This package provides the lua ngcp lib that ngcp-klish-config

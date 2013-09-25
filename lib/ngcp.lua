@@ -18,7 +18,6 @@
 -- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 --
 require 'ngcp-klish.expand'
-require 'ngcp.utils'
 
 -- templates
 local templates = {
