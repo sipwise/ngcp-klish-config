@@ -1,0 +1,19 @@
+Source: ngcp-klish-config
+Priority: extra
+Maintainer: Sipwise Development Team <support@sipwise.com>
+Uploader: Victor Seva <vseva@sipwise.com>
+Build-Depends: debhelper (>= 9~)
+Standards-Version: 3.9.4
+Section: shells
+Homepage: git://git.mgm.sipwise.com/ngcp-klish-config
+
+Package: ngcp-klish-config
+Provides: klish-config
+Section: shells
+Architecture: any
+Depends: klish,
+         ${shlibs:Depends},
+         ${misc:Depends}
+Conflicts: klish-default-config
+Description: NGCP config for klish
+ This package provides the NGCP config for klish.
