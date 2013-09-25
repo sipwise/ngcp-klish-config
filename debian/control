@@ -5,7 +5,7 @@ Uploaders: Victor Seva <vseva@sipwise.com>
 Build-Depends: debhelper (>= 9~)
 Standards-Version: 3.9.4
 Section: shells
-Homepage: git://git.mgm.sipwise.com/ngcp-klish-config
+Homepage: https://github.com/sipwise/ngcp-klish-config
 
 Package: ngcp-klish-config
 Provides: klish-config
