@@ -1,7 +1,7 @@
 Source: ngcp-klish-config
 Priority: extra
 Maintainer: Sipwise Development Team <support@sipwise.com>
-Uploader: Victor Seva <vseva@sipwise.com>
+Uploaders: Victor Seva <vseva@sipwise.com>
 Build-Depends: debhelper (>= 9~)
 Standards-Version: 3.9.4
 Section: shells
