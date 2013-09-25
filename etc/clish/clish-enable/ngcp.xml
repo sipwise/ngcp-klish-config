@@ -9,7 +9,7 @@
 
 	<!-- NGCP Proxy DB -->
 
-	<COMMAND name="show ngcp proxy db" help="Display NGCP Proxy DB information" />
+	<COMMAND name="show ngcp proxy db" help="Display NGCP Proxy DB information (menu)" />
 
    	<COMMAND name="show ngcp proxy db trusted" lock="false" help="Show Proxy Routes" interrupt="true">
        		<ACTION>ngcp-kamctl proxy db show trusted</ACTION>
@@ -39,7 +39,7 @@
 	<!-- NGCP Proxy -->
 
 
-	<COMMAND name="show ngcp proxy" help="Display NGCP Proxy information" />
+	<COMMAND name="show ngcp proxy" help="Display NGCP Proxy information (menu)" />
 
    	<COMMAND name="show ngcp proxy debug" lock="false" help="Set Debug level" interrupt="true"/>
    	<COMMAND name="show ngcp proxy debug get" lock="false" help="Get PROXY Debug level" interrupt="true">
@@ -116,10 +116,11 @@
        		<ACTION>ngcp-kamctl proxy ul show "${useruri}"</ACTION>
    	</COMMAND>
 
-   	<COMMAND name="show ngcp proxy domains-database" help="Show DOMAINS" interrupt="true"  lock="false">
+	<COMMAND name="show ngcp proxy domains" help="Show DOMAINS (menu)" />
+   	<COMMAND name="show ngcp proxy domains database" help="Show DOMAINS" interrupt="true"  lock="false">
         	<ACTION> ngcp-kamctl proxy domain show showdb </ACTION>
    	</COMMAND>
-   	<COMMAND name="show ngcp proxy domains-memory" help="Show DOMAINS" interrupt="true"  lock="false">
+   	<COMMAND name="show ngcp proxy domains memory" help="Show DOMAINS" interrupt="true"  lock="false">
         	<ACTION> ngcp-kamctl proxy domain show  </ACTION>
    	</COMMAND>
 
@@ -182,7 +183,7 @@
 
 	<!-- NGCP LB -->
 
-	<COMMAND name="show ngcp lb" help="Display NGCP Load-Balancer information" />
+	<COMMAND name="show ngcp lb" help="Display NGCP Load-Balancer information (menu)" />
 
    	<COMMAND name="show ngcp lb version" lock="false" help="Show Server Version" interrupt="true">
        		<ACTION>ngcp-sercmd lb server </ACTION>
@@ -216,7 +217,7 @@
 
 	<!-- NGCP B2BUA -->
 
-        <COMMAND name="show ngcp sems" help="Display NGCP SEMS/B2BUA information" />
+        <COMMAND name="show ngcp sems" help="Display NGCP SEMS/B2BUA information (menu)" />
 
         <COMMAND name="show ngcp sems stats" lock="false" help="Show Server Version" interrupt="true">
                 <ACTION>sems-stats </ACTION>
@@ -230,7 +231,7 @@
 
 	<!-- NGCP MEDIAPROXY -->
 
-        <COMMAND name="show ngcp mediaproxy" help="Display Mediaproxy-NG information" />
+        <COMMAND name="show ngcp mediaproxy" help="Display Mediaproxy-NG information (menu)" />
 
         <COMMAND name="show ngcp mediaproxy stats" lock="false" help="Show Mediaproxy-NG Version" interrupt="true">
                 <ACTION>sems-stats </ACTION>

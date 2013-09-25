@@ -13,14 +13,14 @@
 
 <!-- COMMAND CONTAINERS -->
 
-<COMMAND name="show ngcp log"  help="Search Logs PROXY"/>
+<COMMAND name="show ngcp log"  help="Search Element Logs (menu)"/>
 <COMMAND name="show ngcp log proxy"  help="Search Logs PROXY"  />
 <COMMAND name="show ngcp log lb"  help="Search Logs LB"  />
 <COMMAND name="show ngcp log sems"  help="Search Logs SEMS" />
 <COMMAND name="show ngcp log mediaproxy"  help="Search Logs MEDIAPROXY"  />
 <COMMAND name="show ngcp log rate"  help="Search Logs RATE-O-MAT" />
 <COMMAND name="show ngcp log oss"  help="Search Logs OSS"  />
-<COMMAND name="show ngcp banned"  help="Search OSS Logs" />
+<COMMAND name="show ngcp banned"  help="Search BAN Logs (menu)" />
 
 
 <!-- CURRENT LOGS TAIL -->

@@ -50,25 +50,25 @@
 		help="Show running system information"/>
 
 	<COMMAND name="show ip"
-		help="IP information"/>
+		help="Show IP information"/>
 
 	<COMMAND name="show ngcp"
-		help="NGCP information"/>
+		help="Show NGCP system components information"/>
 
 	<COMMAND name="show diag"
 		help="Show diagnostic information for port adapters/modules">
 		<ACTION>lspci</ACTION>
 	</COMMAND>
 
-	<COMMAND name="show running-config"
-		help="Current operating configuration">
-		<CONFIG operation="dump"/>
-	</COMMAND>
-
-	<COMMAND name="show startup-config"
-		help="Contents of startup configuration">
-		<ACTION>cat /etc/startup-config</ACTION>
-	</COMMAND>
+        <COMMAND name="show running-config" help="Show running NGCP configuration" />
+        <COMMAND name="show running-config network"
+                help="Current operating Network configuration">
+                <ACTION> cat /etc/ngcp-config/network.yml</ACTION>
+        </COMMAND>
+        <COMMAND name="show running-config system"
+                help="Current operating NGCP configuration">
+                <ACTION> cat /etc/ngcp-config/config.yml</ACTION>
+        </COMMAND>
 
 <!-- Copy commands -->
 

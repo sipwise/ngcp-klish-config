@@ -8,12 +8,12 @@
 <VIEW name="enable-view">
 
 	<COMMAND name="show interfaces"
-		help="Interface status and configuration">
+		help="Show Interface status and configuration">
 		<ACTION>ip addr show</ACTION>
 	</COMMAND>
 
 	<COMMAND name="show ip interface"
-		help="IP interface status and configuration">
+		help="Show IP interface status and configuration">
 		<ACTION>ip addr show</ACTION>
 	</COMMAND>
 
