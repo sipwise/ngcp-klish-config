@@ -13,13 +13,13 @@ The status is work-in-progress. Do not expect a full blown shell just yet!
 BASIC HOW-TO:
 ============
 
-1) Clone & Install NGCP-CLISH (https://github.com/sipwise/klish) and verify its working
+1) Clone & Install NGCP-CLISH (https://github.com/sipwise/klish) from source or .deb
 
 2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (launch script + clish directory)
     # /etc/cli.sh
     # /etc/clish
     
-3) Add execution permisions to the launcher, ie:
+3) Add execution permisions to the launcher if needed, ie:
     # chmod +x /etc/cli.sh
 
 4) Create a dedicated system user (ie: cliuser) with password and default shell: /etc/cli.sh
@@ -27,7 +27,9 @@ BASIC HOW-TO:
 
 5) SSH to the system as 'cliuser' using the new account
 
-6) Enter ENABLE mode by using the system's root password when asked
+6) Use tab/autocompletion and ? to explore the available menus and commands
+
+7) Enter ENABLE to start priviledged mode, use the system's root password when asked for one
 
 cliuser@localhost's password:
 Linux sipx 3.2.0-4-amd64 #1 SMP Debian 3.2.46-1 x86_64
