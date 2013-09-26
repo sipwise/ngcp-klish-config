@@ -25,29 +25,37 @@ local templates = {
 Total Concurrent Calls: $(total)
 Total Concurrent Outgoing Calls: $(peerout)
 Total Concurrent Incoming Calls: $(incoming)
-Total Concurrent Internal Calls: $(local)
+Total Concurrent Internal Calls: $(internal)
 Total Concurrent Calls with RTP: $(rtp)
 Average Amount of Calls (last hour): $(average)]]
 }
 
+local patterns = {
+	cc_stats = {
+		total='profile::  name=total value= count=(%d+)',
+		peerout='profile::  name=peerout value= count=(%d+)',
+		internal='profile::  name=type value=internal count=(%d+)',
+		incoming='profile::  name=type value=incoming count=(%d+)'
+	}
+}
 -- prints concurrent calls stats
 -- if result <0 it's an error
 function cc_stats()
-	local _,k,v
+	local k,v
 	local prog_call='ngcp-kamctl proxy fifo profile_get_size'
-	local args = { 'total', 'incoming', 'peerout', 'local' }
-	local result_pattern = {'profile::  name=', ' value= count=(%d+)' }
-	local stats = {rtp=-1, average=-1}
+	local args = { total="", peerout="", internal="type", incoming="type" }
+	local stats = {
+		rtp=-1, average=-1,
+		total=-1, peerout=-1,
+		internal=-1, incoming=-1
+	}
 
-	for _,v in ipairs(args) do
+	for k,v in pairs(args) do
 		local val, line
-		local foutput = io.popen (string.format('%s %s', prog_call, v), 'r')
+		local foutput = io.popen (string.format('%s %s %s', prog_call, v, k), 'r')
 		for line in foutput:lines() do
-			for val in string.gmatch(line, result_pattern[1]..v..result_pattern[2]) do
-				stats[v] = tonumber(val)
-			end
-			if not stats[v] then
-				stats[v] = -1
+			for val in string.gmatch(line, patterns.cc_stats[k]) do
+				stats[k] = tonumber(val)
 			end
 		end
 		foutput:close()
