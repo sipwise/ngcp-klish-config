@@ -13,7 +13,7 @@ The status is work-in-progress. Do not expect a full blown shell just yet!
 BASIC HOW-TO:
 ============
 
-1) Clone & Install NGCP-CLISH (https://github.com/sipwise/klish) from source or .deb
+1) Clone & Install NGCP-CLISH (https://github.com/sipwise/klish)
 
 2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (launch script + clish directory)
     # /etc/cli.sh
