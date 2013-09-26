@@ -7,10 +7,17 @@
 
 <VIEW name="enable-view">
   <COMMAND name="show ngcp calls" help="Show calls info"></COMMAND>
+
   <!-- NGCP LUA MAGIC -->
   <COMMAND name="show ngcp calls concurrent-calls" help="Show concurrent calls stats" lock="false" interrupt="true">
     <ACTION>cc_stats()</ACTION>
   </COMMAND>
+
+  <COMMAND name="show ngcp calls concurrent-calls details" help="Show concurrent calls details" lock="false" interrupt="true">
+  	<PARAM name="callid" optional="true" ptype="STRING" help="callid"/>
+    <ACTION>cc_details("${callid}")</ACTION>
+  </COMMAND>
+
 </VIEW>
 
 </CLISH_MODULE>
