@@ -41,13 +41,13 @@ local patterns = {
 	},
 	cc_list = {
 		'hash:(%d+:%d+) state:(%d) ref_count:%d+ timestart:(%d+) timeout:%d+$',
-		'%s+callid:([%w-]+) from_tag:([%w-]+) to_tag:([%w-]+)$',
-		'%s+from_uri:(sip:%w+@[%w\.]+) to_uri:(sip:%w+@[%w\.]+)$',
-		'%s+caller_contact:(sip:%w+@[%w\.]+:%d+) caller_cseq:%d+$',
+		'%s+callid:([%w-]+) from_tag:([%w-%.]+) to_tag:([%w-%.]+)$',
+		'%s+from_uri:(sip:%w+@[%w%.]+) to_uri:(sip:%w+@[%w%.]+)$',
+		'%s+caller_contact:(sip:%w+@[%w%.]+:%d+) caller_cseq:%d+$',
 		'%s+caller_route_set:.*$',
-		'%s+callee_contact:(sip:%w+@%[%w\.]+:%d+) callee_cseq:%d+$',
+		'%s+callee_contact:(sip:%w+@%[%w%.]+:%d+) callee_cseq:%d+$',
 		'%s+callee_route_set:.*$',
-		'%s+caller_bind_addr:%w+:[%w\.]+:%d+ callee_bind_addr:%w+:[%w\.]+:%d+$'
+		'%s+caller_bind_addr:%w+:[%w%.]+:%d+ callee_bind_addr:%w+:[%w%.]+:%d+$'
 	},
 	cc_list_keys = {
 		{'hash','state','timestart'},
@@ -151,7 +151,7 @@ end
 
 
 function cc_details(callid)
-	if callif ~= "" then
+	if callid == "" then
 		local stats = cc_stats_info()
 		-- TODO: kamailio has to have a num offset parameter on dlg.list
 		if stats.total <= 50 then 
