@@ -21,7 +21,8 @@ Description: NGCP config for klish
 Package: lua-ngcp-klish
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends},
+Depends: lua-uri,
+         ${shlibs:Depends},
          ${misc:Depends}
 Description: lua libs for ngcp-klish-config
  This package provides the lua ngcp lib that ngcp-klish-config
