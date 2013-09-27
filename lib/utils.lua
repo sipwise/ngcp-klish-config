@@ -18,6 +18,7 @@
 -- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 --
 -- Lua utils
+local URI = require 'uri'
 
 -- copy a table
 function table.deepcopy(object)
@@ -153,32 +154,9 @@ function string.ends(String,End)
    return End=='' or string.sub(String,-string.len(End))==End
 end
 
--- URI helpers
-function uri_parse(str)
-  local result = {}
-  for user, dom in string.gmatch(str, 'sip:(%w+)@([%w\.]+)') do
-    result.user = user
-    result.dom = dom
-  end
-  for port in string.gmatch(str, 'sip:%w+@[%w\.]+:(%d+)') do
-    result.port = port
-  end
-  return result
-end
-
 function uri_get_username(str)
-  local t = uri_parse(str)
-  return t.user
-end
-
-function uri_get_domain(str)
-  local t = uri_parse(str)
-  return t.dom
-end
-
-function uri_get_port(str)
-  local t = uri_parse(str)
-  return t.port
+  local uri = URI:new(str)
+  return uri:username()
 end
 
 -- Stack Table
