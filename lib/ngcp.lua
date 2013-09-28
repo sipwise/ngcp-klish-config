@@ -40,24 +40,16 @@ local patterns = {
 		incoming='profile::  name=type value=incoming count=(%d+)'
 	},
 	cc_list = {
-		'hash:(%d+:%d+) state:(%d) ref_count:%d+ timestart:(%d+) timeout:%d+$',
-		'%s+callid:([%w-]+) from_tag:([%w-%.]+) to_tag:([%w-%.]+)$',
-		'%s+from_uri:(sip:%w+@[%w%.]+) to_uri:(sip:%w+@[%w%.]+)$',
-		'%s+caller_contact:(sip:%w+@[%w%.]+:%d+) caller_cseq:%d+$',
-		'%s+caller_route_set:.*$',
-		'%s+callee_contact:(sip:%w+@%[%w%.]+:%d+) callee_cseq:%d+$',
-		'%s+callee_route_set:.*$',
-		'%s+caller_bind_addr:%w+:[%w%.]+:%d+ callee_bind_addr:%w+:[%w%.]+:%d+$'
-	},
-	cc_list_keys = {
-		{'hash','state','timestart'},
-		{'callid','from_tag','to_tag'},
-		{'from_uri','to_uri'},
-		{'caller_contact'},
-		{},
-		{'callee_contact'},
-		{},
-		{}
+		[1]={{'hash','state','timestart'},
+			'hash:(%d+:%d+) state:(%d) ref_count:%d+ timestart:(%d+) timeout:%d+$'},
+		[2]={{'callid','from_tag','to_tag'},
+			'callid:([%w-%.]+) from_tag:([%w-%.]+) to_tag:([%w-%.]+)$'},
+		[3]={{'from_uri','to_uri'},
+			'from_uri:(sip:%w+@[%w%.]+) to_uri:(sip:%w+@[%w%.]+)$'},
+		[4]={{'caller_contact'},
+			'caller_contact:(sip:%w+@[%w%.]+:%d+) caller_cseq:%d+$'},
+		[6]={{'callee_contact'},
+			'callee_contact:(sip:%w+@%[%w%.]+:%d+) callee_cseq:%d+$'},
 	}
 }
 
@@ -111,44 +103,39 @@ end
 --prints concurrent calls list
 function cc_list()
 	local prog_call='ngcp-sercmd proxy dlg.list'
-	local line
 	local result = {}
-	local temp,k,v
+	local line,temp,count,_,k,p
 	local foutput = io.popen (string.format('%s', prog_call), 'r')
 
 	for line in foutput:lines() do
 		local a,b,c
 		if string.starts(line,'hash') then
-			if temp then
-				result[temp.callid] = temp
-			end
-			temp = {}
+			if temp then result[temp.callid] = temp end
+			temp = {}; count = 0
 		end
-		for k,v in ipairs(patterns.cc_list) do
-			for a,b,c in string.gmatch(line, v) do
-				local rk,_
+		count = count + 1
+		-- just parse the lines we want some info
+		if patterns.cc_list[count] then
+			for a,b,c in string.gmatch(line, patterns.cc_list[count][2]) do
 				local temp_line = {a,b,c}
-				local count = 1
+				local j = 1
 				-- set the result line values with proper key
-				for _,rk in pairs(patterns.cc_list_keys[k]) do
-					temp[rk] = temp_line[count]
-					count = count + 1
+				for _,k in pairs(patterns.cc_list[count][1]) do
+					temp[k] = temp_line[j]
+					j = j + 1
 				end
 			end
 		end
 	end
 	foutput:close()
 	-- last item
-	if temp then
-		result[temp.callid] = temp
-	end
+	if temp then result[temp.callid] = temp end
 	-- header
 	print("| Call-ID | Caller | Callee | Time | Peer | RTP ports| Dialog hash |")
 	for _,v in pairs(result) do
 		print(expand(templates.cc_list, cc_list_prepare(v)))
 	end
 end
-
 
 function cc_details(callid)
 	if callid == "" then
