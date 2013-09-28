@@ -18,6 +18,15 @@
     <ACTION>cc_details("${callid}")</ACTION>
   </COMMAND>
 
+  <COMMAND name="show ngcp registrations" help="Show registrations" lock="false" interrupt="true">
+    <ACTION>reg_stats()</ACTION>
+  </COMMAND>
+
+  <COMMAND name="show ngcp registrations subscriber" help="Show registration" lock="false" interrupt="true">
+    <PARAM name="aor" optional="false" ptype="STRING" help="AOR user@domain"/>
+    <ACTION>reg_info("${aor}")</ACTION>
+  </COMMAND>
+
 </VIEW>
 
 </CLISH_MODULE>

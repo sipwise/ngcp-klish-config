@@ -29,7 +29,19 @@ Total Concurrent Internal Calls: $(internal)
 Total Concurrent Calls with RTP: $(rtp)
 Average Amount of Calls (last hour): $(average)]],
 	cc_list=[[
-| $(callid) | $(caller) | $(callee) | $(date) | $(peer) | $(rtp_ports) | $(hash) |]]
+| $(callid) | $(caller) | $(callee) | $(date) | $(peer) | $(rtp_ports) | $(hash) |]],
+	reg_stats=[[
+Total Users online: $(reg_users)]],
+	reg_info=[[
+Address: ${address}
+Expires: ${expires}
+Call-ID: ${callid}
+CSeq: ${'cseq'}
+User-Agent: ${agent}
+Received: ${received}
+Path: ${path}
+State: ${state}
+Socket: ${socket}]]
 }
 
 local patterns = {
@@ -50,6 +62,20 @@ local patterns = {
 			'caller_contact:(sip:%w+@[%w%.]+:%d+) caller_cseq:%d+$'},
 		[6]={{'callee_contact'},
 			'callee_contact:(sip:%w+@%[%w%.]+:%d+) callee_cseq:%d+$'},
+	},
+	reg_stats = {
+		reg_users='usrloc:registered_users = (%d+)'
+	},
+	reg_lookup = {
+		[3]={address='Address: (.+)$'},
+		[4]={expires='Expires: (%d+)$'},
+		[6]={callid='Call%-ID: (.*)$'},
+		[7]={cseq='CSeq: (%d+)$'},
+		[8]={agent='User%-Agent: (.*)$'},
+		[9]={received='Received: (.*)$'},
+		[10]={path='Path: (.*)$'},
+		[11]={state='State: (.*)$'},
+		[14]={socket='Socket: (.*)$'}
 	}
 }
 
@@ -149,4 +175,46 @@ function cc_details(callid)
 		return
 	end
 	print("TODO")
+end
+
+function reg_stats()
+	local k,v
+	local prog_call='ngcp-kamctl proxy fifo get_statistics usrloc::registered_users'
+	local stats = {}
+
+	local val, line
+	local foutput = io.popen (string.format('%s', prog_call), 'r')
+	for line in foutput:lines() do
+		for val in string.gmatch(line, patterns.reg_stats.reg_users) do
+			stats.reg_users = tonumber(val)
+		end
+	end
+	foutput:close()
+	print(expand(templates.reg_stats, stats))
+end
+
+function reg_info(aor)
+	local prog_call='ngcp-sercmd proxy ul.lookup location'
+	local result = {}
+	local line, val, k, p
+	local count = 0
+	local foutput = io.popen (string.format('%s %s', prog_call, aor), 'r')
+
+	for line in foutput:lines() do
+		count = count + 1
+		-- just parse the lines we want some info
+		if patterns.reg_lookup[count] then
+			for k,p in pairs(patterns.reg_lookup[count]) do
+				for val in string.gmatch(line, p) do
+					result[k] = val
+				end
+			end
+		end
+	end
+	foutput:close()
+	if not result.address then
+		print("Not found")
+	else
+		print(expand(templates.reg_info, result))
+	end
 end
