@@ -60,9 +60,8 @@
 
 				user=$(whoami)
 				pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
-				echo $pid
 				if [ ! -z $pid ]; then
-					echo "ERROR: SIP Trace to file is already runnnig for $user"
+					echo "ERROR: SIP Trace to file is already runnnig for $user ($pid)"
 				else
 					echo "Starting SIP Tracer $$ for $user..."
 					tcpdump -ni any -s0 $param -w /tmp/siptrace$$.pcap &amp;
@@ -75,7 +74,7 @@
                 <ACTION>
 				user=$(whoami)
 				pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
-				echo $pid
+				#echo $pid
 				if [ ! -z $pid ]; then
 					echo "Stopping SIP Tracer $pid..."
 					kill $pid
@@ -100,7 +99,7 @@
                                 kill "${npid}"
                         else
 				pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
-                                echo $pid
+                                #echo $pid
                                 if [ ! -z $pid ]; then
                                         echo "Choose a PID to terminate:"
                                         echo $pid; echo
@@ -272,7 +271,7 @@
                                 ptype="SUBCOMMAND"
                                 mode="subcommand">
                                 <PARAM name="pfil"
-                                        help="value"
+                                        help="filter string"
 					default=""
                                         ptype="STRING"/>
                         </PARAM>
@@ -295,12 +294,12 @@
                                 	param=" -T -i -t -q ${pfil} $param"
                         	fi
 
-				echo "STRING: $param"
+				#echo "STRING: $param"
 				user=$(whoami)
 				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
-				echo $pid
+				#echo $pid
 				if [ ! -z $pid ]; then
-					echo "ERROR: SIP Log to file is already runnnig for $user"
+					echo "ERROR: SIP Log to file is already runnnig for $user ($pid)"
 				else
 					echo "Starting SIP Logr $$ for $user..."
 					ngrep -d any -W byline $param -P $user > /tmp/siplog$$.log &amp;
@@ -313,7 +312,7 @@
                 <ACTION>
 				user=$(whoami)
 				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
-				echo $pid
+				#echo $pid
 				if [ ! -z $pid ]; then
 					echo "Stopping SIP Logr $pid..."
 					kill $pid
@@ -339,7 +338,7 @@
 				kill "${npid}"
 			else 
 			     pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
-                                echo $pid
+                                #echo $pid
                                 if [ ! -z $pid ]; then
 					echo "Choose a PID to terminate:"
 					echo $pid; echo
@@ -396,7 +395,7 @@
                                 ptype="SUBCOMMAND"
                                 mode="subcommand">
                                 <PARAM name="pfil"
-                                        help="value"
+                                        help="filter string"
 					default=""
                                         ptype="STRING"/>
                         </PARAM>
