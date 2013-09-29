@@ -36,25 +36,6 @@
 
 	<COMMAND name="show ngcp element proxy" help="Display NGCP Proxy information (menu)" />
 
-   	<COMMAND name="show ngcp element proxy debug" lock="false" help="Set Debug level" interrupt="true"/>
-   	<COMMAND name="show ngcp element proxy debug get" lock="false" help="Get PROXY Debug level" interrupt="true">
-   	<ACTION>ngcp-kamctl proxy fifo debug</ACTION>
-        </COMMAND>
-
-   	<COMMAND name="show ngcp element proxy debug set" lock="false" help="Set PROXY Debug level" interrupt="true">
-		<PARAM name="level"
-                        help="Debug Level"
-                        optional="true"
-                        mode="subcommand"
-                        ptype="SUBCOMMAND">
-                        <PARAM name="debuglevel"
-				default="2"
-                                help="Debug level to set"
-                                ptype="UINT"/>
-                </PARAM>
-       		<ACTION>ngcp-kamctl proxy fifo debug ${debuglevel} </ACTION>
-   	</COMMAND>
-
 	<!-- NGCP Proxy DB -->
 
 	<COMMAND name="show ngcp element proxy db" help="Display NGCP Proxy DB information (menu)" />
