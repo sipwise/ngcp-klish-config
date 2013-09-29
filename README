@@ -58,14 +58,15 @@ BASIC HOW-TO:
 
     # chmod +x /etc/cli.sh
 
-4) Create a dedicated system user (ie: cliuser) with password and the clish script as default shell: /etc/cli.sh
+4) Create a limited user (ie: cliuser) with default clish shell:
 
-    # cliuser:x:1001:1001:,,,:/dev/null:/etc/cli.sh
+    # useradd -s /etc/cli.sh -r -M cliuser
+    # passwd cliuser
 
-5) Modify /etc/sudoers to allow cliuser to execute enable mode calls as root. For example:
+5) Modify /etc/sudoers to allow 'cliuser'' to execute enable clish. For example:
 
     Defaults:cliuser targetpw
-    cliuser ALL=(ALL) /usr/bin/clish
+    cliuser ALL=(ALL) /usr/bin/clish, /usr/local/bin/clish
 
 
 
