@@ -8,27 +8,31 @@ WARNING:
 =======
 
 The status is work-in-progress. Do not expect a full blown shell just yet!
+This package & its components are meant for a SIP:Provider CE 3.x Server *ONLY*
 
 
 BASIC HOW-TO:
 ============
 
 1) Clone & Install the system & software requirements:
+
     - NGCP-CLISH (https://github.com/sipwise/klish)
     - LUA-URI (https://github.com/sipwise/lua-uri.git)
 
-2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (launch script + clish directory)
+2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (script + clish directory)
+
     # /etc/cli.sh
     # /etc/clish
     
 3) Add execution permisions to the launcher if needed, ie:
+
     # chmod +x /etc/cli.sh
 
-4) Create a dedicated system user (ie: cliuser) with password and default shell: /etc/cli.sh
+4) Create a dedicated system user (ie: cliuser) with password and the clish script as default shell: /etc/cli.sh
+
     # cliuser:x:1001:1001:,,,:/dev/null:/etc/cli.sh
 
-
-5) Modify /etc/sudoers to allow cliuser to execute enable mode calls. For example:
+5) Modify /etc/sudoers to allow cliuser to execute enable mode calls as root. For example:
 
     Defaults:cliuser targetpw
     cliuser ALL=(ALL) /usr/bin/clish
