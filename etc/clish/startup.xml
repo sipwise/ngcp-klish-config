@@ -35,7 +35,7 @@
     ###     # ###            EEEEEEEE   E   EEE     DEEEE
               ###
 
-  SIPWISE NGCP CE: Command Line (NGCLI)
+   SIPWISE SP:CE Command Line [SPCLI]
         </DETAIL>
         <ACTION>echo "Welcome `whoami` it is `date`";echo</ACTION>
 </STARTUP>

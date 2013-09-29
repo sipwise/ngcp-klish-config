@@ -11,12 +11,14 @@
 	<ACTION builtin="clish_close"/>
 </COMMAND>
 
+<!--
 <COMMAND name="!"
 	help="Comments"
 	args="comment"
 	args_help="ignored comment text">
 	<ACTION builtin="clish_nop"/>
 </COMMAND>
+-->
 
 </CLISH_MODULE>
 
