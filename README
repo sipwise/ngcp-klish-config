@@ -13,7 +13,9 @@ The status is work-in-progress. Do not expect a full blown shell just yet!
 BASIC HOW-TO:
 ============
 
-1) Clone & Install NGCP-CLISH (https://github.com/sipwise/klish)
+1) Clone & Install the pre-requirements:
+    - NGCP-CLISH (https://github.com/sipwise/klish)
+    - LUA-URI (https://github.com/sipwise/lua-uri.git)
 
 2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (launch script + clish directory)
     # /etc/cli.sh
@@ -25,7 +27,7 @@ BASIC HOW-TO:
 4) Create a dedicated system user (ie: cliuser) with password and default shell: /etc/cli.sh
     # cliuser:x:1001:1001:,,,:/dev/null:/etc/cli.sh
 
-5) SSH to the system as 'cliuser' using the new account
+5) SSH to the system as 'cliuser' using the new account or manually launch /etc/cli.sh
 
 6) Use tab/autocompletion and ? to explore the available menus and commands
 
