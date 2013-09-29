@@ -442,17 +442,12 @@
         </COMMAND>
 
         <COMMAND name="notify debug proxy set" lock="false" help="Set PROXY Debug level" interrupt="true">
-                <PARAM name="level"
-                        help="Debug Level"
-                        optional="true"
-                        mode="subcommand"
-                        ptype="SUBCOMMAND">
-                        <PARAM name="debuglevel"
-                                default="2"
-                                help="Debug level to set"
-                                ptype="UINT"/>
-                </PARAM>
-                <ACTION>ngcp-kamctl proxy fifo debug ${debuglevel} </ACTION>
+		<PARAM name="debuglevel"
+                        optional="false"
+                        help="Debug level to set"
+                        ptype="STRING"/>
+
+                <ACTION>ngcp-kamctl proxy fifo debug "${debuglevel}" </ACTION>
         </COMMAND>
 
 	<!-- DEBUG LB -->
@@ -463,17 +458,12 @@
         </COMMAND>
 
         <COMMAND name="notify debug lb set" lock="false" help="Set LB Debug level" interrupt="true">
-                <PARAM name="level"
-                        help="Debug Level"
-                        optional="true"
-                        mode="subcommand"
-                        ptype="SUBCOMMAND">
-                        <PARAM name="debuglevel"
-                                default="2"
-                                help="Debug level to set"
-                                ptype="UINT"/>
-                </PARAM>
-                <ACTION>ngcp-kamctl lb fifo debug ${debuglevel} </ACTION>
+		<PARAM name="debuglevel"
+                        optional="false"
+                        help="Debug level to set"
+                        ptype="STRING"/>
+
+                <ACTION>ngcp-kamctl lb fifo debug "${debuglevel}" </ACTION>
         </COMMAND>
 
         <COMMAND name="notify debug sems" lock="false" help="Notify SEMS Debug level" interrupt="true"/>
@@ -484,16 +474,10 @@
 	<!-- DEBUG SEMS -->
 
         <COMMAND name="notify debug sems set" lock="false" help="Set SEMS Debug level" interrupt="true">
-                <PARAM name="level"
-                        help="Debug Level"
-                        optional="true"
-                        mode="subcommand"
-                        ptype="SUBCOMMAND">
-                        <PARAM name="debuglevel"
-                                default="2"
-                                help="Debug level to set"
-                                ptype="UINT"/>
-                </PARAM>
+		<PARAM name="debuglevel"
+                        optional="false"
+                        help="Debug level to set"
+                        ptype="STRING"/>
                 <ACTION>sems-stats -c "set_loglevel ${debuglevel}" </ACTION>
         </COMMAND>
 
