@@ -13,7 +13,7 @@ The status is work-in-progress. Do not expect a full blown shell just yet!
 BASIC HOW-TO:
 ============
 
-1) Clone & Install the pre-requirements:
+1) Clone & Install the system & software requirements:
     - NGCP-CLISH (https://github.com/sipwise/klish)
     - LUA-URI (https://github.com/sipwise/lua-uri.git)
 
@@ -27,11 +27,22 @@ BASIC HOW-TO:
 4) Create a dedicated system user (ie: cliuser) with password and default shell: /etc/cli.sh
     # cliuser:x:1001:1001:,,,:/dev/null:/etc/cli.sh
 
-5) SSH to the system as 'cliuser' using the new account or manually launch /etc/cli.sh
 
-6) Use tab/autocompletion and ? to explore the available menus and commands
+5) Modify /etc/sudoers to allow cliuser to execute enable mode calls. For example:
 
-7) Enter ENABLE to start priviledged mode, use the system's root password when asked for one
+    Defaults:cliuser targetpw
+    cliuser ALL=(ALL) /usr/bin/clish
+
+
+
+BASIC USAGE:
+===========
+
+1) SSH to the system as 'cliuser' using the new account or manually launch /etc/cli.sh
+
+2) Use tab/autocompletion and ? to explore the available menus and commands
+
+3) Enter ENABLE to start priviledged mode, use the system's root password when asked for one
 
 cliuser@localhost's password:
 Linux sipx 3.2.0-4-amd64 #1 SMP Debian 3.2.46-1 x86_64
