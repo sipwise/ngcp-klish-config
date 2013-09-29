@@ -14,13 +14,18 @@
 		help="Turn on privileged commands"
 		lock="false"
 		interrupt="true">
-		<ACTION>su -l -c "clish -x /etc/clish/clish-enable"</ACTION>
+		<ACTION>
+			sudo clish -x /etc/clish/clish-enable
+			#su -l -c "clish -x /etc/clish/clish-enable"
+		</ACTION>
 	</COMMAND>
+
 
 <!-- Inheritance -->
 
 	<NAMESPACE ref="ping-view"
 		help="true"
+		interrupt="true"
 		completion="true"/>
 
 	<NAMESPACE ref="utils-view"

@@ -9,11 +9,10 @@
 
 <!-- Inheritance -->
 
-        <NAMESPACE ref="utils-view"
-                help="true"
-                interrupt="true"
-                completion="true"/>
-
+	<NAMESPACE ref="utils-view"
+		help="true"
+		interrupt="true"
+		completion="true"/>
 
 <!--
 	<NAMESPACE ref="ping-view"
@@ -21,6 +20,7 @@
 		interrupt="true"
 		completion="true"/>
 -->
+
 
 <!-- Simple enable mode commands -->
 
