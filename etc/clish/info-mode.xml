@@ -23,6 +23,11 @@
 		help="true"
 		completion="true"/>
 
+	<NAMESPACE ref="utils-view"
+		help="true"
+		interrupt="true"
+		completion="true"/>
+
 
 </VIEW>
 

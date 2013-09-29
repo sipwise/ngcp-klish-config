@@ -5,7 +5,7 @@
                      http://clish.sourceforge.net/XMLSchema/clish.xsd">
 	<!--=======================================================-->
 
-<VIEW name="ping-view">
+<VIEW name="utils-view">
 
 <!-- UTILS PROCESSING -->
 
@@ -21,7 +21,43 @@
 <!-- TCPDUMP -->
 
 <COMMAND name="notify siptrace on" lock="false" help="Start SIP Tracer in PCAP Mode" interrupt="true">
+		<!-- command options -->
+		<PARAM name="ptype"
+                        help="Switch Port or Range"
+                        ptype="STRING"
+			optional="true"
+			default="null"
+                        mode="switch">
+                        <PARAM name="port"
+                                help="port number"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="UINT"/>
+			</PARAM>
+                        <PARAM name="portrange"
+                                help="port range"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="STRING"/>
+                        </PARAM>
+                </PARAM>
                 <ACTION>
+				case "${ptype}" in
+					"port")
+						param="port ${psel}"
+						;;
+					"portrange")
+						param="portrange ${psel}"
+						;;
+					*)
+						param="portrange 5060-5090"
+						;;
+				esac
+
 				user=$(whoami)
 				pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
 				echo $pid
@@ -29,7 +65,8 @@
 					echo "ERROR: SIP Trace to file is already runnnig for $user"
 				else
 					echo "Starting SIP Tracer $$ for $user..."
-					tcpdump -ni any -s0 portrange 5060-5090 -w /tmp/siptrace$$.pcap &amp;
+					tcpdump -ni any -s0 $param -w /tmp/siptrace$$.pcap &amp;
+					#tcpdump -ni any -s0 portrange 5060-5090 -w /tmp/siptrace$$.pcap &amp;
 					echo "SIP Trace to PCAP is runnnig (saving to: /tmp/siptrace$$.pcap)"
 				fi
                 </ACTION>
@@ -85,10 +122,48 @@
                         default="10"
                         help="Specify the length of tracer is seconds"
                         ptype="STRING"/>
+		<!-- command options -->
+                <PARAM name="ptype"
+                        help="Switch Port or Range"
+                        ptype="STRING"
+			optional="true"
+			default="null"
+                        mode="switch">
+                        <PARAM name="port"
+                                help="port number"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="UINT"/>
+                        </PARAM>
+                        <PARAM name="portrange"
+                                help="port range"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="STRING"/>
+                        </PARAM>
+                </PARAM>
+
                 <ACTION>
+				case "${ptype}" in
+                                        "port")
+                                                param="port ${psel}"
+                                                ;;
+                                        "portrange")
+                                                param="portrange ${psel}"
+                                                ;;
+                                        *)
+                                                param="portrange 5060-5090"
+                                                ;;
+                                esac
+
                         user=$(whoami)
                         if test -n "${tlimit}"; then
-					timeout "${tlimit}" tcpdump -ni any -s0 portrange 5060-5090 -w /tmp/siptrace_timed_$$.pcap &amp;
+					timeout "${tlimit}" tcpdump -ni any -s0 $param -w /tmp/siptrace_timed_$$.pcap &amp;
+					#timeout "${tlimit}" tcpdump -ni any -s0 portrange 5060-5090 -w /tmp/siptrace_timed_$$.pcap &amp;
                                         echo "SIP Tracer timed capturing started for "${tlimit}" seconds, saving to: /tmp/siptrace_timed_$$.pcap"
                         fi
                 </ACTION>
@@ -101,15 +176,87 @@
 <!-- NGREP -->
 
 <COMMAND name="notify siplog on screen" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
+		<!-- command options -->
+                <PARAM name="ptype"
+                        help="Switch Port or Range"
+                        ptype="STRING"
+			optional="true"
+			default="null"
+                        mode="switch">
+                        <PARAM name="port"
+                                help="port number"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="UINT"/>
+                        </PARAM>
+                        <PARAM name="portrange"
+                                help="port range"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="STRING"/>
+                        </PARAM>
+                </PARAM>
                 <ACTION>
+				case "${ptype}" in
+                                        "port")
+                                                param="port ${psel}"
+                                                ;;
+                                        "portrange")
+                                                param="portrange ${psel}"
+                                                ;;
+                                        *)
+                                                param="portrange 5060-5090"
+                                                ;;
+                                esac
+
 					echo "Starting SIP Tracer... (CTRL-C to Stop)"
-					cmd="ngrep -pql -W byline portrange 5060-5090"
+					cmd="ngrep -pql -W byline $param"
 					$cmd 
                 </ACTION>
 </COMMAND>
 
 <COMMAND name="notify siplog on" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
+		<!-- command options -->
+                <PARAM name="ptype"
+                        help="Switch Port or Range"
+                        ptype="STRING"
+			optional="true"
+			default="null"
+                        mode="switch">
+                        <PARAM name="port"
+                                help="port number"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="UINT"/>
+                        </PARAM>
+                        <PARAM name="portrange"
+                                help="port range"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="STRING"/>
+                        </PARAM>
+                </PARAM>
                 <ACTION>
+				case "${ptype}" in
+                                        "port")
+                                                param="port ${psel}"
+                                                ;;
+                                        "portrange")
+                                                param="portrange ${psel}"
+                                                ;;
+                                        *)
+                                                param="portrange 5060-5090"
+                                                ;;
+                                esac
+
 				user=$(whoami)
 				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
 				echo $pid
@@ -117,7 +264,8 @@
 					echo "ERROR: SIP Log to file is already runnnig for $user"
 				else
 					echo "Starting SIP Logr $$ for $user..."
-					ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog$$.log &amp;
+					ngrep -W byline $param -P $user > /tmp/siplog$$.log &amp;
+					#ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog$$.log &amp;
 					echo "SIP Log to file is runnnig (saving to: /tmp/siplog$$.log)"
 				fi
                 </ACTION>
@@ -174,10 +322,46 @@
                         default="10"
                         help="Specify the length of tracer is seconds"
                         ptype="STRING"/>
+		<!-- command options -->
+                <PARAM name="ptype"
+                        help="Switch Port or Range"
+                        ptype="STRING"
+			optional="true"
+			default="null"
+                        mode="switch">
+                        <PARAM name="port"
+                                help="port number"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="UINT"/>
+                        </PARAM>
+                        <PARAM name="portrange"
+                                help="port range"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="psel"
+                                        help="value"
+                                        ptype="STRING"/>
+                        </PARAM>
+                </PARAM>
                 <ACTION>
+			case "${ptype}" in
+                                        "port")
+                                                param="port ${psel}"
+                                                ;;
+                                        "portrange")
+                                                param="portrange ${psel}"
+                                                ;;
+                                        *)
+                                                param="portrange 5060-5090"
+                                                ;;
+                        esac
 			user=$(whoami)
                         if test -n "${tlimit}"; then
-					timeout "${tlimit}" ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog_timed_$$.log &amp;
+					timeout "${tlimit}" ngrep -W byline $param -P $user > /tmp/siplog_timed_$$.log &amp;
+					#timeout "${tlimit}" ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog_timed_$$.log &amp;
 					echo "SIP Logr timed capturing started for "${tlimit}" seconds, saving to: /tmp/siplog_timed_$$.txt"
                         fi
                 </ACTION>
