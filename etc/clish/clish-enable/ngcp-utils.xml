@@ -115,7 +115,7 @@
                 </ACTION>
 </COMMAND>
 
-<COMMAND name="notify siptrace timed" lock="false" help="Start SIP Logr with timer" interrupt="false" >
+<COMMAND name="notify siptrace on timed" lock="false" help="Start SIP Logr with timer" interrupt="false" >
                  <PARAM name="tlimit"
                         optional="true"
                         default="10"
@@ -354,7 +354,7 @@
                 </ACTION>
 </COMMAND>
 
-<COMMAND name="notify siplog timed" lock="false" help="Start SIP Logr with timer" interrupt="false" >
+<COMMAND name="notify siplog on timed" lock="false" help="Start SIP Logr with timer" interrupt="false" >
                  <PARAM name="tlimit"
                         optional="true"
                         default="10"
