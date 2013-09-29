@@ -9,7 +9,7 @@
 	</PLUGIN>
 	<HOOK name="action" builtin="lua@lua"/>
 -->
-	<STARTUP view="enable-view" default_shebang="/bin/bash">
+	<STARTUP view="enable-view">
 	</STARTUP>
 
 </CLISH_MODULE>

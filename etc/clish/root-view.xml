@@ -8,6 +8,8 @@
         prompt="${SYSTEM_NAME}&gt; ">
         <!--===================================================-->
         <COMMAND name="exit"
+		 lock="false"
+                 interrupt="true"
                  help="Exit this CLI session">
             <ACTION builtin="clish_close"/>
         </COMMAND>
