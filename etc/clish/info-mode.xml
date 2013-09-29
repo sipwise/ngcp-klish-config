@@ -5,6 +5,8 @@
                      http://clish.sourceforge.net/XMLSchema/clish.xsd">
 	<!--=======================================================-->
 
+<HOTKEY key="^Z" cmd="exit"/>
+
 <VIEW name="info-view"
 	prompt="${SYSTEM_NAME}&gt; ">
 

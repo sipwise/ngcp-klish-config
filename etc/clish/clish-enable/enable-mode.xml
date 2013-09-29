@@ -4,6 +4,9 @@
  xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
                      http://clish.sourceforge.net/XMLSchema/clish.xsd">
 	<!--=======================================================-->
+
+<HOTKEY key="^Z" cmd="exit"/>
+
 <VIEW name="enable-view"
 	prompt="${SYSTEM_NAME}# ">
 
