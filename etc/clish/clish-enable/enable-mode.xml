@@ -32,19 +32,195 @@
 		<ACTION builtin="clish_close"/>
 	</COMMAND>
 
-	<COMMAND name="reboot"
+   	<COMMAND name="system" help="Enter upgrade mode" />
+
+	<COMMAND name="system reboot"
 		help="Halt and perform a cold restart">
 		<ACTION>reboot</ACTION>
 	</COMMAND>
 
-   	<COMMAND name="system" help="Enter upgrade mode" />
-
-   	<COMMAND name="system upgrade" help="Upgrade system (full)">
-       	<DETAIL>
-		Upgrade NGCP release to latest patchlevel.
+   	<COMMAND name="system upgrade" help="System Update (menu)" />
+   	<COMMAND name="system upgrade packages" help="Upgrade system packages.">
+       	    <DETAIL>
+		Upgrade NGCP packages to latest patchlevel.
    	    </DETAIL>
-   	    <ACTION>apt-get update;apt-get upgrade;ngcpcfg apply;echo "Upgrade Completed.";echo</ACTION>
+   	    <ACTION>apt-get update;apt-get upgrade;echo "Package Upgrade Completed.";echo;echo "To Activate the changes, run 'system activate-config'"</ACTION>
    	</COMMAND>
+
+   	<COMMAND name="system upgrade activate-config" help="Upgrade system packages and Activate configuration.">
+       	    <DETAIL>
+		Upgrade NGCP packages to latest patchlevel and activate.
+   	    </DETAIL>
+   	    <ACTION>apt-get update;apt-get upgrade;ngcpcfg apply;echo "Package Upgrade and Activate Completed.";echo</ACTION>
+   	</COMMAND>
+
+   	<COMMAND name="system activate-config" help="Generate and Activate configuration.">
+       	    <DETAIL>
+		Generate and Activate NGCP Configuration from templates.
+   	    </DETAIL>
+   	    <ACTION>ngcpcfg apply;echo "Apply Completed.";echo</ACTION>
+   	</COMMAND>
+
+	<!-- SERVICES -->
+
+   	<COMMAND name="system service" help="Manage System Services (menu)" />
+   	<COMMAND name="system service lb" help="Manage NGCP Load-Balance service">
+	 <!-- command options -->
+                <PARAM name="command"
+                        help="Switch Command"
+                        ptype="STRING"
+                        optional="false"
+                        default="null"
+                        mode="switch">
+                        <PARAM name="start"
+                                help="start"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="stop"
+                                help="stop"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="restart"
+                                help="restart"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="status"
+                                help="status"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                </PARAM>
+   	    <ACTION>/etc/init.d/kamailio-lb "${command}";echo</ACTION>
+   	</COMMAND>
+   	<COMMAND name="system service proxy" help="Manage NGCP Proxy service">
+	 <!-- command options -->
+                <PARAM name="command"
+                        help="Switch Command"
+                        ptype="STRING"
+                        optional="false"
+                        default="null"
+                        mode="switch">
+                        <PARAM name="start"
+                                help="start"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="stop"
+                                help="stop"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="restart"
+                                help="restart"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="status"
+                                help="status"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                </PARAM>
+   	    <ACTION>/etc/init.d/kamailio-proxy "${command}";echo</ACTION>
+   	</COMMAND>
+   	<COMMAND name="system service mediaproxy" help="Manage MediaProxy-ng service">
+	 <!-- command options -->
+                <PARAM name="command"
+                        help="Switch Command"
+                        ptype="STRING"
+                        optional="false"
+                        default="null"
+                        mode="switch">
+                        <PARAM name="start"
+                                help="start"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="stop"
+                                help="stop"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="restart"
+                                help="restart"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="status"
+                                help="status"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                </PARAM>
+   	    <ACTION>/etc/init.d/ngcp-mediaproxy-ng-daemon "${command}";echo</ACTION>
+   	</COMMAND>
+   	<COMMAND name="system service mysql" help="Manage MYSQL service.">
+	 <!-- command options -->
+                <PARAM name="command"
+                        help="Switch Command"
+                        ptype="STRING"
+                        optional="false"
+                        default="null"
+                        mode="switch">
+                        <PARAM name="start"
+                                help="start"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="stop"
+                                help="stop"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="restart"
+                                help="restart"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="status"
+                                help="status"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                </PARAM>
+   	    <ACTION>/etc/init.d/mysql "${command}";echo</ACTION>
+   	</COMMAND>
+   	<COMMAND name="system service asterisk" help="Manage ASTERISK-Voicemail service.">
+	 <!-- command options -->
+                <PARAM name="command"
+                        help="Switch Command"
+                        ptype="STRING"
+                        optional="false"
+                        default="null"
+                        mode="switch">
+                        <PARAM name="start"
+                                help="start"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="stop"
+                                help="stop"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="restart"
+                                help="restart"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                        <PARAM name="status"
+                                help="status"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                        </PARAM>
+                </PARAM>
+   	    <ACTION>/etc/init.d/asterisk "${command}";echo</ACTION>
+   	</COMMAND>
+
+
    	<!--=======================================================-->
 
 
@@ -86,6 +262,7 @@
                 help="Current operating NGCP configuration">
                 <ACTION> cat /etc/ngcp-config/config.yml</ACTION>
         </COMMAND>
+
 
 <!-- Copy commands -->
 
