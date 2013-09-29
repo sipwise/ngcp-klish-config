@@ -14,37 +14,30 @@
 <!-- COMMAND CONTAINERS -->
 
 <COMMAND name="notify"  help="Notify Services" interrupt="true" />
-<COMMAND name="notify siptrace"  help="SIP Trace Element" interrupt="true"/>
+<COMMAND name="notify siptrace"  help="SIP Trace Element (PCAP)" interrupt="true"/>
+<COMMAND name="notify siplog"  help="SIP Log Element (TXT)" interrupt="true"/>
 
 
-<!-- CURRENT LOGS TAIL -->
+<!-- TCPDUMP -->
 
-<COMMAND name="notify siptrace on screen" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
-                <ACTION>
-					echo "Starting SIP Tracer... (CTRL-C to Stop)"
-					cmd="ngrep -pql -W byline portrange 5060-5090"
-					$cmd 
-                </ACTION>
-</COMMAND>
-
-<COMMAND name="notify siptrace on" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
+<COMMAND name="notify siptrace on" lock="false" help="Start SIP Tracer in PCAP Mode" interrupt="true">
                 <ACTION>
 				user=$(whoami)
-				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
+				pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
 				echo $pid
 				if [ ! -z $pid ]; then
 					echo "ERROR: SIP Trace to file is already runnnig for $user"
 				else
 					echo "Starting SIP Tracer $$ for $user..."
-					ngrep -W byline portrange 5060-5090 -P $user > /tmp/siptrace$$.log &amp;
-					echo "SIP Trace to file is runnnig (saving to: /tmp/siptrace$$.log)"
+					tcpdump -ni any -s0 portrange 5060-5090 -w /tmp/siptrace$$.pcap &amp;
+					echo "SIP Trace to PCAP is runnnig (saving to: /tmp/siptrace$$.pcap)"
 				fi
                 </ACTION>
 </COMMAND>
-<COMMAND name="notify siptrace off" lock="false" help="Stop SIP Tracer in Text Mode" interrupt="true">
+<COMMAND name="notify siptrace off" lock="false" help="Stop SIP Tracer in PCAP Mode" interrupt="true">
                 <ACTION>
 				user=$(whoami)
-				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
+				pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
 				echo $pid
 				if [ ! -z $pid ]; then
 					echo "Stopping SIP Tracer $pid..."
@@ -55,13 +48,101 @@
 				fi
                 </ACTION>
 </COMMAND>
-<COMMAND name="notify siptrace kill all" lock="false" help="Kill ALL SIP Tracers" interrupt="true">
+<COMMAND name="notify siptrace kill all" lock="false" help="Kill ALL SIP Logrs" interrupt="true">
                 <ACTION>
-				killall ngrep
-				rm -rf /tmp/siptrace*.pid
+                                killall tcpdump
                 </ACTION>
 </COMMAND>
-<COMMAND name="notify siptrace kill" lock="false" help="Kill SIP Tracers by PID" interrupt="true">
+<COMMAND name="notify siptrace kill" lock="false" help="Kill SIP Tracer by PID" interrupt="true">
+                 <PARAM name="npid"
+                        optional="true"
+                        help="Specify the PID to kill"
+                        ptype="STRING"/>
+                <ACTION>
+                        if test -n "${npid}"; then
+                                kill "${npid}"
+                        else
+				pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
+                                echo $pid
+                                if [ ! -z $pid ]; then
+                                        echo "Choose a PID to terminate:"
+                                        echo $pid; echo
+                                else
+                                        echo "No Tracers runnning."
+                                fi
+                        fi
+                </ACTION>
+</COMMAND>
+<COMMAND name="notify siptrace list" lock="false" help="Kill ALL SIP Tracers" interrupt="true">
+                <ACTION>
+				 pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
+                </ACTION>
+</COMMAND>
+
+<COMMAND name="notify siptrace timed" lock="false" help="Start SIP Logr with timer" interrupt="false" >
+                 <PARAM name="tlimit"
+                        optional="true"
+                        default="10"
+                        help="Specify the length of tracer is seconds"
+                        ptype="STRING"/>
+                <ACTION>
+                        user=$(whoami)
+                        if test -n "${tlimit}"; then
+					timeout "${tlimit}" tcpdump -ni any -s0 portrange 5060-5090 -w /tmp/siptrace_timed_$$.pcap &amp;
+                                        echo "SIP Tracer timed capturing started for "${tlimit}" seconds, saving to: /tmp/siptrace_timed_$$.pcap"
+                        fi
+                </ACTION>
+</COMMAND>
+
+
+
+
+
+<!-- NGREP -->
+
+<COMMAND name="notify siplog on screen" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
+                <ACTION>
+					echo "Starting SIP Tracer... (CTRL-C to Stop)"
+					cmd="ngrep -pql -W byline portrange 5060-5090"
+					$cmd 
+                </ACTION>
+</COMMAND>
+
+<COMMAND name="notify siplog on" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
+                <ACTION>
+				user=$(whoami)
+				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
+				echo $pid
+				if [ ! -z $pid ]; then
+					echo "ERROR: SIP Log to file is already runnnig for $user"
+				else
+					echo "Starting SIP Logr $$ for $user..."
+					ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog$$.log &amp;
+					echo "SIP Log to file is runnnig (saving to: /tmp/siplog$$.log)"
+				fi
+                </ACTION>
+</COMMAND>
+<COMMAND name="notify siplog off" lock="false" help="Stop SIP Logr in Text Mode" interrupt="true">
+                <ACTION>
+				user=$(whoami)
+				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
+				echo $pid
+				if [ ! -z $pid ]; then
+					echo "Stopping SIP Logr $pid..."
+					kill $pid
+					echo "Done."
+				else
+					echo "ERROR: SIP Log is not runnnig."
+				fi
+                </ACTION>
+</COMMAND>
+<COMMAND name="notify siplog kill all" lock="false" help="Kill ALL SIP Logrs" interrupt="true">
+                <ACTION>
+				killall ngrep
+				rm -rf /tmp/siplog*.pid
+                </ACTION>
+</COMMAND>
+<COMMAND name="notify siplog kill" lock="false" help="Kill SIP Logrs by PID" interrupt="true">
 		 <PARAM name="npid"
                         optional="true"
                         help="Specify the PID to kill"
@@ -81,13 +162,13 @@
 			fi
                 </ACTION>
 </COMMAND>
-<COMMAND name="notify siptrace list" lock="false" help="Kill ALL SIP Tracers" interrupt="true">
+<COMMAND name="notify siplog list" lock="false" help="Kill ALL SIP Logrs" interrupt="true">
                 <ACTION>
 				 ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}'
                 </ACTION>
 </COMMAND>
 
-<COMMAND name="notify siptrace timed" lock="false" help="Start SIP Tracer with timer" interrupt="false" >
+<COMMAND name="notify siplog timed" lock="false" help="Start SIP Logr with timer" interrupt="false" >
                  <PARAM name="tlimit"
                         optional="true"
                         default="10"
@@ -96,8 +177,8 @@
                 <ACTION>
 			user=$(whoami)
                         if test -n "${tlimit}"; then
-					timeout "${tlimit}" ngrep -W byline portrange 5060-5090 -P $user > /tmp/siptrace_timed_$$.log &amp;
-					echo "SIP Tracer timed capturing started for "${tlimit}" seconds, saving to: /tmp/siptrace_timed_$$.txt"
+					timeout "${tlimit}" ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog_timed_$$.log &amp;
+					echo "SIP Logr timed capturing started for "${tlimit}" seconds, saving to: /tmp/siplog_timed_$$.txt"
                         fi
                 </ACTION>
 </COMMAND>
