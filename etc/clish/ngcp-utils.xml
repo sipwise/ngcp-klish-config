@@ -175,7 +175,7 @@
 
 <!-- NGREP -->
 
-<COMMAND name="notify siplog on screen" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
+<COMMAND name="notify siplog screen" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
 		<!-- command options -->
                 <PARAM name="ptype"
                         help="Switch Port or Range"
@@ -200,6 +200,23 @@
                                         ptype="STRING"/>
                         </PARAM>
                 </PARAM>
+		<PARAM name="filter"
+                        help="SIP filter"
+                        ptype="STRING"
+                        optional="true"
+                        default="null"
+                        mode="switch">
+                        <PARAM name="grep"
+                                help="port number"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="pfil"
+                                        help="value"
+					default=""
+                                        ptype="STRING"/>
+                        </PARAM>
+		</PARAM>
+
                 <ACTION>
 				case "${ptype}" in
                                         "port")
@@ -214,8 +231,8 @@
                                 esac
 
 					echo "Starting SIP Tracer... (CTRL-C to Stop)"
-					cmd="ngrep -pql -W byline $param"
-					$cmd 
+					ngrep-sip ${pfil} $param
+					
                 </ACTION>
 </COMMAND>
 
@@ -244,6 +261,23 @@
                                         ptype="STRING"/>
                         </PARAM>
                 </PARAM>
+		<PARAM name="filter"
+                        help="SIP filter"
+                        ptype="STRING"
+                        optional="true"
+                        default="null"
+                        mode="switch">
+                        <PARAM name="grep"
+                                help="port number"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="pfil"
+                                        help="value"
+					default=""
+                                        ptype="STRING"/>
+                        </PARAM>
+		</PARAM>
+
                 <ACTION>
 				case "${ptype}" in
                                         "port")
@@ -257,6 +291,11 @@
                                                 ;;
                                 esac
 
+				if test -n "${pfil}"; then
+                                	param=" -T -i -t -q ${pfil} $param"
+                        	fi
+
+				echo "STRING: $param"
 				user=$(whoami)
 				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
 				echo $pid
@@ -264,7 +303,7 @@
 					echo "ERROR: SIP Log to file is already runnnig for $user"
 				else
 					echo "Starting SIP Logr $$ for $user..."
-					ngrep -W byline $param -P $user > /tmp/siplog$$.log &amp;
+					ngrep -d any -W byline $param -P $user > /tmp/siplog$$.log &amp;
 					#ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog$$.log &amp;
 					echo "SIP Log to file is runnnig (saving to: /tmp/siplog$$.log)"
 				fi
@@ -346,6 +385,23 @@
                                         ptype="STRING"/>
                         </PARAM>
                 </PARAM>
+		<PARAM name="filter"
+                        help="SIP filter"
+                        ptype="STRING"
+                        optional="true"
+                        default="null"
+                        mode="switch">
+                        <PARAM name="grep"
+                                help="port number"
+                                ptype="SUBCOMMAND"
+                                mode="subcommand">
+                                <PARAM name="pfil"
+                                        help="value"
+					default=""
+                                        ptype="STRING"/>
+                        </PARAM>
+		</PARAM>
+
                 <ACTION>
 			case "${ptype}" in
                                         "port")
@@ -358,9 +414,14 @@
                                                 param="portrange 5060-5090"
                                                 ;;
                         esac
+
+				if test -n "${pfil}"; then
+                                	param=" -T -i -t -q ${pfil} $param"
+                        	fi
+
 			user=$(whoami)
                         if test -n "${tlimit}"; then
-					timeout "${tlimit}" ngrep -W byline $param -P $user > /tmp/siplog_timed_$$.log &amp;
+					timeout "${tlimit}" ngrep -d any -W byline $param -P $user > /tmp/siplog_timed_$$.log &amp;
 					#timeout "${tlimit}" ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog_timed_$$.log &amp;
 					echo "SIP Logr timed capturing started for "${tlimit}" seconds, saving to: /tmp/siplog_timed_$$.txt"
                         fi
