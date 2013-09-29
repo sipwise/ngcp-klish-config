@@ -1,56 +1,7 @@
 ngcp-klish-config 
 =================
 
-Sipwise NGCP shell based on klish/clish
-
-
-WARNING:
-=======
-
-The status is work-in-progress. Do not expect a full blown shell just yet!
-This package & its components are meant for a SIP:Provider CE 3.x Server *ONLY*
-
-
-BASIC HOW-TO:
-============
-
-1) Clone & Install the system & software requirements:
-
-    - NGCP-CLISH (https://github.com/sipwise/klish)
-    - LUA-URI (https://github.com/sipwise/lua-uri.git)
-
-2) Clone & Deploy NGCP-KLISH-CONFIG in your /etc (script + clish directory)
-
-    # /etc/cli.sh
-    # /etc/clish
-    
-3) Add execution permisions to the launcher if needed, ie:
-
-    # chmod +x /etc/cli.sh
-
-4) Create a dedicated system user (ie: cliuser) with password and the clish script as default shell: /etc/cli.sh
-
-    # cliuser:x:1001:1001:,,,:/dev/null:/etc/cli.sh
-
-5) Modify /etc/sudoers to allow cliuser to execute enable mode calls as root. For example:
-
-    Defaults:cliuser targetpw
-    cliuser ALL=(ALL) /usr/bin/clish
-
-
-
-BASIC USAGE:
-===========
-
-1) SSH to the system as 'cliuser' using the new account or manually launch /etc/cli.sh
-
-2) Use tab/autocompletion and ? to explore the available menus and commands
-
-3) Enter ENABLE to start priviledged mode, use the system's root password when asked for one
-
-cliuser@localhost's password:
-Linux sipx 3.2.0-4-amd64 #1 SMP Debian 3.2.46-1 x86_64
-
+Sipwise NGCP/SPCE CLI shell based on klish/clish
 
 
                     #######
@@ -81,11 +32,55 @@ Linux sipx 3.2.0-4-amd64 #1 SMP Debian 3.2.46-1 x86_64
     ###     # ###            EEEEEEEE   E   EEE     DEEEE
               ###
 
-  SIPWISE NGCP CE: Command Line (NGCLI)
 
-Welcome cliuser it is Tue Sep 24 19:36:17 CEST 2013
 
-> enable
-Password: (root password)
-# 
+WARNING:
+=======
+
+The status is work-in-progress. Do not expect a full blown shell just yet!
+This package & its components are meant for a SIP:Provider CE 3.x Server *ONLY*
+
+
+BASIC HOW-TO:
+============
+
+1) Clone & Install the system & software requirements:
+
+    - NGCP-CLISH (https://github.com/sipwise/klish)
+    - LUA-URI (https://github.com/sipwise/lua-uri.git)
+
+2) Clone & Deploy NGCP-KLISH-CONFIG to your /etc:
+
+        # git clone https://github.com/sipwise/ngcp-clish-config
+        # cd ngcp-clish-config; cp -r etc/* /etc/
+    
+3) Add execution permisions to the launcher if needed, ie:
+
+    # chmod +x /etc/cli.sh
+
+4) Create a dedicated system user (ie: cliuser) with password and the clish script as default shell: /etc/cli.sh
+
+    # cliuser:x:1001:1001:,,,:/dev/null:/etc/cli.sh
+
+5) Modify /etc/sudoers to allow cliuser to execute enable mode calls as root. For example:
+
+    Defaults:cliuser targetpw
+    cliuser ALL=(ALL) /usr/bin/clish
+
+
+
+BASIC USAGE:
+===========
+
+1) SSH to the system as 'cliuser' using the new account or manually launch /etc/cli.sh
+
+2) Use tab/autocompletion and ? to explore the menus, commands and parameters
+
+3) Use 'enable' to enter priviledged mode (use the system's root password when asked)
+
+
+EXAMPLE COMMANDS:
+================
+
+- coming soon! - 
 
