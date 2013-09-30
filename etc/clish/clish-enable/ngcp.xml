@@ -65,8 +65,8 @@
        		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show active_watchers</ACTION>
    	</COMMAND>
 
-	<!-- PROXY MISC -->
 
+	<!-- PROXY MISC -->
 
    	<COMMAND name="show ngcp service proxy uptime" lock="false" help="Show Server Uptime" interrupt="true">
        		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy core.uptime </ACTION>
@@ -141,41 +141,8 @@
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy logs" lock="false" help="Show PROXY Logs" interrupt="true">
-       		<ACTION shebang='/bin/bash'>tail -n 30 /var/log/ngcp/kamailio-proxy.log </ACTION>
+       		<ACTION>echo "Please use 'show ngcp log' command"</ACTION>
    	</COMMAND>
-
-	<COMMAND name="show ngcp service proxy search" lock="false" help="Search string in the current PROXY Logs" interrupt="true">
-		<PARAM name="proxystring"
-                        help="Specify a string to search (i.e. the Call-ID)"
-                        ptype="STRING"/>
-                <ACTION shebang='/bin/bash'>grep "${proxystring}" /var/log/ngcp/kamailio-proxy.log > /home/cliuser/kamailio_proxy_log_${proxystring}</ACTION>
-        </COMMAND>
-
-	<COMMAND name="show ngcp service proxy search-old" lock="false" help="Search string in old PROXY Logs" interrupt="true">
-                <PARAM name="proxystringold"
-                        help="Specify a string (i.e. the Call-ID)"
-                        ptype="STRING"/>
-                <ACTION shebang='/bin/bash'>zgrep "${proxystringold}" /var/log/ngcp/old/kamailio-proxy-* > /home/cliuser/kamailio_old_proxy_log_${proxystring}</ACTION>
-        </COMMAND>
-
-	<COMMAND name="show ngcp service proxy search list-file" lock="false" help="List all the log file created" interrupt="true">
-                <ACTION shebang='/bin/bash'>ls /home/cliuser/</ACTION>
-        </COMMAND>
-
-	<COMMAND name="show ngcp service proxy search delete" lock="false" help="Delete an existing log file" interrupt="true">
-		<PARAM name="logfilename"
-                        help="Specify the name of the file to delete (see the file list with 'show ngcp service proxy search list-file')"
-                        ptype="STRING"/>
-                <ACTION shebang='/bin/bash'>rm /home/cliuser/${logfilename}</ACTION>
-        </COMMAND>
-
-        <COMMAND name="show ngcp service proxy search open" lock="false" help="Open an existing log file" interrupt="true">
-                <PARAM name="logfilename"
-                        help="Specify the name of the file to open (see the file list with 'show ngcp service proxy search list-file')"
-                        ptype="STRING"/>
-                <ACTION shebang='/bin/bash'>cat /home/cliuser/${logfilename}</ACTION>
-        </COMMAND>
-
 
    	<COMMAND name="show ngcp service proxy calls" lock="false" help="Show PROXY concurrent calls" interrupt="true">
        		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy fifo dlg_list </ACTION>
