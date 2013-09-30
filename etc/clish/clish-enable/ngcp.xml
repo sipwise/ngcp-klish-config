@@ -9,6 +9,26 @@
   <COMMAND name="show ngcp calls" help="Show calls info"></COMMAND>
 
   <!-- NGCP LUA MAGIC -->
+
+  <COMMAND name="show ngcp calls concurrent-calls" help="Show concurrent calls stats" lock="false" interrupt="true">
+    <ACTION  builtin="lua@lua">cc_stats()</ACTION>
+  </COMMAND>
+
+  <COMMAND name="show ngcp calls concurrent-calls details" help="Show concurrent calls details" lock="false" interrupt="true">
+  	<PARAM name="callid" optional="true" ptype="STRING" help="callid"/>
+    <ACTION builtin="lua@lua">cc_details("${callid}")</ACTION>
+  </COMMAND>
+
+  <COMMAND name="show ngcp registrations" help="Show registrations" lock="false" interrupt="true">
+    <ACTION builtin="lua@lua">reg_stats()</ACTION>
+  </COMMAND>
+
+  <COMMAND name="show ngcp registrations subscriber" help="Show registration" lock="false" interrupt="true">
+    <PARAM name="aor" optional="false" ptype="STRING" help="AOR user@domain"/>
+    <ACTION builtin="lua@lua">reg_info("${aor}")</ACTION>
+  </COMMAND>
+
+<!--
   <COMMAND name="show ngcp calls concurrent-calls" help="Show concurrent calls stats" lock="false" interrupt="true">
     <ACTION>echo 'cc_stats()' | lua -lngcp-klish.ngcp </ACTION>
   </COMMAND>
@@ -26,6 +46,8 @@
     <PARAM name="aor" optional="false" ptype="STRING" help="AOR user@domain"/>
     <ACTION>echo 'reg_info("${aor}")' | lua -lngcp-klish.ngcp</ACTION>
   </COMMAND>
+
+-->
 
   <!-- OLD COMMANDS -->
 
