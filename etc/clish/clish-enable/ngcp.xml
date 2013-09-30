@@ -10,21 +10,21 @@
 
   <!-- NGCP LUA MAGIC -->
   <COMMAND name="show ngcp calls concurrent-calls" help="Show concurrent calls stats" lock="false" interrupt="true">
-    <ACTION>echo 'cc_stats()' | lua -lngcp-klish.ngcp </ACTION>
+    <ACTION>cc_stats()</ACTION>
   </COMMAND>
 
   <COMMAND name="show ngcp calls concurrent-calls details" help="Show concurrent calls details" lock="false" interrupt="true">
   	<PARAM name="callid" optional="true" ptype="STRING" help="callid"/>
-    <ACTION>echo 'cc_details("${callid}")' | lua -lngcp-klish.ngcp </ACTION>
+    <ACTION>cc_details("${callid}")</ACTION>
   </COMMAND>
 
   <COMMAND name="show ngcp registrations" help="Show registrations" lock="false" interrupt="true">
-    <ACTION>echo 'reg_stats()' | lua -lngcp-klish.ngcp</ACTION>
+    <ACTION>reg_stats()</ACTION>
   </COMMAND>
 
   <COMMAND name="show ngcp registrations subscriber" help="Show registration" lock="false" interrupt="true">
     <PARAM name="aor" optional="false" ptype="STRING" help="AOR user@domain"/>
-    <ACTION>echo 'reg_info("${aor}")' | lua -lngcp-klish.ngcp</ACTION>
+    <ACTION>reg_info("${aor}")</ACTION>
   </COMMAND>
 
   <!-- OLD COMMANDS -->
@@ -41,151 +41,151 @@
 	<COMMAND name="show ngcp service proxy db" help="Display NGCP Proxy DB information (menu)" />
 
    	<COMMAND name="show ngcp service proxy db trusted" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy db show trusted</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show trusted</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy db lcr_gw" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy db show lcr_gw</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show lcr_gw</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy db lcr_rule" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy db show lcr_rule</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show lcr_rule</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy db lcr_rule_target" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy db show lcr_rule_target</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show lcr_rule_target</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy db dialplan" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy db show dialplan</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show dialplan</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy db location" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy db show location</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show location</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy db sems_registrations" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy db show sems_registrations</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show sems_registrations</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy db watchers" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy db show active_watchers</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy db show active_watchers</ACTION>
    	</COMMAND>
 
 	<!-- PROXY MISC -->
 
 
    	<COMMAND name="show ngcp service proxy uptime" lock="false" help="Show Server Uptime" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy core.uptime </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy core.uptime </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy version" lock="false" help="Show Server Version" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy core.info </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy core.info </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy sockets" lock="false" help="Show Server Uptime" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy core.sockets_list </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy core.sockets_list </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy dialog" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy fifo get_statistics dialog:</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy fifo get_statistics dialog:</ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy routes" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy dialplan show</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy dialplan show</ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy stats" lock="false" help="Show TM Stats" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy tm.stats </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy tm.stats </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy list-dispatcher" lock="false" help="Show Dispatcher List" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy dispatcher.list </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy dispatcher.list </ACTION>
    	</COMMAND>
 
 	<COMMAND name="show ngcp service proxy list-users" help="Display NGCP Proxy information" />
 
    	<COMMAND name="show ngcp service proxy list-users count" lock="false" help="Count Registered UL" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy fifo get_statistics usrloc::registered_users </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy fifo get_statistics usrloc::registered_users </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy list-users online" lock="false" help="Show Registered UL" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy online </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy online </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy list-users full" lock="false" help="Show Registered UL" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy ul show </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy ul show </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy list-users brief" lock="false" help="Show Registered UL" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy ul show --brief </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy ul show --brief </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy find-userid" lock="false" help="Find Registered UL" interrupt="true">
 		<PARAM name="userloc"
                         help="This subscriber id name"
                         ptype="STRING"/>
-       		<ACTION>ngcp-sercmd proxy ul.lookup location "${userloc}"</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy ul.lookup location "${userloc}"</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy find-URI" lock="false" help="Find Registered UL" interrupt="true">
 		<PARAM name="useruri"
                         help="This subscriber USER@DOMAIN"
                         ptype="STRING"/>
-       		<ACTION>ngcp-kamctl proxy ul show "${useruri}"</ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy ul show "${useruri}"</ACTION>
    	</COMMAND>
 
 	<COMMAND name="show ngcp service proxy domains" help="Show DOMAINS (menu)" />
    	<COMMAND name="show ngcp service proxy domains database" help="Show DOMAINS" interrupt="true"  lock="false">
-        	<ACTION> ngcp-kamctl proxy domain show showdb </ACTION>
+        	<ACTION shebang='/bin/bash'> ngcp-kamctl proxy domain show showdb </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy domains memory" help="Show DOMAINS" interrupt="true"  lock="false">
-        	<ACTION> ngcp-kamctl proxy domain show  </ACTION>
+        	<ACTION shebang='/bin/bash'> ngcp-kamctl proxy domain show  </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy gateways" help="Show GATEWAYS" interrupt="true"  lock="false">
-       		<ACTION>ngcp-sercmd proxy lcr.dump_gws </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy lcr.dump_gws </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy rules" help="Show GATEWAYS" interrupt="true"  lock="false">
-       		<ACTION>ngcp-sercmd proxy lcr.dump_rules </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd proxy lcr.dump_rules </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy logs" lock="false" help="Show PROXY Logs" interrupt="true">
-       		<ACTION>tail -n 30 /var/log/ngcp/kamailio-proxy.log </ACTION>
+       		<ACTION shebang='/bin/bash'>tail -n 30 /var/log/ngcp/kamailio-proxy.log </ACTION>
    	</COMMAND>
 
 	<COMMAND name="show ngcp service proxy search" lock="false" help="Search string in the current PROXY Logs" interrupt="true">
 		<PARAM name="proxystring"
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
-                <ACTION>grep "${proxystring}" /var/log/ngcp/kamailio-proxy.log > /home/cliuser/kamailio_proxy_log_${proxystring}</ACTION>
+                <ACTION shebang='/bin/bash'>grep "${proxystring}" /var/log/ngcp/kamailio-proxy.log > /home/cliuser/kamailio_proxy_log_${proxystring}</ACTION>
         </COMMAND>
 
 	<COMMAND name="show ngcp service proxy search-old" lock="false" help="Search string in old PROXY Logs" interrupt="true">
                 <PARAM name="proxystringold"
                         help="Specify a string (i.e. the Call-ID)"
                         ptype="STRING"/>
-                <ACTION>zgrep "${proxystringold}" /var/log/ngcp/old/kamailio-proxy-* > /home/cliuser/kamailio_old_proxy_log_${proxystring}</ACTION>
+                <ACTION shebang='/bin/bash'>zgrep "${proxystringold}" /var/log/ngcp/old/kamailio-proxy-* > /home/cliuser/kamailio_old_proxy_log_${proxystring}</ACTION>
         </COMMAND>
 
 	<COMMAND name="show ngcp service proxy search list-file" lock="false" help="List all the log file created" interrupt="true">
-                <ACTION>ls /home/cliuser/</ACTION>
+                <ACTION shebang='/bin/bash'>ls /home/cliuser/</ACTION>
         </COMMAND>
 
 	<COMMAND name="show ngcp service proxy search delete" lock="false" help="Delete an existing log file" interrupt="true">
 		<PARAM name="logfilename"
                         help="Specify the name of the file to delete (see the file list with 'show ngcp service proxy search list-file')"
                         ptype="STRING"/>
-                <ACTION>rm /home/cliuser/${logfilename}</ACTION>
+                <ACTION shebang='/bin/bash'>rm /home/cliuser/${logfilename}</ACTION>
         </COMMAND>
 
         <COMMAND name="show ngcp service proxy search open" lock="false" help="Open an existing log file" interrupt="true">
                 <PARAM name="logfilename"
                         help="Specify the name of the file to open (see the file list with 'show ngcp service proxy search list-file')"
                         ptype="STRING"/>
-                <ACTION>cat /home/cliuser/${logfilename}</ACTION>
+                <ACTION shebang='/bin/bash'>cat /home/cliuser/${logfilename}</ACTION>
         </COMMAND>
 
 
    	<COMMAND name="show ngcp service proxy calls" lock="false" help="Show PROXY concurrent calls" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy fifo dlg_list </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-kamctl proxy fifo dlg_list </ACTION>
    	</COMMAND>
 
 	<COMMAND name="show ngcp service proxy calls account" lock="false" help="Show PROXY concurrent calls per account" interrupt="true">
 		<PARAM name="account"
                         help="Specify the account ID"
                         ptype="STRING"/>
-                <ACTION>ngcp-kamctl proxy fifo profile_get_size account ${account} </ACTION>
+                <ACTION shebang='/bin/bash'>ngcp-kamctl proxy fifo profile_get_size account ${account} </ACTION>
         </COMMAND>
 
 
@@ -194,33 +194,33 @@
 	<COMMAND name="show ngcp service lb" help="Display NGCP Load-Balancer information (menu)" />
 
    	<COMMAND name="show ngcp service lb version" lock="false" help="Show Server Version" interrupt="true">
-       		<ACTION>ngcp-sercmd lb server </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd lb server </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service lb stats" lock="false" help="Show TM Stats" interrupt="true">
-       		<ACTION>ngcp-sercmd lb sl.stats </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd lb sl.stats </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service lb list-dispatcher" lock="false" help="Show TM Stats" interrupt="true">
-       		<ACTION>ngcp-sercmd lb dispatcher.list </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd lb dispatcher.list </ACTION>
    	</COMMAND>
 
 
 	<COMMAND name="show ngcp service lb tls" help="Display NGCP Load-Balancer TLS information" />
    	<COMMAND name="show ngcp service lb tls info" lock="false" help="Show LB TLS Info" interrupt="true">
-       		<ACTION>ngcp-sercmd lb tls.info </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd lb tls.info </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service lb tls list" lock="false" help="Show LB TLS List" interrupt="true">
-       		<ACTION>ngcp-sercmd lb tls.list </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd lb tls.list </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service lb tls options" lock="false" help="Show LB TLS Options" interrupt="true">
-       		<ACTION>ngcp-sercmd lb tls.options </ACTION>
+       		<ACTION shebang='/bin/bash'>ngcp-sercmd lb tls.options </ACTION>
    	</COMMAND>
 
 
 
    	<COMMAND name="show ngcp service lb logs" lock="false" help="Show LB Logs" interrupt="true">
-       		<ACTION>tail /var/log/ngcp/kamailio-lb.log </ACTION>
+       		<ACTION shebang='/bin/bash'>tail /var/log/ngcp/kamailio-lb.log </ACTION>
    	</COMMAND>
 
 	<!-- NGCP B2BUA -->
@@ -228,11 +228,11 @@
         <COMMAND name="show ngcp service sems" help="Display NGCP SEMS/B2BUA information (menu)" />
 
         <COMMAND name="show ngcp service sems stats" lock="false" help="Show Server Version" interrupt="true">
-                <ACTION>sems-stats </ACTION>
+                <ACTION shebang='/bin/bash'>sems-stats </ACTION>
         </COMMAND>
 
         <COMMAND name="show ngcp service sems logs" lock="false" help="Show Server Version" interrupt="true">
-                <ACTION>tail /var/log/ngcp/sems.log </ACTION>
+                <ACTION shebang='/bin/bash'>tail /var/log/ngcp/sems.log </ACTION>
         </COMMAND>
 
 
@@ -242,11 +242,11 @@
         <COMMAND name="show ngcp service mediaproxy" help="Display Mediaproxy-NG information (menu)" />
 
         <COMMAND name="show ngcp service mediaproxy stats" lock="false" help="Show Mediaproxy-NG Version" interrupt="true">
-                <ACTION>sems-stats </ACTION>
+                <ACTION shebang='/bin/bash'>sems-stats </ACTION>
         </COMMAND>
 
         <COMMAND name="show ngcp service mediaproxy logs" lock="false" help="Show Mediaproxy-NG Logs" interrupt="true">
-                <ACTION>tail /var/log/ngcp/rtp.log </ACTION>
+                <ACTION shebang='/bin/bash'>tail /var/log/ngcp/rtp.log </ACTION>
         </COMMAND>
 
 
