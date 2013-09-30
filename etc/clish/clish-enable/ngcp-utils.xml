@@ -174,7 +174,7 @@
 
 <!-- NGREP -->
 
-<COMMAND name="notify siplog screen" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
+<COMMAND name="notify siplog on screen" lock="false" help="Start SIP Tracer in Text Mode" interrupt="true">
 		<!-- command options -->
                 <PARAM name="ptype"
                         help="Switch Port or Range"
