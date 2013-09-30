@@ -112,7 +112,7 @@
 
 <!-- NEW LOGS GREP -->
 
-<COMMAND name="show ngcp log proxy search" lock="false" help="Search PROXY Logs" interrupt="true">
+<COMMAND name="show ngcp log proxy grep" lock="false" help="Search PROXY Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -121,7 +121,7 @@
                         grep "${grepstring}" /var/log/ngcp/kamailio-proxy.log 
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log lb search" lock="false" help="Search LB Logs" interrupt="true">
+<COMMAND name="show ngcp log lb grep" lock="false" help="Search LB Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -130,7 +130,7 @@
                         grep "${grepstring}" /var/log/ngcp/kamailio-lb.log 
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log sems search" lock="false" help="Search SEMS Logs" interrupt="true">
+<COMMAND name="show ngcp log sems grep" lock="false" help="Search SEMS Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -139,7 +139,7 @@
                         grep "${grepstring}" /var/log/ngcp/sems.log 
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log rate search" lock="false" help="Search RATE Logs" interrupt="true">
+<COMMAND name="show ngcp log rate grep" lock="false" help="Search RATE Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -148,7 +148,16 @@
                         grep "${grepstring}" /var/log/ngcp/old/rate-o-mat.log
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log oss search" lock="false" help="Search OSS Logs" interrupt="true">
+<COMMAND name="show ngcp log mediaproxy grep" lock="false" help="Search MEDIAPROXY Logs" interrupt="true">
+                 <PARAM name="grepstring"
+                        optional="false"
+                        help="Specify a string to search (i.e. the Call-ID)"
+                        ptype="STRING"/>
+                <ACTION>
+                        grep "${grepstring}" /var/log/ngcp/old/rtp.log
+                </ACTION>
+</COMMAND>
+<COMMAND name="show ngcp log oss grep" lock="false" help="Search OSS Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -160,7 +169,7 @@
 
 <!-- OLD LOGS ZGREP -->
 
-<COMMAND name="show ngcp log proxy search-old" lock="false" help="Search PROXY Logs" interrupt="true">
+<COMMAND name="show ngcp log proxy grep-old" lock="false" help="Search PROXY Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -169,7 +178,7 @@
                         zgrep "${grepstring}" /var/log/ngcp/old/kamailio-proxy*.gz 
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log lb search-old" lock="false" help="Search LB Logs" interrupt="true">
+<COMMAND name="show ngcp log lb grep-old" lock="false" help="Search LB Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -178,7 +187,7 @@
                         zgrep "${grepstring}" /var/log/ngcp/old/lb-proxy*.gz 
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log sems search-old" lock="false" help="Search SEMS Logs" interrupt="true">
+<COMMAND name="show ngcp log sems grep-old" lock="false" help="Search SEMS Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -187,7 +196,7 @@
                         zgrep "${grepstring}" /var/log/ngcp/old/sems-log*.gz 
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log rate search-old" lock="false" help="Search RATE Logs" interrupt="true">
+<COMMAND name="show ngcp log rate grep-old" lock="false" help="Search RATE Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -196,7 +205,16 @@
                         zgrep "${grepstring}" /var/log/ngcp/old/rate-o-mat*.gz 
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log oss search-old" lock="false" help="Search OSS Logs" interrupt="true">
+<COMMAND name="show ngcp log mediaproxy grep-old" lock="false" help="Search Mediaproxy Logs" interrupt="true">
+                 <PARAM name="grepstring"
+                        optional="false"
+                        help="Specify a string to search (i.e. the Call-ID)"
+                        ptype="STRING"/>
+                <ACTION>
+                        zgrep "${grepstring}" /var/log/ngcp/old/rtp*.gz 
+                </ACTION>
+</COMMAND>
+<COMMAND name="show ngcp log oss grep-old" lock="false" help="Search OSS Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
