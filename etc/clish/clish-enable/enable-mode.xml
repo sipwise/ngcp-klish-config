@@ -63,14 +63,14 @@
 
 	<!-- SERVICES -->
 
-   	<COMMAND name="system service" help="Manage System Services (menu)" />
-   	<COMMAND name="system service lb" help="Manage NGCP Load-Balance service">
+   	<COMMAND name="notify service" help="Manage System Services (menu)" />
+   	<COMMAND name="notify service lb" help="Manage NGCP Load-Balance service">
 	 <!-- command options -->
                 <PARAM name="command"
                         help="Switch Command"
                         ptype="STRING"
                         optional="false"
-                        default="null"
+                        default=""
                         mode="switch">
                         <PARAM name="start"
                                 help="start"
@@ -95,13 +95,13 @@
                 </PARAM>
    	    <ACTION>/etc/init.d/kamailio-lb "${command}";echo</ACTION>
    	</COMMAND>
-   	<COMMAND name="system service proxy" help="Manage NGCP Proxy service">
+   	<COMMAND name="notify service proxy" help="Manage NGCP Proxy service">
 	 <!-- command options -->
                 <PARAM name="command"
                         help="Switch Command"
                         ptype="STRING"
                         optional="false"
-                        default="null"
+                        default=""
                         mode="switch">
                         <PARAM name="start"
                                 help="start"
@@ -126,13 +126,13 @@
                 </PARAM>
    	    <ACTION>/etc/init.d/kamailio-proxy "${command}";echo</ACTION>
    	</COMMAND>
-   	<COMMAND name="system service mediaproxy" help="Manage MediaProxy-ng service">
+   	<COMMAND name="notify service mediaproxy" help="Manage MediaProxy-ng service">
 	 <!-- command options -->
                 <PARAM name="command"
                         help="Switch Command"
                         ptype="STRING"
                         optional="false"
-                        default="null"
+                        default=""
                         mode="switch">
                         <PARAM name="start"
                                 help="start"
@@ -157,13 +157,13 @@
                 </PARAM>
    	    <ACTION>/etc/init.d/ngcp-mediaproxy-ng-daemon "${command}";echo</ACTION>
    	</COMMAND>
-   	<COMMAND name="system service mysql" help="Manage MYSQL service.">
+   	<COMMAND name="notify service mysql" help="Manage MYSQL service.">
 	 <!-- command options -->
                 <PARAM name="command"
                         help="Switch Command"
                         ptype="STRING"
                         optional="false"
-                        default="null"
+                        default=""
                         mode="switch">
                         <PARAM name="start"
                                 help="start"
@@ -188,13 +188,13 @@
                 </PARAM>
    	    <ACTION>/etc/init.d/mysql "${command}";echo</ACTION>
    	</COMMAND>
-   	<COMMAND name="system service asterisk" help="Manage ASTERISK-Voicemail service.">
+   	<COMMAND name="notify service asterisk" help="Manage ASTERISK-Voicemail service.">
 	 <!-- command options -->
                 <PARAM name="command"
                         help="Switch Command"
                         ptype="STRING"
                         optional="false"
-                        default="null"
+                        default=""
                         mode="switch">
                         <PARAM name="start"
                                 help="start"

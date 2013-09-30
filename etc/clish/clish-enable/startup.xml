@@ -7,6 +7,7 @@
 	<PLUGIN name="lua" file="clish_plugin_lua.so">
 		scripts_dir="/usr/share/lua/5.1/ngcp-klish"
 	</PLUGIN>
+<!--
 	<HOOK name="action" builtin="lua@lua"/>
 
 	<STARTUP view="enable-view">
