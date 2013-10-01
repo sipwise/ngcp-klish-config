@@ -17,8 +17,6 @@
 -- On Debian systems, the complete text of the GNU General
 -- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 --
--- Lua utils
-local URI = require 'uri'
 
 -- copy a table
 function table.deepcopy(object)
@@ -152,11 +150,6 @@ end
 
 function string.ends(String,End)
    return End=='' or string.sub(String,-string.len(End))==End
-end
-
-function uri_get_username(str)
-  local uri = URI:new(str)
-  return uri:username()
 end
 
 -- Stack Table
