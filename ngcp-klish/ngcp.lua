@@ -18,7 +18,7 @@
 -- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 --
 require 'ngcp-klish.expand'
-require 'uri'
+local URI = require 'uri'
 
 local function uri_get_username(str)
   local uri = URI:new(str)
