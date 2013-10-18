@@ -11,6 +11,7 @@ Package: ngcp-klish-config
 Section: shells
 Architecture: any
 Depends: klish,
+         lua5.1,
          lua-ngcp-klish,
          ${shlibs:Depends},
          ${misc:Depends}
