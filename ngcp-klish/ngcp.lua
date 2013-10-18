@@ -18,6 +18,7 @@
 -- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 --
 require 'ngcp-klish.expand'
+require 'ngcp-klish.configs'
 local URI = require 'uri'
 
 local function uri_get_username(str)
@@ -37,7 +38,9 @@ Average Amount of Calls (last hour): $(average)]],
 	cc_list=[[
 | $(callid) | $(caller) | $(callee) | $(date) | $(peer) | $(rtp_ports) | $(hash) |]],
 	reg_stats=[[
-Total Users online: $(reg_users)]],
+Users: $(users)
+Users online: $(reg_users)
+Users offline: $(users-reg_users)]],
 	reg_info=[[
 Address: ${address}
 Expires: ${expires}
@@ -196,6 +199,7 @@ function reg_stats()
 		end
 	end
 	foutput:close()
+	stats.users = get_users()
 	print(expand(templates.reg_stats, stats))
 end
 

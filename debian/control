@@ -22,8 +22,10 @@ Description: NGCP config for klish
 Package: lua-ngcp-klish
 Section: libs
 Architecture: any
-Depends: lua-uri,
+Depends: lua-dbi-mysql,
          lua-socket,
+         lua-uri,
+         lua-yaml,
          ${shlibs:Depends},
          ${misc:Depends}
 Description: lua libs for ngcp-klish-config
