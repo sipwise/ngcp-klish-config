@@ -11,21 +11,21 @@
   <!-- NGCP LUA MAGIC -->
 
   <COMMAND name="show ngcp calls concurrent-calls" help="Show concurrent calls stats" lock="false" interrupt="true">
-    <ACTION  builtin="lua@ngcp-klish">cc_stats()</ACTION>
+    <ACTION  builtin="lua@ngcp-klish">require "ngcp-klish.ngcp"; cc_stats()</ACTION>
   </COMMAND>
 
   <COMMAND name="show ngcp calls concurrent-calls details" help="Show concurrent calls details" lock="false" interrupt="true">
   	<PARAM name="callid" optional="true" ptype="STRING" help="callid"/>
-    <ACTION builtin="lua@ngcp-klish">cc_details("${callid}")</ACTION>
+    <ACTION builtin="lua@ngcp-klish">require "ngcp-klish.ngcp"; cc_details("${callid}")</ACTION>
   </COMMAND>
 
   <COMMAND name="show ngcp registrations" help="Show registrations" lock="false" interrupt="true">
-    <ACTION builtin="lua@ngcp-klish">reg_stats()</ACTION>
+    <ACTION builtin="lua@ngcp-klish">require "ngcp-klish.ngcp"; reg_stats()</ACTION>
   </COMMAND>
 
   <COMMAND name="show ngcp registrations subscriber" help="Show registration" lock="false" interrupt="true">
     <PARAM name="aor" optional="false" ptype="STRING" help="AOR user@domain"/>
-    <ACTION builtin="lua@ngcp-klish">reg_info("${aor}")</ACTION>
+    <ACTION builtin="lua@ngcp-klish">require "ngcp-klish.ngcp"; reg_info("${aor}")</ACTION>
   </COMMAND>
 
   <!-- OLD COMMANDS -->
