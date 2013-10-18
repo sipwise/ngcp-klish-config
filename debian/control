@@ -22,6 +22,7 @@ Package: lua-ngcp-klish
 Section: libs
 Architecture: any
 Depends: lua-uri,
+         lua-socket,
          ${shlibs:Depends},
          ${misc:Depends}
 Description: lua libs for ngcp-klish-config
