@@ -4,8 +4,6 @@
  xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
                      http://clish.sourceforge.net/XMLSchema/clish.xsd">
 
-	<PLUGIN name="ngcp-klish" file="clish_plugin_lua.so"></PLUGIN>
-
 	<STARTUP view="enable-view" >
 	</STARTUP>
 
