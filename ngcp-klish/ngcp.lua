@@ -19,7 +19,9 @@
 --
 require 'ngcp-klish.expand'
 require 'ngcp-klish.configs'
+local MP = require 'ngcp-klish.mediaproxy-ng'
 local URI = require 'uri'
+require 'ngcp-klish.utils'
 
 local function uri_get_username(str)
   local uri = URI:new(str)
@@ -37,6 +39,7 @@ Total Concurrent Calls with RTP: $(rtp)
 Average Amount of Calls (last hour): $(average)]],
 	cc_list=[[
 | $(callid) | $(caller) | $(callee) | $(date) | $(peer) | $(rtp_ports) | $(hash) |]],
+	cc_rtp_info=[[$(from_local)($(from_ip):$(from))->$(to_local)($(to_ip):$(to))]],
 	reg_stats=[[
 Users: $(users)
 Users online: $(reg_users)
@@ -119,6 +122,23 @@ function cc_stats()
 	print(expand(templates.cc_stats, stats))
 end
 
+-- formats the values of rtp
+-- @param t table with all the info of the call + rtp_info
+-- @return string
+local function rtp_info_prepare(t)
+	local result, temp = '', {}
+	if t.rtp_info then
+		temp.from_local = t.rtp_info[t.from_tag]["local port"]
+		temp.from = t.rtp_info[t.from_tag]["peer address"].port
+		temp.from_ip = t.rtp_info[t.from_tag]["peer address"].address
+		temp.to_local = t.rtp_info[t.to_tag]["local port"]
+		temp.to = t.rtp_info[t.to_tag]["peer address"].port
+		temp.to_ip = t.rtp_info[t.to_tag]["peer address"].address
+		result = expand(templates.cc_rtp_info, temp)
+	end
+	return result
+end
+
 -- formats the values before output them
 -- @param t table
 -- @return table with the fields formated
@@ -129,21 +149,17 @@ local function cc_list_prepare(t)
 		callee=uri_get_username(t.to_uri),
 		date=os.date('%Y/%m/%d %H:%M:%S', t.timestart),
 		peer='',
-		rtp_ports='',
+		rtp_ports=rtp_info_prepare(t),
 		hash=t.hash
 	}
 	return f
 end
 
---prints concurrent calls list
-function cc_list()
-	local prog_call='ngcp-sercmd proxy dlg.list'
+-- get dlg info
+local function dlg_info(foutput)
 	local result = {}
-	local line,temp,count,_,k,p
-	local foutput = io.popen (string.format('%s', prog_call), 'r')
-
+	local temp,count
 	for line in foutput:lines() do
-		local a,b,c
 		if string.starts(line,'hash') then
 			if temp then result[temp.callid] = temp end
 			temp = {}; count = 0
@@ -165,25 +181,70 @@ function cc_list()
 	foutput:close()
 	-- last item
 	if temp then result[temp.callid] = temp end
+	return result
+end
+
+--prints concurrent calls list
+function cc_list()
+	local prog_call='ngcp-sercmd proxy dlg.list'
+	local foutput = io.popen (string.format('%s', prog_call), 'r')
+	local result = dlg_info(foutput)
 	-- header
-	print("| Call-ID | Caller | Callee | Time | Peer | RTP ports| Dialog hash |")
+	print("| Call-ID | Caller | Callee | Time | Peer | RTP ports | Dialog hash |")
+	for _,v in pairs(result) do
+		print(expand(templates.cc_list, cc_list_prepare(v)))
+	end
+end
+
+-- gets the info for the callid
+local function cc_rtp_info(info)
+	local result = {}
+
+	for _,s in ipairs(info.streams) do
+		for _,s2 in ipairs(s) do
+			if s2.tag and s2.tag ~= "" then
+				result[s2.tag]=s2.stats.rtp
+			end
+		end
+	end
+	return result
+end
+
+--get the dlg info for the callid
+local function call_info(callid, rtp_info)
+	local prog_call='ngcp-sercmd proxy dlg.dlg_list'
+	local foutput, result = {}
+	for k,v in pairs(rtp_info) do
+		foutput = io.popen (string.format('%s %s %s', prog_call, callid, k), 'r')
+		result = dlg_info(foutput)
+		if result[callid] then
+			result[callid]["rtp_info"] = rtp_info
+			break
+		end
+	end
+	-- header
+	print("| Call-ID | Caller | Callee | Time | Peer | RTP ports | Dialog hash |")
 	for _,v in pairs(result) do
 		print(expand(templates.cc_list, cc_list_prepare(v)))
 	end
 end
 
 function cc_details(callid)
-	if callid == "" then
+	if not callid or callid == "" then
 		local stats = cc_stats_info()
 		-- TODO: kamailio has to have a num offset parameter on dlg.list
-		if stats.total <= 50 then 
+		if stats.total <= 50 then
 			cc_list()
 		else
 			print('Total concurrent calls exceed 50')
 		end
-		return
+	else
+		local mp = MP:new()
+		local rtp_info = mp:query(callid)
+		if rtp_info then
+			call_info(callid, cc_rtp_info(rtp_info))
+		end
 	end
-	print("TODO")
 end
 
 function reg_stats()
