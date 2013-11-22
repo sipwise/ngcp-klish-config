@@ -200,10 +200,12 @@ end
 local function cc_rtp_info(info)
 	local result = {}
 
-	for _,s in ipairs(info.streams) do
-		for _,s2 in ipairs(s) do
-			if s2.tag and s2.tag ~= "" then
-				result[s2.tag]=s2.stats.rtp
+	if info.streams then
+		for _,s in ipairs(info.streams) do
+			for _,s2 in ipairs(s) do
+				if s2.tag and s2.tag ~= "" then
+					result[s2.tag]=s2.stats.rtp
+				end
 			end
 		end
 	end
@@ -222,10 +224,14 @@ local function call_info(callid, rtp_info)
 			break
 		end
 	end
-	-- header
-	print("| Call-ID | Caller | Callee | Time | Peer | RTP ports | Dialog hash |")
-	for _,v in pairs(result) do
-		print(expand(templates.cc_list, cc_list_prepare(v)))
+	if result then
+		-- header
+		print("| Call-ID | Caller | Callee | Time | Peer | RTP ports | Dialog hash |")
+		for _,v in pairs(result) do
+			print(expand(templates.cc_list, cc_list_prepare(v)))
+		end
+	else
+		print(string.format("No callid:%s found", callid))
 	end
 end
 
