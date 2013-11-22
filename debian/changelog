@@ -1,3 +1,9 @@
+ngcp-klish-config (0.2.0) UNRELEASE; urgency=low
+
+  * [e9bccac] MT#5075 fix error with non existent callid at concurrent-calls details
+
+ -- Victor Seva <vseva@sipwise.com>  Fri, 22 Nov 2013 22:46:17 +0100
+
 ngcp-klish-config (0.1.0) unstable; urgency=low
 
   * Initial Release.
