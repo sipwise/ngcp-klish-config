@@ -1,3 +1,9 @@
+ngcp-klish-config (0.2.0+0~mr3.3) unstable; urgency=low
+
+  * New release.
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Sat, 01 Feb 2014 19:51:06 +0100
+
 ngcp-klish-config (0.2.0) UNRELEASE; urgency=low
 
   * [e9bccac] MT#5075 fix error with non existent callid at concurrent-calls details
