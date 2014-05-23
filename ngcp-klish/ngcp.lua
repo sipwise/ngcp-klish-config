@@ -19,7 +19,7 @@
 --
 require 'ngcp-klish.expand'
 require 'ngcp-klish.configs'
-local MP = require 'ngcp-klish.mediaproxy-ng'
+local MP = require 'ngcp-klish.rtpengine'
 local URI = require 'uri'
 require 'ngcp-klish.utils'
 

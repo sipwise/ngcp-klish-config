@@ -65,12 +65,12 @@ function TestMP:setUp()
 		dns={ toip=mc:mock() },
 		udp= udp
 	}
-	package.loaded['ngcp-klish.mediaproxy-ng'] = nil
+	package.loaded['ngcp-klish.rtpengine'] = nil
 	package.loaded.socket = nil
 	package.preload['socket'] = function ()
 	    return socket
 	end
-	MP = require 'ngcp-klish.mediaproxy-ng'
+	MP = require 'ngcp-klish.rtpengine'
 	self.mp = MP:new()
 end
 

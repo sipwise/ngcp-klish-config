@@ -17,7 +17,7 @@
 <COMMAND name="show ngcp log proxy"  help="Search Logs PROXY"  />
 <COMMAND name="show ngcp log lb"  help="Search Logs LB"  />
 <COMMAND name="show ngcp log sems"  help="Search Logs SEMS" />
-<COMMAND name="show ngcp log mediaproxy"  help="Search Logs MEDIAPROXY"  />
+<COMMAND name="show ngcp log rtpengine"  help="Search Logs RTPENGINE"  />
 <COMMAND name="show ngcp log rate"  help="Search Logs RATE-O-MAT" />
 <COMMAND name="show ngcp log oss"  help="Search Logs OSS"  />
 <COMMAND name="show ngcp banned"  help="Search OSS Logs" />
@@ -67,7 +67,7 @@
                         fi
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log mediaproxy tail" lock="false" help="Search Logs" interrupt="true">
+<COMMAND name="show ngcp log rtpengine tail" lock="false" help="Search Logs" interrupt="true">
                  <PARAM name="tlimit"
                         optional="true"
                         default="100"
@@ -148,7 +148,7 @@
                         grep "${grepstring}" /var/log/ngcp/old/rate-o-mat.log
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log mediaproxy grep" lock="false" help="Search MEDIAPROXY Logs" interrupt="true">
+<COMMAND name="show ngcp log rtpengine grep" lock="false" help="Search RTPENGINE Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"
@@ -205,7 +205,7 @@
                         zgrep "${grepstring}" /var/log/ngcp/old/rate-o-mat*.gz 
                 </ACTION>
 </COMMAND>
-<COMMAND name="show ngcp log mediaproxy grep-old" lock="false" help="Search Mediaproxy Logs" interrupt="true">
+<COMMAND name="show ngcp log rtpengine grep-old" lock="false" help="Search RTPENGINE Logs" interrupt="true">
                  <PARAM name="grepstring"
                         optional="false"
                         help="Specify a string to search (i.e. the Call-ID)"

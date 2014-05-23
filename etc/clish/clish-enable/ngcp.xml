@@ -205,15 +205,15 @@
 
 
 
-	<!-- NGCP MEDIAPROXY -->
+	<!-- NGCP RTPENGINE -->
 
-        <COMMAND name="show ngcp service mediaproxy" help="Display Mediaproxy-NG information (menu)" />
+        <COMMAND name="show ngcp service rtpengine" help="Display Rtpengine information (menu)" />
 
-        <COMMAND name="show ngcp service mediaproxy stats" lock="false" help="Show Mediaproxy-NG Version" interrupt="true">
+        <COMMAND name="show ngcp service rtpengine stats" lock="false" help="Show Rtpengine Stats" interrupt="true">
                 <ACTION>sems-stats </ACTION>
         </COMMAND>
 
-        <COMMAND name="show ngcp service mediaproxy logs" lock="false" help="Show Mediaproxy-NG Logs" interrupt="true">
+        <COMMAND name="show ngcp service rtpengine logs" lock="false" help="Show Rtpengine Logs" interrupt="true">
                 <ACTION>tail /var/log/ngcp/rtp.log </ACTION>
         </COMMAND>
 

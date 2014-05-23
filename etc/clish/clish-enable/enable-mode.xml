@@ -126,7 +126,7 @@
                 </PARAM>
    	    <ACTION>/etc/init.d/kamailio-proxy "${command}";echo</ACTION>
    	</COMMAND>
-   	<COMMAND name="notify service mediaproxy" help="Manage MediaProxy-ng service">
+   	<COMMAND name="notify service rtpengine" help="Manage rtpengine service">
 	 <!-- command options -->
                 <PARAM name="command"
                         help="Switch Command"
@@ -155,7 +155,7 @@
                                 mode="subcommand">
                         </PARAM>
                 </PARAM>
-   	    <ACTION>/etc/init.d/ngcp-mediaproxy-ng-daemon "${command}";echo</ACTION>
+   	    <ACTION>/etc/init.d/ngcp-rtpengine-daemon "${command}";echo</ACTION>
    	</COMMAND>
    	<COMMAND name="notify service mysql" help="Manage MYSQL service.">
 	 <!-- command options -->
