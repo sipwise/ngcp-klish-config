@@ -1,3 +1,15 @@
+ngcp-klish-config (0.3.1.0+0~mr3.3.1.0) unstable; urgency=low
+
+  [ Michael Prokop ]
+  * [f3e64fb] MT#6511 Bump Standards-Version to 3.9.5
+
+  [ Victor Seva ]
+  * [a82db68] MT#6611 rename mediaproxy to rtpengine
+
+  [ Sipwise Jenkins Builder ]
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Mon, 26 May 2014 15:50:16 +0200
+
 ngcp-klish-config (0.3.0.0+0~mr3.3.0.0) unstable; urgency=low
 
   * New release.
