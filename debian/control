@@ -13,6 +13,7 @@ Architecture: any
 Depends: klish,
          lua-ngcp-klish,
          lua5.1,
+         pssh,
          ${misc:Depends},
          ${shlibs:Depends}
 Conflicts: klish-default-config
@@ -31,3 +32,27 @@ Depends: lua-dbi-mysql,
 Description: lua libs for ngcp-klish-config
  This package provides the lua ngcp lib that ngcp-klish-config
  uses.
+
+Package: ngcp-templates-ce-klish
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: Configuration templates for NGCP Klish/Clish
+ Configuration templates for Klish/Clish management of
+ NGCP services. This package is part of NGCP platform's
+ configuration framework.
+ .
+ This package provides the configuration files for the
+ Sipwise sip:provider Community Edition (CE).
+
+Package: ngcp-templates-pro-klish
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: Configuration templates for NGCP Klish/Clish
+ Configuration templates for Klish/Clish management of
+ NGCP services. This package is part of NGCP platform's
+ configuration framework.
+ .
+ This package provides the configuration files for the
+ Sipwise sip:provider Professional Edition (PRO).
