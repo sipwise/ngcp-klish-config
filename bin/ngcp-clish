@@ -1,0 +1,3 @@
+#!/bin/bash
+
+clish -x /etc/clish/clish-enable/ -c "$@"

@@ -13,6 +13,7 @@ Architecture: any
 Depends: klish,
          lua-ngcp-klish,
          lua5.1,
+         pssh,
          ${misc:Depends},
          ${shlibs:Depends}
 Conflicts: klish-default-config
