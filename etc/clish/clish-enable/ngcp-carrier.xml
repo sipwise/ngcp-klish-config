@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+       http://clish.sourceforge.net/XMLSchema/clish.xsd">
+<!--=======================================================-->
+
+<VIEW name="enable-view">
+
+<COMMAND name="ngcp" help="NGCP commands"></COMMAND>
+
+<COMMAND name="ngcp update" help="TODO" lock="false" interrupt="true">
+  <PARAM name="host" help="HOST" optional="false" mode="switch" ptype="SUBCOMMAND">
+    <PARAM name="all"        help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="active"     help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="inactive"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="neighbours" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="me"         help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="sp1"        help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="sp2"        help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="db01a"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="db01b"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="lb01a"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="lb01b"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prx01a"     help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prx01b"     help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prx02a"     help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prx02b"     help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+  </PARAM>
+  <ACTION>
+  . /etc/default/ngcp-roles
+
+  case "${host}" in
+    "all")
+      echo "ARE YOU SURE TO UPDATE _ALL_ HOST??? Type 'YES_I_AM_LUCKY' to proceed:"
+      read a
+
+      if [ "$a" != "YES_I_AM_LUCKY" ]; then
+        echo "Aborting request." ; exit 1
+      else
+        echo "Updating ALL hosts to the latest hotfix, please be patient!"
+        parallel-ssh -t 0 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i "FORCE=yes FORCE_ACTIVE=yes ngcp-update"
+      fi
+
+      unset a
+      ;;
+
+    "active")
+      echo "ARE YOU SURE? You are going to update all ACTIVE hosts! Type 'YES_PLEASE' to proceed:"
+      read a
+
+      if [ "$a" != "YES_PLEASE" ]; then
+        echo "Aborting request." ; exit 1
+      else
+        echo "Updating all ACTIVE hosts to the latest hotfix, please be patient!"
+        parallel-ssh -t 0 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+          "if /usr/sbin/ngcp-check_active -q ; then FORCE=yes FORCE_ACTIVE=yes ngcp-update ; \
+          else echo 'Skipped inactive node.' ; fi"
+      fi
+
+      unset a
+      ;;
+
+    "inactive")
+      echo "Please confirm update of all inactive hosts to latest hotfix! Type 'YES' to proceed:"
+      read a
+
+      if [ "$a" != "YES" ]; then
+        echo "Aborting request." ; exit 1
+      else
+        echo "Updating all inactive hosts to the latest hotfix, please be patient!"
+        parallel-ssh -t 0 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+          "if ! /usr/sbin/ngcp-check_active -q ; then FORCE=yes ngcp-update ; \
+          else echo 'Skipped active node.' ; fi"
+      fi
+
+      unset a
+      ;;
+
+    "neighbours")
+      echo "ARE YOU SURE? You are going to update ALL NEIGHBOURS to latest hotfix! Type 'YES_NEIGHBOURS' to proceed:"
+      read a
+
+      if [ "$a" != "YES_NEIGHBOURS" ]; then
+        echo "Aborting request." ; exit 1
+      else
+        echo "Updating all inactive hosts to the latest hotfix, please be patient!"
+        parallel-ssh -t 0 -O "BatchMode=yes" -H "$NGCP_NEIGHBOURS" -i "FORCE=yes FORCE_ACTIVE=yes ngcp-update"
+      fi
+
+      unset a
+      ;;
+
+    "me")
+      echo "Please confirm update of current host ($NGCP_HOSTNAME) to latest hotfix! Type 'YES' to proceed:"
+      read a
+
+      if [ "$a" != "YES" ]; then
+        echo "Aborting request." ; exit 1
+      else
+        echo "Updating current host ($NGCP_HOSTNAME) to the latest hotfix, please be patient!"
+        parallel-ssh -t 0 -O "BatchMode=yes" -H "$NGCP_HOSTNAME" -i \
+          "if ! /usr/sbin/ngcp-check_active -q ; then FORCE=yes ngcp-update ; \
+          else echo 'Skipped update of active node!' ; fi"
+      fi
+
+      unset a
+      ;;
+
+    *)
+      echo "Please confirm host '${host}' update to the latest hotfix! Type 'YES' to proceed:"
+      read a
+
+      if [ "$a" != "YES" ]; then
+        echo "Aborting request." ; exit 1
+      else
+        echo "Updating host '${host}' to the latest hotfix, please be patient!"
+        parallel-ssh -t 0 -O "BatchMode=yes" -H "${host}" -i "FORCE=yes ngcp-update"
+      fi
+
+      unset a
+      ;;
+  esac
+  echo "All the tasks are finished, please chech the logs above for details."
+  </ACTION>
+</COMMAND>
+
+
+<!-- <COMMAND name="ngcp monit" help="Show monit summary"></COMMAND> -->
+
+<COMMAND name="ngcp monit summary" help="Show 'monit summary' on specific/all host(s)">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+
+  case "${host}" in
+    "all")
+      parallel-ssh -t 2 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i "cat /etc/motd ; monit summary"
+      ;;
+
+    "active")
+      parallel-ssh -t 2 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+  "cat /etc/motd ; if /usr/sbin/ngcp-check_active -q ; then monit summary ; fi"
+      ;;
+
+    "inactive")
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+  "cat /etc/motd ; if ! /usr/sbin/ngcp-check_active -q ; then monit summary ; fi"
+      ;;
+
+    *)
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i "cat /etc/motd ; monit summary"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp monit" help="TODO">
+  <PARAM name="host" help="HOST" optional="false" mode="switch" ptype="SUBCOMMAND">
+    <PARAM name="sp1"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="sp2"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="db01a"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="db01b"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="lb01a"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="lb01b"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prx01a"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prx01b"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prx02a"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prx02b"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+  </PARAM>
+  <PARAM name="action" help="TODO" optional="false" mode="switch" ptype="SUBCOMMAND">
+    <PARAM name="start"     help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="stop"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="restart"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="monitor"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="unmonitor" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="reload"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="status"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="summary"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="validate"  help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+  </PARAM>
+  <PARAM name="service" help="TODO" optional="true" default="" mode="switch" ptype="SUBCOMMAND">
+    <PARAM name="lb"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="proxy"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="sbc"  help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="redis"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="rtpengine"  help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="mysql"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="ssh"  help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="nginx"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="ngcp-panel" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="cron"       help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="exim"       help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="snmpd"      help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="syslog"     help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="ntp"  help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="glusterfsd" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="asterisk"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="prosody"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="mediator"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="rate-o-mat" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="hylafax"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="iaxmodem"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="collectd"   help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="haproxy"    help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="hb_watchdog" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="ngcpcfg-api" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="mysql_cluster" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+    <PARAM name="elasticsearch" help="TODO" mode="subcommand" ptype="SUBCOMMAND"/>
+  </PARAM>
+  <ACTION>
+  . /etc/default/ngcp-roles
+
+  case "${action}" in
+    "start"|"stop"|"restart"|"monitor"|"unmonitor")
+      if [ "${service}" = "" ]; then
+        echo "Error: please specify service name for action '${action}', e.g. 'proxy'"
+        exit 1
+      fi
+      ;;
+
+    "*")  ;;
+  esac
+
+  parallel-ssh -O "BatchMode=yes" -H "${host}" -i "monit ${action} ${service}"
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp cluster" help="Carrier 3.x helpers"></COMMAND>
+
+<COMMAND name="ngcp cluster status" help="Carrier 3.x HA cluster status of node(s)">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+
+  case "${host}" in
+    "all")
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+        "cat /etc/motd | egrep -v '^$' ; echo -n 'Heartbeat reports status: ' ; cl_status rscstatus ;"
+      ;;
+
+    *)
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i \
+        "cat /etc/motd | egrep -v '^$' ; echo -n 'Heartbeat reports status: ' ; cl_status rscstatus ;"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp cluster standby" help="TODO">
+  <PARAM name="host" optional="false" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i "/usr/share/heartbeat/hb_standby"
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp cluster takeover" help="TODO">
+  <PARAM name="host" optional="false" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i "/usr/share/heartbeat/hb_takeover"
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp cluster ssh" help="TODO"></COMMAND>
+
+<COMMAND name="ngcp cluster ssh connectivity" help="Check Carrier 3.x SSH connectivity from this node to other node(s)">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  echo "Checking connectivity from $(hostname) host to the following hosts:"
+  case "${host}" in
+    "all")
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "$NGCP_HOSTS" "true"
+      ;;
+    *)
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" "true"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp cluster ssh crossconnectivity" help="Check Carrier 3.x SSH connectivity from all nodes to all nodes">
+  <ACTION>
+  . /etc/default/ngcp-roles
+  parallel-ssh -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+      "clish -l -x /etc/clish/clish-enable/ -c 'ngcp cluster ssh connectivity all'"
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp version" help="TODO"></COMMAND>
+
+<COMMAND name="ngcp version summary" help="TODO">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+    "all")
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+        "echo -n '/etc/ngcp_version: '; cat /etc/ngcp_version"
+      ;;
+    *)
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i \
+        "echo -n '/etc/ngcp_version: '; cat /etc/ngcp_version"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp version package" help="TODO">
+    <PARAM name="package" optional="false" ptype="STRING" help="Package name"/>
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+    "all")
+    parallel-ssh -t 5 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+      "apt-cache policy ${package} | grep 'Installed:\|Candidate:'"
+    ;;
+    *)
+    parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i \
+      "apt-cache policy ${package} | grep 'Installed:\|Candidate:'"
+    ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp version package installed" help="TODO">
+  <PARAM name="package" optional="false" ptype="STRING" help="Package name"/>
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+    "all")
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+        "apt-cache policy ${package} | grep Installed:"
+      ;;
+    *)
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i \
+        "apt-cache policy ${package} | grep Installed:"
+    ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp version package available" help="TODO">
+  <PARAM name="package" optional="false" ptype="STRING" help="Package name"/>
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+    "all")
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "$NGCP_HOSTS" -i \
+        "apt-cache policy ${package} | grep Candidate:"
+      ;;
+    *)
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i \
+        "apt-cache policy ${package} | grep Candidate:"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp version package check" help="TODO">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  cmd="dpkg --list"
+  local="/tmp/dpkg-list-$(hostname)"
+  foreign="/tmp/dpkg-list-foreign"
+  tmp="/tmp/dpkg-list-tmp"
+  $cmd > "$tmp"
+  case "${host}" in
+    "all")
+      parallel-scp -O "BatchMode=yes" -H "$NGCP_HOSTS" "$tmp" "$local" >/dev/null
+      parallel-ssh -t 5 -O "BatchMode=yes" -h /etc/ngcp_hosts -i \
+        "$cmd > '$foreign'; diff -U0 -w '$local' '$foreign'"
+      ;;
+    *)
+      parallel-scp -O "BatchMode=yes" -H "${host}"  "$tmp" "$local" >/dev/null
+      parallel-ssh -t 5 -O "BatchMode=yes" -H "${host}" -i \
+        "$cmd > '$foreign'; diff -U0 -w '$local' '$foreign'"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp status" help="TODO"></COMMAND>
+
+<COMMAND name="ngcp status summary" help="TODO">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <PARAM name="option" optional="true" ptype="STRING" default="" help="ngcp-status option"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+  "all")
+    parallel-ssh -O "BatchMode=yes" -H "$NGCP_HOSTS" -i "ngcp-status ${option}"
+    ;;
+  *)
+    parallel-ssh -O "BatchMode=yes" -H "${host}" -i "ngcp-status ${option}"
+    ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp status collective-check" help="TODO">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+    "all")
+      parallel-ssh -O "BatchMode=yes" -H "$NGCP_HOSTS" -i "ngcp-collective-check"
+      ;;
+    *)
+      parallel-ssh -O "BatchMode=yes" -H "${host}" -i "ngcp-collective-check"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp show" help="TODO"></COMMAND>
+
+<COMMAND name="ngcp show date" help="TODO">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <PARAM name="option" optional="true" ptype="STRING" default="" help="'date' command option"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+    "all")
+      if [ "$option" = "" ]; then option="--rfc-3339=ns" ; fi
+      parallel-ssh -O "BatchMode=yes" -H "$NGCP_HOSTS" -i "date $option"
+      ;;
+    *)
+      parallel-ssh -O "BatchMode=yes" -H "${host}" -i "date $option"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp show ntpq" help="TODO">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <PARAM name="option" optional="true" ptype="STRING" default="-p -n" help="'date' command option"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+    "all")
+      parallel-ssh -O "BatchMode=yes" -H "$NGCP_HOSTS" -i "ntpq ${option}"
+      ;;
+    *)
+      parallel-ssh -O "BatchMode=yes" -H "${host}" -i "ntpq ${option}"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+<COMMAND name="ngcp show dns-servers" help="TODO">
+  <PARAM name="host" optional="true" ptype="STRING" default="all" help="Server name/ip"/>
+  <ACTION>
+  . /etc/default/ngcp-roles
+  case "${host}" in
+    "all")
+      parallel-ssh -O "BatchMode=yes" -H "$NGCP_HOSTS" -i "cat /etc/resolv.conf"
+      ;;
+    *)
+      parallel-ssh -O "BatchMode=yes" -H "${host}" -i "cat /etc/resolv.conf"
+      ;;
+  esac
+  </ACTION>
+</COMMAND>
+
+</VIEW>
+</CLISH_MODULE>
