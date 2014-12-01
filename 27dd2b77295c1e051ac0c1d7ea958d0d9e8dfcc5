@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a23299d_0a4b8b2c",
+        "filename": "etc/clish/clish-enable/ngcp-carrier.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2014-12-01T22:46:14Z",
+      "side": 1,
+      "message": "Maybe we need a template here and produce the list of hosts from the network.yml?",
+      "revId": "27dd2b77295c1e051ac0c1d7ea958d0d9e8dfcc5",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": false
+    }
+  ]
+}
