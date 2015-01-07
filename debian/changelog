@@ -1,3 +1,13 @@
+ngcp-klish-config (0.7.1.0+0~mr3.7.1.0) unstable; urgency=low
+
+  [ Alexander Lutay ]
+  * [cd58b2f] MT#7505 Add .gitreview file for ngcp-klish-config
+  * [bf234ea] MT#10425 Add ngcp-clish wrapper, pssh dependency and templates
+
+  [ Sipwise Jenkins Builder ]
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Wed, 07 Jan 2015 21:31:10 +0100
+
 ngcp-klish-config (0.7.0.0+0~mr3.7.0.0) unstable; urgency=low
 
   * New release.
