@@ -1,3 +1,12 @@
+ngcp-klish-config (0.8.1.0+0~mr3.8.1.0) unstable; urgency=low
+
+  [ Michael Prokop ]
+  * [8964e7f] MT#9127 Bump Standards-Version to 3.9.6
+
+  [ Sipwise Jenkins Builder ]
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Wed, 18 Mar 2015 14:06:28 +0100
+
 ngcp-klish-config (0.8.0.0+0~mr3.8.0.0) unstable; urgency=low
 
   [ Alexander Lutay ]
