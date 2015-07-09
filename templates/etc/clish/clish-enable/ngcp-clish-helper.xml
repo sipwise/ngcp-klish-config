@@ -232,9 +232,6 @@
     <PARAM name="collectd" help="NGCP Collectd monitoring server" mode="subcommand" ptype="SUBCOMMAND"/>
     <PARAM name="hb_watchdog" help="NGCP Heartbeat watchdog" mode="subcommand" ptype="SUBCOMMAND"/>
     <!-- # MGMT services -->
-[% IF www_csc.enable == 'yes' -%]
-    <PARAM name="ngcp-www-csc" help="Deprecated Subscriber selfcare" mode="subcommand" ptype="SUBCOMMAND"/>
-[% END -%]
 [% IF hostname.search('\d+[ab]$') -%]
     <PARAM name="ngcpcfg-api" help="NGCP congiration API server" mode="subcommand" ptype="SUBCOMMAND"/>
     <PARAM name="dhcp" help="NGCP PXE boot DHCP server" mode="subcommand" ptype="SUBCOMMAND"/>
