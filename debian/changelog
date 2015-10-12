@@ -1,3 +1,9 @@
+ngcp-klish-config (0.11.0.0+0~mr4.2.0.0) unstable; urgency=medium
+
+  * New release.
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Mon, 12 Oct 2015 15:36:59 +0200
+
 ngcp-klish-config (0.10.0.0+0~mr4.1.0.0) unstable; urgency=low
 
   [ Alexander Lutay ]
