@@ -54,7 +54,7 @@
         <DETAIL>
                 Upgrade NGCP release to latest patchlevel.
             </DETAIL>
-            <ACTION>apt-get update;apt-get upgrade;ngcpcfg apply;echo "Upgrade Completed.";echo</ACTION>
+            <ACTION>apt-get update;apt-get upgrade;ngcpcfg apply "system upgrade via klish";echo "Upgrade Completed.";echo</ACTION>
         </COMMAND>
         <!--=======================================================-->
 

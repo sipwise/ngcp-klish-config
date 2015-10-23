@@ -51,14 +51,14 @@
        	    <DETAIL>
 		Upgrade NGCP packages to latest patchlevel and activate.
    	    </DETAIL>
-   	    <ACTION>apt-get update;apt-get upgrade;ngcpcfg apply;echo "Package Upgrade and Activate Completed.";echo</ACTION>
+   	    <ACTION>apt-get update;apt-get upgrade;ngcpcfg apply "system upgrade via klish";echo "Package Upgrade and Activate Completed.";echo</ACTION>
    	</COMMAND>
 
    	<COMMAND name="system activate-config" help="Generate and Activate configuration.">
        	    <DETAIL>
 		Generate and Activate NGCP Configuration from templates.
    	    </DETAIL>
-   	    <ACTION>ngcpcfg apply;echo "Apply Completed.";echo</ACTION>
+   	    <ACTION>ngcpcfg apply "system upgrade via klish";echo "Apply Completed.";echo</ACTION>
    	</COMMAND>
 
 	<!-- SERVICES -->
