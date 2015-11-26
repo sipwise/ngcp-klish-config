@@ -1,5 +1,6 @@
+[%- TAGS [- -] -%]
 <?xml version="1.0" encoding="UTF-8"?>
-[% TAGS [- -] -%]
+[% PROCESS '/usr/lib/ngcp-ngcpcfg/get_ngcp_type'; ngcp_type = out -%]
 [% PROCESS '/usr/lib/ngcp-ngcpcfg/get_hostname'; hostname = out -%]
 [% argv.host=hostname; argv.role='proxy'; PROCESS '/usr/lib/ngcp-ngcpcfg/has_role'; is_proxy = out -%]
 [% argv.host=hostname; argv.role='lb'; PROCESS '/usr/lib/ngcp-ngcpcfg/has_role'; is_lb = out -%]
@@ -182,7 +183,7 @@
     <PARAM name="redis" help="NGCP Redis DB" mode="subcommand" ptype="SUBCOMMAND"/>
     <!-- # DB services -->
     <PARAM name="mysql" help="NGCP MySQL DB" mode="subcommand" ptype="SUBCOMMAND"/>
-[% IF hostname.search('\d+[ab]$') -%]
+[% IF ngcp_type == 'carrier' -%]
     <PARAM name="mysql_cluster" help="NGCP MySQL central DB" mode="subcommand" ptype="SUBCOMMAND"/>
     <PARAM name="elasticsearch" help="NGCP ElasticSearch DB" mode="subcommand" ptype="SUBCOMMAND"/>
 [% END -%]
@@ -232,7 +233,7 @@
     <PARAM name="collectd" help="NGCP Collectd monitoring server" mode="subcommand" ptype="SUBCOMMAND"/>
     <PARAM name="hb_watchdog" help="NGCP Heartbeat watchdog" mode="subcommand" ptype="SUBCOMMAND"/>
     <!-- # MGMT services -->
-[% IF hostname.search('\d+[ab]$') -%]
+[% IF ngcp_type == 'carrier' -%]
     <PARAM name="ngcpcfg-api" help="NGCP congiration API server" mode="subcommand" ptype="SUBCOMMAND"/>
     <PARAM name="dhcp" help="NGCP PXE boot DHCP server" mode="subcommand" ptype="SUBCOMMAND"/>
 [% END -%]
