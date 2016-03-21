@@ -1,3 +1,15 @@
+ngcp-klish-config (0.13.0.0+0~mr4.4.0.0) unstable; urgency=medium
+
+  [ Michael Prokop ]
+  * [366a17e] MT#17699 Bump Standards-Version to 3.9.7
+
+  [ Alexander Lutay ]
+  * [da4fc07] MT#18619 Remove ossbss from ngcp-clish-helper.xml
+
+  [ Sipwise Jenkins Builder ]
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Mon, 21 Mar 2016 22:22:22 +0100
+
 ngcp-klish-config (0.12.0.0+0~mr4.3.0.0) unstable; urgency=medium
 
   [ Michael Prokop ]
