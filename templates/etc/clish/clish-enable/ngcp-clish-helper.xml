@@ -238,11 +238,6 @@
     <PARAM name="dhcp" help="NGCP PXE boot DHCP server" mode="subcommand" ptype="SUBCOMMAND"/>
 [% END -%]
     <PARAM name="nginx" help="NGCP Nginx WEB frontend server" mode="subcommand" ptype="SUBCOMMAND"/>
-[% IF ossbss.frontend == 'fcgi' -%]
-    <PARAM name="ngcp-ossbss" help="Deprecated SOAP API server" mode="subcommand" ptype="SUBCOMMAND"/>
-[% ELSIF ossbss.frontend == 'apache' -%]
-    <PARAM name="apache" help="Deprecated Apache server" mode="subcommand" ptype="SUBCOMMAND"/>
-[% END -%]
     <PARAM name="ngcp-panel" help="NGCP WEB Admin Panel and REST" mode="subcommand" ptype="SUBCOMMAND"/>
   </PARAM>
   <ACTION>
