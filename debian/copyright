@@ -1,6 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: ngcp-klish-config
-Source: git://git.mgm.sipwise.com/ngcp-klish-config
+Source: https://github.com/sipwise/ngcp-klish-config.git
 
 Files: *
 Copyright: 2013 Sipwise GmbH, Austria
