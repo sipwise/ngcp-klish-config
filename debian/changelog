@@ -1,3 +1,9 @@
+ngcp-klish-config (5.0.0.0+0~mr5.0.0.0) unstable; urgency=medium
+
+  * [5233e70] MT#22619 Switch Debian Source to Sipwise GitHub mirror
+
+ -- Alexander Lutay <alutay@sipwise.com>  Fri, 21 Oct 2016 15:29:02 +0200
+
 ngcp-klish-config (0.15.0.0+0~mr5.0.0.0) unstable; urgency=medium
 
   * New release.
