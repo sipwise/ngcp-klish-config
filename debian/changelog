@@ -1,3 +1,9 @@
+ngcp-klish-config (5.0.1.0+0~mr5.0.1.0) unstable; urgency=medium
+
+  * New release.
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Thu, 17 Nov 2016 23:16:42 +0100
+
 ngcp-klish-config (5.0.0.0+0~mr5.0.0.0) unstable; urgency=medium
 
   * [5233e70] MT#22619 Switch Debian Source to Sipwise GitHub mirror
