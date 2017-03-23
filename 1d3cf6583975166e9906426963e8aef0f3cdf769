@@ -87,6 +87,24 @@
       "revId": "1d3cf6583975166e9906426963e8aef0f3cdf769",
       "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_6c82ef01",
+        "filename": "run_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2017-03-23T13:16:18Z",
+      "side": 1,
+      "message": "agree, while I do not care as nobody execute this script. :-(\nthe current task is to have clean repo on tap-test, so no new issues will be landed here. then we can fix tests and add them to jenkins. \n\nI was focused on shellcheck only here :-)",
+      "parentUuid": "7a1969be_6cb4aff2",
+      "revId": "1d3cf6583975166e9906426963e8aef0f3cdf769",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": false
     }
   ]
 }
