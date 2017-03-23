@@ -69,6 +69,24 @@
       "revId": "1d3cf6583975166e9906426963e8aef0f3cdf769",
       "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_6cb4aff2",
+        "filename": "run_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2017-03-23T13:11:39Z",
+      "side": 1,
+      "message": "Well, you\u0027re e.g. mussing the lua-lemock package. But my point isn\u0027t so much about the failing tests, it\u0027s more about that we ignore any errors during code execution, so once lua5.1 won\u0027t be present on our test system then we might not even notice that because we don\u0027t get a failed test run (unless we\u0027ve set the option in Jenkins job to fail if there are no test results, then we should be good).",
+      "parentUuid": "7a1969be_ac1fc708",
+      "revId": "1d3cf6583975166e9906426963e8aef0f3cdf769",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": false
     }
   ]
 }
