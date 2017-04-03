@@ -1,3 +1,12 @@
+ngcp-klish-config (5.2.2.0+0~mr5.2.2.0) unstable; urgency=medium
+
+  [ Alexander Lutay ]
+  * [a169286] TT#12759 Fix shellcheck warnings for run_tests.sh
+
+  [ Sipwise Jenkins Builder ]
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Mon, 03 Apr 2017 14:30:45 +0200
+
 ngcp-klish-config (5.2.1.0+0~mr5.2.1.0) unstable; urgency=medium
 
   * New release.
