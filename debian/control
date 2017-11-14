@@ -1,34 +1,37 @@
 Source: ngcp-klish-config
-Priority: extra
-Maintainer: Sipwise Development Team <support@sipwise.com>
-Uploaders: Victor Seva <vseva@sipwise.com>
-Build-Depends: debhelper (>= 9~)
-Standards-Version: 3.9.7
 Section: shells
+Priority: optional
+Maintainer: Sipwise Development Team <support@sipwise.com>
 Homepage: https://github.com/sipwise/ngcp-klish-config
+Standards-Version: 3.9.8
+Build-Depends:
+ debhelper (>= 10),
 
 Package: ngcp-klish-config
 Section: shells
 Architecture: any
-Depends: klish,
-         lua-ngcp-klish,
-         lua5.1,
-         pssh,
-         ${misc:Depends},
-         ${shlibs:Depends}
-Conflicts: klish-default-config
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ klish,
+ lua-ngcp-klish,
+ lua5.1,
+ pssh,
+Conflicts:
+ klish-default-config,
 Description: NGCP config for klish
  This package provides the NGCP config for klish.
 
 Package: lua-ngcp-klish
 Section: libs
 Architecture: any
-Depends: lua-dbi-mysql,
-         lua-socket,
-         lua-uri,
-         lua-yaml,
-         ${misc:Depends},
-         ${shlibs:Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ lua-dbi-mysql,
+ lua-socket,
+ lua-uri,
+ lua-yaml,
 Description: lua libs for ngcp-klish-config
  This package provides the lua ngcp lib that ngcp-klish-config
  uses.
