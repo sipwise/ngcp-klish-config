@@ -438,7 +438,7 @@
 
         <COMMAND name="notify debug proxy" lock="false" help="Notify Proxy Debug level" interrupt="true"/>
         <COMMAND name="notify debug proxy get" lock="false" help="Get PROXY Debug level" interrupt="true">
-        <ACTION>ngcp-kamctl proxy fifo debug</ACTION>
+        <ACTION>ngcp-kamctl proxy fifo corex.debug | jq -r '.debug' </ACTION>
         </COMMAND>
 
         <COMMAND name="notify debug proxy set" lock="false" help="Set PROXY Debug level" interrupt="true">
@@ -447,14 +447,14 @@
                         help="Debug level to set"
                         ptype="STRING"/>
 
-                <ACTION>ngcp-kamctl proxy fifo debug "${debuglevel}" </ACTION>
+                <ACTION>ngcp-kamctl proxy fifo corex.debug "${debuglevel}" | jq -r '.new' </ACTION>
         </COMMAND>
 
 	<!-- DEBUG LB -->
 
         <COMMAND name="notify debug lb" lock="false" help="Notify LB Debug level" interrupt="true"/>
         <COMMAND name="notify debug lb get" lock="false" help="Get LB Debug level" interrupt="true">
-        <ACTION>ngcp-kamctl lb fifo debug</ACTION>
+        <ACTION>ngcp-kamctl lb fifo corex.debug | jq -r '.debug' </ACTION>
         </COMMAND>
 
         <COMMAND name="notify debug lb set" lock="false" help="Set LB Debug level" interrupt="true">
@@ -463,7 +463,7 @@
                         help="Debug level to set"
                         ptype="STRING"/>
 
-                <ACTION>ngcp-kamctl lb fifo debug "${debuglevel}" </ACTION>
+                <ACTION>ngcp-kamctl lb fifo corex.debug "${debuglevel}" | jq -r '.new' </ACTION>
         </COMMAND>
 
         <COMMAND name="notify debug sems" lock="false" help="Notify SEMS Debug level" interrupt="true"/>

@@ -228,7 +228,7 @@
 
 <COMMAND name="show ngcp banned users" lock="false" help="Show NGCP Banned users" interrupt="true">
                 <ACTION>
-                        ngcp-kamctl lb fifo sht_dump auth 
+                        ngcp-kamctl lb fifo htable.dump auth
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp banned users search" lock="false" help="Search NGCP Banned Users" interrupt="true">
@@ -237,12 +237,12 @@
                         help="Specify a string to search (i.e. the Username)"
                         ptype="STRING"/>
                 <ACTION>
-                        ngcp-kamctl lb fifo sht_dump auth | grep "${grepstring}"
+                        ngcp-kamctl lb fifo htable.dump auth | grep "${grepstring}"
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp banned ips" lock="false" help="Show NGCP Banned IPs" interrupt="true">
                 <ACTION>
-                        ngcp-kamctl lb fifo sht_dump ipban
+                        ngcp-kamctl lb fifo htable.dump ipban
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp banned ips search" lock="false" help="Search NGCP Banned IPs" interrupt="true">
@@ -251,7 +251,7 @@
                         help="Specify a string to search (i.e. the IP)"
                         ptype="STRING"/>
                 <ACTION>
-                        ngcp-kamctl lb fifo sht_dump ipban | grep "${grepstring}"
+                        ngcp-kamctl lb fifo htable.dump ipban | grep "${grepstring}"
                 </ACTION>
 </COMMAND>
 

@@ -17,6 +17,7 @@ Depends:
  lua-ngcp-klish,
  lua5.1,
  pssh,
+ jq,
 Conflicts:
  klish-default-config,
 Description: NGCP config for klish
@@ -32,6 +33,7 @@ Depends:
  lua-socket,
  lua-uri,
  lua-yaml,
+ jq,
 Description: lua libs for ngcp-klish-config
  This package provides the lua ngcp lib that ngcp-klish-config
  uses.
