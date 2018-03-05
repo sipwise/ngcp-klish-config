@@ -82,7 +82,7 @@
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy dialog" lock="false" help="Show Proxy Routes" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy fifo get_statistics dialog:</ACTION>
+		<ACTION>ngcp-sercmd proxy stats.get_statistics dialog:</ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy routes" lock="false" help="Show Proxy Routes" interrupt="true">
@@ -100,7 +100,7 @@
 	<COMMAND name="show ngcp service proxy list-users" help="Display NGCP Proxy information" />
 
    	<COMMAND name="show ngcp service proxy list-users count" lock="false" help="Count Registered UL" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy fifo get_statistics usrloc::registered_users </ACTION>
+		<ACTION>ngcp-sercmd proxy stats.get_statistics usrloc registered_users </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy list-users online" lock="false" help="Show Registered UL" interrupt="true">
        		<ACTION>ngcp-kamctl proxy online </ACTION>
@@ -146,14 +146,14 @@
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy calls" lock="false" help="Show PROXY concurrent calls" interrupt="true">
-       		<ACTION>ngcp-kamctl proxy fifo dlg_list </ACTION>
+		<ACTION>ngcp-kamctl proxy fifo dlg.list </ACTION>
    	</COMMAND>
 
 	<COMMAND name="show ngcp service proxy calls account" lock="false" help="Show PROXY concurrent calls per account" interrupt="true">
 		<PARAM name="account"
                         help="Specify the account ID"
                         ptype="STRING"/>
-                <ACTION>ngcp-kamctl proxy fifo profile_get_size account ${account} </ACTION>
+                <ACTION>ngcp-kamctl proxy fifo dlg.profile_get_size account ${account} </ACTION>
         </COMMAND>
 
 

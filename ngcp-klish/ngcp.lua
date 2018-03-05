@@ -94,7 +94,7 @@ local patterns = {
 -- get the stats info
 local function cc_stats_info()
 	local k,v
-	local prog_call='ngcp-kamctl proxy fifo profile_get_size'
+	local prog_call='ngcp-kamctl proxy fifo dlg.profile_get_size'
 	local args = { total="", peerout="", internal="type", incoming="type" }
 	local stats = {
 		rtp=-1, average=-1,
@@ -255,7 +255,7 @@ end
 
 function reg_stats()
 	local k,v
-	local prog_call='ngcp-kamctl proxy fifo get_statistics usrloc::registered_users'
+	local prog_call='ngcp-kamctl proxy fifo stats.get_statistics usrloc registered_users | grep registered_users | tr -d " \"],"'
 	local stats = {}
 
 	local val, line
