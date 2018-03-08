@@ -11,13 +11,13 @@ Package: ngcp-klish-config
 Section: shells
 Architecture: any
 Depends:
- ${misc:Depends},
- ${shlibs:Depends},
+ jq,
  klish,
  lua-ngcp-klish,
  lua5.1,
  pssh,
- jq,
+ ${misc:Depends},
+ ${shlibs:Depends},
 Conflicts:
  klish-default-config,
 Description: NGCP config for klish
@@ -27,13 +27,13 @@ Package: lua-ngcp-klish
 Section: libs
 Architecture: any
 Depends:
- ${misc:Depends},
- ${shlibs:Depends},
+ jq,
  lua-dbi-mysql,
  lua-socket,
  lua-uri,
  lua-yaml,
- jq,
+ ${misc:Depends},
+ ${shlibs:Depends},
 Description: lua libs for ngcp-klish-config
  This package provides the lua ngcp lib that ngcp-klish-config
  uses.
