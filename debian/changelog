@@ -1,3 +1,15 @@
+ngcp-klish-config (6.2.1.0+0~mr6.2.1.0) unstable; urgency=medium
+
+  [ Marco Capetta ]
+  * [9bb7751] TT#33867 Update ngcp-kamctl format to the one used in kamailio 5.1.2
+
+  [ Alexander Lutay ]
+  * [f01863e] TT#33867 Perform 'wrap-and-sort -sat'
+
+  [ Sipwise Jenkins Builder ]
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Tue, 03 Apr 2018 22:29:14 +0200
+
 ngcp-klish-config (6.2.0.0+0~mr6.2.0.0) unstable; urgency=medium
 
   * New release.
