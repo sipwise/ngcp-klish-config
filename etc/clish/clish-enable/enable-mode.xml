@@ -93,7 +93,7 @@
                                 mode="subcommand">
                         </PARAM>
                 </PARAM>
-   	    <ACTION>/etc/init.d/kamailio-lb "${command}";echo</ACTION>
+            <ACTION>ngcp-service kamailio-lb "${command}";echo</ACTION>
    	</COMMAND>
    	<COMMAND name="notify service proxy" help="Manage NGCP Proxy service">
 	 <!-- command options -->
@@ -124,7 +124,7 @@
                                 mode="subcommand">
                         </PARAM>
                 </PARAM>
-   	    <ACTION>/etc/init.d/kamailio-proxy "${command}";echo</ACTION>
+            <ACTION>ngcp-service kamailio-proxy "${command}";echo</ACTION>
    	</COMMAND>
    	<COMMAND name="notify service rtpengine" help="Manage rtpengine service">
 	 <!-- command options -->
@@ -155,7 +155,7 @@
                                 mode="subcommand">
                         </PARAM>
                 </PARAM>
-   	    <ACTION>/etc/init.d/ngcp-rtpengine-daemon "${command}";echo</ACTION>
+            <ACTION>ngcp-service ngcp-rtpengine-daemon "${command}";echo</ACTION>
    	</COMMAND>
    	<COMMAND name="notify service mysql" help="Manage MYSQL service.">
 	 <!-- command options -->
@@ -186,7 +186,7 @@
                                 mode="subcommand">
                         </PARAM>
                 </PARAM>
-   	    <ACTION>/etc/init.d/mysql "${command}";echo</ACTION>
+            <ACTION>ngcp-service mysql "${command}";echo</ACTION>
    	</COMMAND>
    	<COMMAND name="notify service asterisk" help="Manage ASTERISK-Voicemail service.">
 	 <!-- command options -->
@@ -217,7 +217,7 @@
                                 mode="subcommand">
                         </PARAM>
                 </PARAM>
-   	    <ACTION>/etc/init.d/asterisk "${command}";echo</ACTION>
+            <ACTION>ngcp-service asterisk "${command}";echo</ACTION>
    	</COMMAND>
 
 
