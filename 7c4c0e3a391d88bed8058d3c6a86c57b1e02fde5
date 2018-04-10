@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_fdbae0bf",
+        "filename": "etc/clish/clish-enable/enable-mode.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2018-04-10T20:57:33Z",
+      "side": 1,
+      "message": "root@spce:~# ngcp-service kamailio-lb status\nngcp-service: error: No kamailio-lb defined\n\nroot@spce:~# ngcp-service summary | grep lb\nlb                             managed      on-boot   active",
+      "revId": "7c4c0e3a391d88bed8058d3c6a86c57b1e02fde5",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": false
+    }
+  ]
+}
