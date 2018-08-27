@@ -1,3 +1,9 @@
+ngcp-klish-config (5.5.6.1+0~mr5.5.6.1) unstable; urgency=medium
+
+  * New release.
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Mon, 27 Aug 2018 19:27:28 +0200
+
 ngcp-klish-config (5.5.6.0+0~mr5.5.6.0) unstable; urgency=medium
 
   * New release.
