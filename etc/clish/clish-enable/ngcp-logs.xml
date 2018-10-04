@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema" 
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
                      http://clish.sourceforge.net/XMLSchema/clish.xsd">
 	<!--=======================================================-->
@@ -33,9 +33,9 @@
                         ptype="STRING"/>
                 <ACTION>
                         if test -n "${tlimit}"; then
-                                        tail -n  "${tlimit}" /var/log/ngcp/kamailio-proxy.log
+                                        tail -n  "${tlimit}" /ngcp-data/logs/kamailio-proxy.log
                         else
-                                        tail -n 30 /var/log/ngcp/kamailio-proxy.log
+                                        tail -n 30 /ngcp-data/logs/kamailio-proxy.log
                         fi
                 </ACTION>
 </COMMAND>
@@ -47,9 +47,9 @@
                         ptype="STRING"/>
                 <ACTION>
                         if test -n "${tlimit}"; then
-                                        tail -n  "${tlimit}" /var/log/ngcp/lb-proxy.log
+                                        tail -n  "${tlimit}" /ngcp-data/logs/lb-proxy.log
                         else
-                                        tail -n 30 /var/log/ngcp/lb-proxy.log
+                                        tail -n 30 /ngcp-data/logs/lb-proxy.log
                         fi
                 </ACTION>
 </COMMAND>
@@ -61,9 +61,9 @@
                         ptype="STRING"/>
                 <ACTION>
                         if test -n "${tlimit}"; then
-                                        tail -n  "${tlimit}" /var/log/ngcp/sems.log
+                                        tail -n  "${tlimit}" /ngcp-data/logs/sems.log
                         else
-                                        tail -n 30 /var/log/ngcp/sems.log
+                                        tail -n 30 /ngcp-data/logs/sems.log
                         fi
                 </ACTION>
 </COMMAND>
@@ -75,9 +75,9 @@
                         ptype="STRING"/>
                 <ACTION>
                         if test -n "${tlimit}"; then
-                                        tail -n  "${tlimit}" /var/log/ngcp/rtp.log
+                                        tail -n  "${tlimit}" /ngcp-data/logs/rtp.log
                         else
-                                        tail -n 30 /var/log/ngcp/rtp.log
+                                        tail -n 30 /ngcp-data/logs/rtp.log
                         fi
                 </ACTION>
 </COMMAND>
@@ -89,9 +89,9 @@
                         ptype="STRING"/>
                 <ACTION>
                         if test -n "${tlimit}"; then
-                                        tail -n  "${tlimit}" /var/log/ngcp/rate-o-mat.log
+                                        tail -n  "${tlimit}" /ngcp-data/logs/rate-o-mat.log
                         else
-                                        tail -n 30 /var/log/ngcp/rate-o-mat.log
+                                        tail -n 30 /ngcp-data/logs/rate-o-mat.log
                         fi
                 </ACTION>
 </COMMAND>
@@ -103,9 +103,9 @@
                         ptype="STRING"/>
                 <ACTION>
                         if test -n "${tlimit}"; then
-                                        tail -n  "${tlimit}" /var/log/ngcp/oss.log
+                                        tail -n  "${tlimit}" /ngcp-data/logs/oss.log
                         else
-                                        tail -n 30 /var/log/ngcp/oss.log
+                                        tail -n 30 /ngcp-data/logs/oss.log
                         fi
                 </ACTION>
 </COMMAND>
@@ -118,7 +118,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        grep "${grepstring}" /var/log/ngcp/kamailio-proxy.log 
+                        grep "${grepstring}" /ngcp-data/logs/kamailio-proxy.log
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log lb grep" lock="false" help="Search LB Logs" interrupt="true">
@@ -127,7 +127,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        grep "${grepstring}" /var/log/ngcp/kamailio-lb.log 
+                        grep "${grepstring}" /ngcp-data/logs/kamailio-lb.log
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log sems grep" lock="false" help="Search SEMS Logs" interrupt="true">
@@ -136,7 +136,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        grep "${grepstring}" /var/log/ngcp/sems.log 
+                        grep "${grepstring}" /ngcp-data/logs/sems.log
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log rate grep" lock="false" help="Search RATE Logs" interrupt="true">
@@ -145,7 +145,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        grep "${grepstring}" /var/log/ngcp/old/rate-o-mat.log
+                        grep "${grepstring}" /ngcp-data/logs/old/rate-o-mat.log
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log rtpengine grep" lock="false" help="Search RTPENGINE Logs" interrupt="true">
@@ -154,7 +154,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        grep "${grepstring}" /var/log/ngcp/old/rtp.log
+                        grep "${grepstring}" /ngcp-data/logs/old/rtp.log
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log oss grep" lock="false" help="Search OSS Logs" interrupt="true">
@@ -163,7 +163,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        grep "${grepstring}" /var/log/ngcp/oss.log 
+                        grep "${grepstring}" /ngcp-data/logs/oss.log
                 </ACTION>
 </COMMAND>
 
@@ -175,7 +175,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        zgrep "${grepstring}" /var/log/ngcp/old/kamailio-proxy*.gz 
+                        zgrep "${grepstring}" /ngcp-data/logs/old/kamailio-proxy*.gz
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log lb grep-old" lock="false" help="Search LB Logs" interrupt="true">
@@ -184,7 +184,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        zgrep "${grepstring}" /var/log/ngcp/old/lb-proxy*.gz 
+                        zgrep "${grepstring}" /ngcp-data/logs/old/lb-proxy*.gz
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log sems grep-old" lock="false" help="Search SEMS Logs" interrupt="true">
@@ -193,7 +193,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        zgrep "${grepstring}" /var/log/ngcp/old/sems-log*.gz 
+                        zgrep "${grepstring}" /ngcp-data/logs/old/sems-log*.gz
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log rate grep-old" lock="false" help="Search RATE Logs" interrupt="true">
@@ -202,7 +202,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        zgrep "${grepstring}" /var/log/ngcp/old/rate-o-mat*.gz 
+                        zgrep "${grepstring}" /ngcp-data/logs/old/rate-o-mat*.gz
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log rtpengine grep-old" lock="false" help="Search RTPENGINE Logs" interrupt="true">
@@ -211,7 +211,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        zgrep "${grepstring}" /var/log/ngcp/old/rtp*.gz 
+                        zgrep "${grepstring}" /ngcp-data/logs/old/rtp*.gz
                 </ACTION>
 </COMMAND>
 <COMMAND name="show ngcp log oss grep-old" lock="false" help="Search OSS Logs" interrupt="true">
@@ -220,7 +220,7 @@
                         help="Specify a string to search (i.e. the Call-ID)"
                         ptype="STRING"/>
                 <ACTION>
-                        zgrep "${grepstring}" /var/log/ngcp/old/oss*.gz 
+                        zgrep "${grepstring}" /ngcp-data/logs/old/oss*.gz
                 </ACTION>
 </COMMAND>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema" 
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
                      http://clish.sourceforge.net/XMLSchema/clish.xsd">
 	<!--=======================================================-->
@@ -188,7 +188,7 @@
 
 
    	<COMMAND name="show ngcp service lb logs" lock="false" help="Show LB Logs" interrupt="true">
-       		<ACTION>tail /var/log/ngcp/kamailio-lb.log </ACTION>
+       		<ACTION>tail /ngcp-data/logs/kamailio-lb.log </ACTION>
    	</COMMAND>
 
 	<!-- NGCP B2BUA -->
@@ -200,7 +200,7 @@
         </COMMAND>
 
         <COMMAND name="show ngcp service sems logs" lock="false" help="Show Server Version" interrupt="true">
-                <ACTION>tail /var/log/ngcp/sems.log </ACTION>
+                <ACTION>tail /ngcp-data/logs/sems.log </ACTION>
         </COMMAND>
 
 
@@ -214,7 +214,7 @@
         </COMMAND>
 
         <COMMAND name="show ngcp service rtpengine logs" lock="false" help="Show Rtpengine Logs" interrupt="true">
-                <ACTION>tail /var/log/ngcp/rtp.log </ACTION>
+                <ACTION>tail /ngcp-data/logs/rtp.log </ACTION>
         </COMMAND>
 
 
