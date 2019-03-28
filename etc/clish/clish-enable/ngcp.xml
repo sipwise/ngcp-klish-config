@@ -70,15 +70,15 @@
 	<!-- PROXY MISC -->
 
    	<COMMAND name="show ngcp service proxy uptime" lock="false" help="Show Server Uptime" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy core.uptime </ACTION>
+       		<ACTION>ngcp-kamcmd proxy core.uptime </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy version" lock="false" help="Show Server Version" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy core.info </ACTION>
+       		<ACTION>ngcp-kamcmd proxy core.info </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy sockets" lock="false" help="Show Server Uptime" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy core.sockets_list </ACTION>
+       		<ACTION>ngcp-kamcmd proxy core.sockets_list </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy dialog" lock="false" help="Show Proxy Routes" interrupt="true">
@@ -90,11 +90,11 @@
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy stats" lock="false" help="Show TM Stats" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy tm.stats </ACTION>
+       		<ACTION>ngcp-kamcmd proxy tm.stats </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy list-dispatcher" lock="false" help="Show Dispatcher List" interrupt="true">
-       		<ACTION>ngcp-sercmd proxy dispatcher.list </ACTION>
+       		<ACTION>ngcp-kamcmd proxy dispatcher.list </ACTION>
    	</COMMAND>
 
 	<COMMAND name="show ngcp service proxy list-users" help="Display NGCP Proxy information" />
@@ -116,7 +116,7 @@
 		<PARAM name="userloc"
                         help="This subscriber id name"
                         ptype="STRING"/>
-       		<ACTION>ngcp-sercmd proxy ul.lookup location "${userloc}"</ACTION>
+       		<ACTION>ngcp-kamcmd proxy ul.lookup location "${userloc}"</ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service proxy find-URI" lock="false" help="Find Registered UL" interrupt="true">
 		<PARAM name="useruri"
@@ -134,11 +134,11 @@
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy gateways" help="Show GATEWAYS" interrupt="true"  lock="false">
-       		<ACTION>ngcp-sercmd proxy lcr.dump_gws </ACTION>
+       		<ACTION>ngcp-kamcmd proxy lcr.dump_gws </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy rules" help="Show GATEWAYS" interrupt="true"  lock="false">
-       		<ACTION>ngcp-sercmd proxy lcr.dump_rules </ACTION>
+       		<ACTION>ngcp-kamcmd proxy lcr.dump_rules </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service proxy logs" lock="false" help="Show PROXY Logs" interrupt="true">
@@ -162,27 +162,27 @@
 	<COMMAND name="show ngcp service lb" help="Display NGCP Load-Balancer information (menu)" />
 
    	<COMMAND name="show ngcp service lb version" lock="false" help="Show Server Version" interrupt="true">
-       		<ACTION>ngcp-sercmd lb server </ACTION>
+       		<ACTION>ngcp-kamcmd lb server </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service lb stats" lock="false" help="Show TM Stats" interrupt="true">
-       		<ACTION>ngcp-sercmd lb sl.stats </ACTION>
+       		<ACTION>ngcp-kamcmd lb sl.stats </ACTION>
    	</COMMAND>
 
    	<COMMAND name="show ngcp service lb list-dispatcher" lock="false" help="Show TM Stats" interrupt="true">
-       		<ACTION>ngcp-sercmd lb dispatcher.list </ACTION>
+       		<ACTION>ngcp-kamcmd lb dispatcher.list </ACTION>
    	</COMMAND>
 
 
 	<COMMAND name="show ngcp service lb tls" help="Display NGCP Load-Balancer TLS information" />
    	<COMMAND name="show ngcp service lb tls info" lock="false" help="Show LB TLS Info" interrupt="true">
-       		<ACTION>ngcp-sercmd lb tls.info </ACTION>
+       		<ACTION>ngcp-kamcmd lb tls.info </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service lb tls list" lock="false" help="Show LB TLS List" interrupt="true">
-       		<ACTION>ngcp-sercmd lb tls.list </ACTION>
+       		<ACTION>ngcp-kamcmd lb tls.list </ACTION>
    	</COMMAND>
    	<COMMAND name="show ngcp service lb tls options" lock="false" help="Show LB TLS Options" interrupt="true">
-       		<ACTION>ngcp-sercmd lb tls.options </ACTION>
+       		<ACTION>ngcp-kamcmd lb tls.options </ACTION>
    	</COMMAND>
 
 

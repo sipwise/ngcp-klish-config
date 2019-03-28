@@ -186,7 +186,7 @@ end
 
 --prints concurrent calls list
 function cc_list()
-	local prog_call='ngcp-sercmd proxy dlg.list'
+	local prog_call='ngcp-kamcmd proxy dlg.list'
 	local foutput = io.popen (string.format('%s', prog_call), 'r')
 	local result = dlg_info(foutput)
 	-- header
@@ -214,7 +214,7 @@ end
 
 --get the dlg info for the callid
 local function call_info(callid, rtp_info)
-	local prog_call='ngcp-sercmd proxy dlg.dlg_list'
+	local prog_call='ngcp-kamcmd proxy dlg.dlg_list'
 	local foutput, result = {}
 	for k,v in pairs(rtp_info) do
 		foutput = io.popen (string.format('%s %s %s', prog_call, callid, k), 'r')
@@ -271,7 +271,7 @@ function reg_stats()
 end
 
 function reg_info(aor)
-	local prog_call='ngcp-sercmd proxy ul.lookup location'
+	local prog_call='ngcp-kamcmd proxy ul.lookup location'
 	local result = {}
 	local line, val, k, p
 	local count = 0
