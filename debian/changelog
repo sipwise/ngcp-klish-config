@@ -1,3 +1,12 @@
+ngcp-klish-config (7.4.0.0+0~mr7.4.0.0) unstable; urgency=medium
+
+  [ Guillem Jover ]
+  * [f555352] TT#56550 Rename ngcp-sercmd to ngcp-kamcmd
+
+  [ Sipwise Jenkins Builder ]
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Thu, 25 Apr 2019 14:29:02 +0200
+
 ngcp-klish-config (7.3.0.0+0~mr7.3.0.0) unstable; urgency=medium
 
   * New release.
