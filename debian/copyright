@@ -3,13 +3,8 @@ Source: https://github.com/sipwise/ngcp-klish-config.git
 Upstream-Name: ngcp-klish-config
 
 Files: *
-Copyright: 2013 Sipwise GmbH, Austria
-License: GPL-3.0+
-
-Files: debian/*
-Copyright: 2013 SipWise Team <development@sipwise.com>
-License: GPL-3.0+
-
+Copyright:
+ Copyright © 2013-2019 Sipwise GmbH, Austria
 License: GPL-3.0+
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
