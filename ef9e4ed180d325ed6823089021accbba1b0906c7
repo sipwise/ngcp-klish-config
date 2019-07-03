@@ -16,6 +16,24 @@
       "revId": "ef9e4ed180d325ed6823089021accbba1b0906c7",
       "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa1b9901_06baf7e1",
+        "filename": "debian/copyright",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-07-03T21:01:38Z",
+      "side": 0,
+      "message": "Hmm, indeed, it looks like the copyright file is very inaccurate. :( Will need to recheck and fill it.",
+      "parentUuid": "fa1b9901_8bce1282",
+      "revId": "ef9e4ed180d325ed6823089021accbba1b0906c7",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": false
     }
   ]
 }
