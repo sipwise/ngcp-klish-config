@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa1b9901_8bce1282",
+        "filename": "debian/copyright",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2019-07-03T20:12:07Z",
+      "side": 0,
+      "message": "Is everything correct here. The repo contains non-sipwise klish code.",
+      "revId": "ef9e4ed180d325ed6823089021accbba1b0906c7",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": false
+    }
+  ]
+}
