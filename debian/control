@@ -24,7 +24,7 @@ Description: NGCP config for klish
  This package provides the NGCP config for klish.
 
 Package: lua-ngcp-klish
-Section: libs
+Section: interpreters
 Architecture: any
 Depends:
  jq,
@@ -34,6 +34,6 @@ Depends:
  lua-yaml,
  ${misc:Depends},
  ${shlibs:Depends},
-Description: lua libs for ngcp-klish-config
- This package provides the lua ngcp lib that ngcp-klish-config
+Description: Lua modules for ngcp-klish-config
+ This package provides the Lua NGCP modules that ngcp-klish-config
  uses.
