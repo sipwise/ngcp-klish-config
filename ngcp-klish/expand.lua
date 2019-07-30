@@ -1,5 +1,5 @@
 -- Code from: http://lua-users.org/wiki/TextTemplate
--- http://lua-users.org/files/wiki_insecure/users/pshook/template/Expand.luaS
+-- http://lua-users.org/files/wiki_insecure/users/pshook/template/Expand.lua
 local strfind = string.find
 local strsub  = string.sub
 local push    = table.insert
