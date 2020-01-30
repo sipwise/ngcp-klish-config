@@ -37,7 +37,7 @@ TestUtils = {} --class
 
     function TestUtils:test_table_deepcopy()
         assertNotIs(table.deepcopy(self.simple_hash), self.simple_hash)
-        -- if the parameter is not a table... it has te be the same
+        -- if the parameter is not a table... it has to be the same
         assertIs(table.deepcopy("hola"), "hola")
     end
 
