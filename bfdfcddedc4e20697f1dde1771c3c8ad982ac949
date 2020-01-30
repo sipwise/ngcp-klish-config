@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20109452_985ebcb2",
+        "filename": "etc/clish/overview.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2020-01-30T12:21:00Z",
+      "side": 1,
+      "message": "the the",
+      "range": {
+        "startLine": 41,
+        "startChar": 17,
+        "endLine": 41,
+        "endChar": 24
+      },
+      "revId": "bfdfcddedc4e20697f1dde1771c3c8ad982ac949",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    }
+  ]
+}
