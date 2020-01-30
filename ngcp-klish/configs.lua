@@ -38,7 +38,7 @@ function get_constants(force)
 	return constants
 end
 
--- conection for provisioning
+-- connection for provisioning
 function get_connection()
 	get_constants()
 	local config = {

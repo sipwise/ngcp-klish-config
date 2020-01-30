@@ -38,7 +38,7 @@ DELETION KEYS
 [backspace] - Delete the character to the left of the insertion point.
 
 ESCAPE SEQUENCES
-!!  - Subsitute the the last command line.
+!!  - Substitute the the last command line.
 !N  - Substitute the Nth command line (absolute as per 'history' command)
 !-N - Substitute the command line entered N lines before (relative)
     </OVERVIEW>

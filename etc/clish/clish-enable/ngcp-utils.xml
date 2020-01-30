@@ -61,12 +61,12 @@
 				user=$(whoami)
 				pid=$(ps aux | grep "tcpdump" | grep -v "grep tcpdump" | awk '$2!=0{print $2}')
 				if [ ! -z $pid ]; then
-					echo "ERROR: SIP Trace to file is already runnnig for $user ($pid)"
+					echo "ERROR: SIP Trace to file is already running for $user ($pid)"
 				else
 					echo "Starting SIP Tracer $$ for $user..."
 					tcpdump -ni any -s0 $param -w /tmp/siptrace$$.pcap &amp;
 					#tcpdump -ni any -s0 portrange 5060-5090 -w /tmp/siptrace$$.pcap &amp;
-					echo "SIP Trace to PCAP is runnnig (saving to: /tmp/siptrace$$.pcap)"
+					echo "SIP Trace to PCAP is running (saving to: /tmp/siptrace$$.pcap)"
 				fi
                 </ACTION>
 </COMMAND>
@@ -80,7 +80,7 @@
 					kill $pid
 					echo "Done."
 				else
-					echo "ERROR: SIP Trace is not runnnig."
+					echo "ERROR: SIP Trace is not running."
 				fi
                 </ACTION>
 </COMMAND>
@@ -104,7 +104,7 @@
                                         echo "Choose a PID to terminate:"
                                         echo $pid; echo
                                 else
-                                        echo "No Tracers runnning."
+                                        echo "No Tracers running."
                                 fi
                         fi
                 </ACTION>
@@ -299,12 +299,12 @@
 				pid=$(ps aux | grep "ngrep" | grep "P $user" | grep -v "grep ngrep" | awk '$2!=0{print $2}')
 				#echo $pid
 				if [ ! -z $pid ]; then
-					echo "ERROR: SIP Log to file is already runnnig for $user ($pid)"
+					echo "ERROR: SIP Log to file is already running for $user ($pid)"
 				else
 					echo "Starting SIP Logr $$ for $user..."
 					ngrep -d any -W byline $param -P $user > /tmp/siplog$$.log &amp;
 					#ngrep -W byline portrange 5060-5090 -P $user > /tmp/siplog$$.log &amp;
-					echo "SIP Log to file is runnnig (saving to: /tmp/siplog$$.log)"
+					echo "SIP Log to file is running (saving to: /tmp/siplog$$.log)"
 				fi
                 </ACTION>
 </COMMAND>
@@ -318,7 +318,7 @@
 					kill $pid
 					echo "Done."
 				else
-					echo "ERROR: SIP Log is not runnnig."
+					echo "ERROR: SIP Log is not running."
 				fi
                 </ACTION>
 </COMMAND>
@@ -343,7 +343,7 @@
 					echo "Choose a PID to terminate:"
 					echo $pid; echo
 				else
-					echo "No Tracers runnning."
+					echo "No Tracers runninng."
 				fi
 			fi
                 </ACTION>

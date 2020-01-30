@@ -53,8 +53,8 @@ BASIC HOW-TO:
 
         # git clone https://github.com/sipwise/ngcp-clish-config
         # cd ngcp-clish-config; cp -r etc/* /etc/
-    
-3) Add execution permisions to the launcher if needed, ie:
+
+3) Add execution permissions to the launcher if needed, ie:
 
     # chmod +x /etc/cli.sh
 
@@ -77,7 +77,7 @@ BASIC USAGE:
 
 2) Use tab/autocompletion and ? to explore the menus, commands and parameters
 
-3) Use 'enable' to enter priviledged mode (use the system's root password when asked)
+3) Use 'enable' to enter privileged mode (use the system's root password when asked)
 
 
 EXAMPLE COMMANDS:

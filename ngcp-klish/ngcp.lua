@@ -141,7 +141,7 @@ end
 
 -- formats the values before output them
 -- @param t table
--- @return table with the fields formated
+-- @return table with the fields formatted
 local function cc_list_prepare(t)
 	local f = {
 		callid=t.callid,
