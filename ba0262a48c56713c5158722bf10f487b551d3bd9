@@ -1,0 +1,8 @@
+Verified+1: Jenkins Jenkins
+Code-Review+1: Michael Prokop <mprokop@sipwise.com>
+Code-Review+2: Víctor Seva <vseva@sipwise.com>
+Submitted-by: Guillem Jover <gjover@sipwise.com>
+Submitted-at: Wed, 19 Feb 2020 23:31:33 +0100
+Reviewed-on: http://gerrit.mgm.sipwise.com/c/ngcp-klish-config/+/37710
+Project: ngcp-klish-config
+Branch: refs/heads/master
