@@ -1,0 +1,73 @@
+#!/bin/bash
+
+set -e
+set -u
+
+PASS=0
+FAIL=0
+
+run()
+{
+  local name="$1"
+  local filename="$2"
+
+  local tmpfile
+  tmpfile=$(mktemp)
+
+  echo -en "Testing ${filename} -> ${RESULTS}/${name}.${FORMAT_EXT}: "
+  cat >"${tmpfile}" <<EOF
+require "t/${name}"
+---- Control test output:
+local lu = require('luaunit')
+lu:setVerbosity(1)
+local runner = lu.LuaUnit.new()
+runner:setOutputType('${FORMAT}')
+runner:runSuite()
+EOF
+  set +e
+  if lua5.1 - <"${tmpfile}" >"${RESULTS}/${name}.${FORMAT_EXT}"; then
+    echo OK
+    (( PASS++ ))
+  else
+    echo FAIL
+    (( FAIL++ ))
+  fi
+  set -e
+  rm -f "${tmpfile}"
+}
+
+if [ -d /results ]; then
+  # Running from Jenkins (RW)
+  RESULTS="/results"
+  FORMAT=JUNIT
+  FORMAT_EXT=xml
+else
+  # Running locally in Docker
+  FORMAT=TAP
+  FORMAT_EXT=tap
+  RESULTS="./results"
+  mkdir -p "${RESULTS}"
+fi
+
+rm -rf "${RESULTS}"/*
+
+if [[ -z "$@" ]]; then
+  TESTS=("$(find t -name '*.lua' -exec basename {} .lua \;)")
+else
+  TESTS=("$@")
+fi
+
+for t in "${TESTS[@]}"; do
+  f="t/${t}.lua"
+  if [ ! -f "${f}" ]; then
+    echo "No ${f} found"
+  else
+    run "${t}" "${f}"
+  fi
+done
+
+echo
+echo "Finished test execution: ${PASS} passed, ${FAIL} failed"
+echo "Test results available at ${RESULTS}"
+
+exit "${FAIL}"
