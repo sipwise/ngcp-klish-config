@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53283323_c204085f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-02-19T13:08:42Z",
+      "side": 1,
+      "message": "nit: s/These/This/ or s/means/mean/, at least AFAICT",
+      "revId": "f1687442155ef50c8c6c8a1fee7df76750abec35",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    }
+  ]
+}
