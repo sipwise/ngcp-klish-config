@@ -12,10 +12,11 @@ function run()
   cat > "${tmpfile}" << EOF
 require "tests/$2"
 ---- Control test output:
-lu = LuaUnit
-lu:setOutputType('TAP')
+local lu = require('luaunit')
 lu:setVerbosity(1)
-lu:run()
+local runner = lu.LuaUnit.new()
+runner:setOutputType('TAP')
+runner:runSuite()
 EOF
   lua5.1 - < "${tmpfile}" > "reports/$2.tap"
   rm -f "${tmpfile}"
