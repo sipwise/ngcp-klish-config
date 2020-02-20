@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e7eb1064_032c53e3",
+        "filename": "t/testrunner",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-02-20T13:21:37Z",
+      "side": 1,
+      "message": "Indeed, missed these, thanks! Done",
+      "parentUuid": "201f9a3e_98d1f285",
+      "revId": "28a78f7b872eb0304e23c8556296a982665a9fa3",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d35c850c_48b3177a",
         "filename": "t/testrunner",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9c65855d_6cdf9110",
+        "filename": "t/testrunner",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-02-20T13:21:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d35c850c_48b3177a",
+      "revId": "28a78f7b872eb0304e23c8556296a982665a9fa3",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f6af9ffd_5f16efa2",
         "filename": "t/testrunner",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2020-02-20T12:26:26Z",
       "side": 1,
       "message": "same here",
+      "revId": "28a78f7b872eb0304e23c8556296a982665a9fa3",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08a98c4d_a4423d7a",
+        "filename": "t/testrunner",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-02-20T13:21:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6af9ffd_5f16efa2",
       "revId": "28a78f7b872eb0304e23c8556296a982665a9fa3",
       "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
       "unresolved": true
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "9824b0c8_699386b9",
+        "filename": "t/testrunner",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-02-20T13:21:37Z",
+      "side": 1,
+      "message": "Using a raw $* here is fine, but I\u0027ve just switched to an array to make this more explicit.",
+      "parentUuid": "05a447e6_aee4690f",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 10
+      },
+      "revId": "28a78f7b872eb0304e23c8556296a982665a9fa3",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d25f1a6e_59f6966a",
         "filename": "t/testrunner",
         "patchSetId": 1
@@ -87,6 +165,30 @@
       "writtenOn": "2020-02-20T10:32:55Z",
       "side": 1,
       "message": "quoted?",
+      "range": {
+        "startLine": 60,
+        "startChar": 9,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "28a78f7b872eb0304e23c8556296a982665a9fa3",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de4580cd_30f115c7",
+        "filename": "t/testrunner",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-02-20T13:21:37Z",
+      "side": 1,
+      "message": "It cannot be quoted or the different values would not be expanded.",
+      "parentUuid": "d25f1a6e_59f6966a",
       "range": {
         "startLine": 60,
         "startChar": 9,
