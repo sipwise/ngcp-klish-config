@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05a447e6_aee4690f",
+        "filename": "t/testrunner",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2020-02-20T10:32:55Z",
+      "side": 1,
+      "message": "\"$*\" maybe, quoted?  Or even \n  TEST\u003d( \"$*\" )\nor with \"$@\".",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 10
+      },
+      "revId": "28a78f7b872eb0304e23c8556296a982665a9fa3",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d25f1a6e_59f6966a",
+        "filename": "t/testrunner",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2020-02-20T10:32:55Z",
+      "side": 1,
+      "message": "quoted?",
+      "range": {
+        "startLine": 60,
+        "startChar": 9,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "28a78f7b872eb0304e23c8556296a982665a9fa3",
+      "serverId": "85315e57-5f03-49c3-83f8-201ae2313a75",
+      "unresolved": true
+    }
+  ]
+}
