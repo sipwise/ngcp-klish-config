@@ -1,5 +1,5 @@
 --
--- Copyright 2013 SipWise Team <development@sipwise.com>
+-- Copyright 2013-2020 SipWise Team <development@sipwise.com>
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -17,16 +17,13 @@
 -- On Debian systems, the complete text of the GNU General
 -- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 --
-require 'ngcp-klish.expand'
-require 'ngcp-klish.configs'
+local expand = require 'ngcp-klish.expand'
+local cfg = require 'ngcp-klish.configs'
 local MP = require 'ngcp-klish.rtpengine'
-local URI = require 'uri'
-require 'ngcp-klish.utils'
+local ut = require 'ngcp-klish.utils'
 
-local function uri_get_username(str)
-  local uri = URI:new(str)
-  return uri:username()
-end
+-- This is not a module!! list of commands:
+-- luacheck: globals cc_stats cc_list cc_details reg_stats reg_info
 
 -- templates
 local templates = {
@@ -93,7 +90,6 @@ local patterns = {
 
 -- get the stats info
 local function cc_stats_info()
-	local k,v
 	local prog_call='ngcp-kamctl proxy fifo dlg.profile_get_size'
 	local args = { total="", peerout="", internal="type", incoming="type" }
 	local stats = {
@@ -102,9 +98,16 @@ local function cc_stats_info()
 		internal=-1, incoming=-1
 	}
 
+	-- get a temporary file name
+	local foutput_name = os.tmpname()
+
 	for k,v in pairs(args) do
-		local val, line
-		local foutput = io.popen (string.format('%s %s %s', prog_call, v, k), 'r')
+		local cmd = string.format('%s %s %s > %s', prog_call, v, k, foutput_name)
+		if(os.execute(cmd) ~= 0) then
+			os.remove(foutput_name)
+			error(string.format("error executing command %s", cmd))
+		end
+		local foutput = io.open(foutput_name, 'r')
 		for line in foutput:lines() do
 			for val in string.gmatch(line, patterns.cc_stats[k]) do
 				stats[k] = tonumber(val)
@@ -112,6 +115,7 @@ local function cc_stats_info()
 		end
 		foutput:close()
 	end
+	os.remove(foutput_name)
 	return stats
 end
 
@@ -145,8 +149,8 @@ end
 local function cc_list_prepare(t)
 	local f = {
 		callid=t.callid,
-		caller=uri_get_username(t.from_uri),
-		callee=uri_get_username(t.to_uri),
+		caller=ut.uri_get_username(t.from_uri),
+		callee=ut.uri_get_username(t.to_uri),
 		date=os.date('%Y/%m/%d %H:%M:%S', t.timestart),
 		peer='',
 		rtp_ports=rtp_info_prepare(t),
@@ -160,7 +164,7 @@ local function dlg_info(foutput)
 	local result = {}
 	local temp,count
 	for line in foutput:lines() do
-		if string.starts(line,'hash') then
+		if ut.string.starts(line,'hash') then
 			if temp then result[temp.callid] = temp end
 			temp = {}; count = 0
 		end
@@ -215,9 +219,9 @@ end
 --get the dlg info for the callid
 local function call_info(callid, rtp_info)
 	local prog_call='ngcp-kamcmd proxy dlg.dlg_list'
-	local foutput, result = {}
-	for k,v in pairs(rtp_info) do
-		foutput = io.popen (string.format('%s %s %s', prog_call, callid, k), 'r')
+	local result = {}
+	for k,_ in pairs(rtp_info) do
+		local foutput = io.popen (string.format('%s %s %s', prog_call, callid, k), 'r')
 		result = dlg_info(foutput)
 		if result[callid] then
 			result[callid]["rtp_info"] = rtp_info
@@ -254,11 +258,9 @@ function cc_details(callid)
 end
 
 function reg_stats()
-	local k,v
 	local prog_call="ngcp-kamctl proxy fifo stats.get_statistics usrloc registered_users | jq '.[0]'"
 	local stats = {}
 
-	local val, line
 	local foutput = io.popen (string.format('%s', prog_call), 'r')
 	for line in foutput:lines() do
 		for val in string.gmatch(line, patterns.reg_stats.reg_users) do
@@ -266,14 +268,13 @@ function reg_stats()
 		end
 	end
 	foutput:close()
-	stats.users = get_users()
+	stats.users = cfg.get_users()
 	print(expand(templates.reg_stats, stats))
 end
 
 function reg_info(aor)
 	local prog_call='ngcp-kamcmd proxy ul.lookup location'
 	local result = {}
-	local line, val, k, p
 	local count = 0
 	local foutput = io.popen (string.format('%s %s', prog_call, aor), 'r')
 

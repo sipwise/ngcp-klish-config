@@ -1,5 +1,5 @@
 --
--- Copyright 2013 SipWise Team <development@sipwise.com>
+-- Copyright 2013-2020 SipWise Team <development@sipwise.com>
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -23,13 +23,10 @@ local M = {}
 -- importing
 local math = math
 local string = string
-local io = io
+
 local socket = require "socket"
-require "ngcp-klish.bencode"
--- debug
-local utils = require "ngcp-klish.utils"
--- forcing error on globals
-_ENV = nil
+local bencode = require "ngcp-klish.bencode"
+
 
 function M:new(o)
 	o = o or {_ip='127.0.0.1', _port=2223}
@@ -47,7 +44,7 @@ function M:server(host)
 end
 
 function M:port(port)
-	self._port = assert(tonumber())
+	self._port = assert(tonumber(port))
 end
 
 function M:cookie()
@@ -89,13 +86,13 @@ function M:ping()
 	return false
 end
 
-function M:offer()
+function M.offer()
 end
 
-function M:answer()
+function M.answer()
 end
 
-function M:delete()
+function M.delete()
 end
 
 function M:query(callid, from_tag, to_tag)
@@ -106,7 +103,7 @@ function M:query(callid, from_tag, to_tag)
 	return _send(self, 'query', param)
 end
 
-function M:start_recording()
+function M.start_recording()
 end
 
 -- end module

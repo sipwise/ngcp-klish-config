@@ -35,42 +35,42 @@ local sort, concat, insert = table.sort, table.concat, table.insert
 local pairs, ipairs, type, tonumber = pairs, ipairs, type, tonumber
 local sub, find = string.sub, string.find
 
-module "bencode"
+local bencode = {
+	encode_rec = nil -- encode_list/dict and encode_rec are mutually recursive...
+}
 
 -- helpers
 
-local function islist(t) 
-	local n = #t 
-	for k, v in pairs(t) do 
-		if type(k) ~= "number" 
+local function islist(t)
+	local n = #t
+	for k, _ in pairs(t) do
+		if type(k) ~= "number"
 		or k % 1 ~= 0 		-- integer?
 		or k < 1
-		or k > n 
-		then 
-			return false 
-		end 
-	end 
+		or k > n
+		then
+			return false
+		end
+	end
 	for i = 1, n do
-		if t[i] == nil then 
-			return false 
-		end 
-	end 
+		if t[i] == nil then
+			return false
+		end
+	end
 	return true
-end 
+end
 
 -- encoder functions
-
-local encode_rec -- encode_list/dict and encode_rec are mutually recursive...
 
 local function encode_list(t, x)
 
 	insert(t, "l")
 
-	for _,v in ipairs(x) do 
-		local err,ev = encode_rec(t, v);    if err then return err,ev end
+	for _,v in ipairs(x) do
+		local err,ev = bencode.encode_rec(t, v);    if err then return err,ev end
 	end
 
-	insert(t, "e") 
+	insert(t, "e")
 end
 
 local function encode_dict(t, x)
@@ -86,8 +86,8 @@ local function encode_dict(t, x)
 	sort(sortedkeys)
 
 	for k, v in ipairs(sortedkeys) do
-		local err,ev = encode_rec(t, v);    if err then return err,ev end
-		      err,ev = encode_rec(t, x[v]); if err then return err,ev end
+		local err,ev = bencode.encode_rec(t, v);    if err then return err,ev end
+		      err,ev = bencode.encode_rec(t, x[v]); if err then return err,ev end
 	end
 	insert(t, "e")
 end
@@ -102,12 +102,12 @@ end
 
 local function encode_str(t, x)
 
-	insert(t, #x  ) 
+	insert(t, #x  )
 	insert(t, ":" )
 	insert(t,  x  )
 end
 
-encode_rec = function(t, x)
+bencode.encode_rec = function(t, x)
 
 	local  typx = type(x)
 	if     typx == "string" then  return encode_str  (t, x)
@@ -124,10 +124,10 @@ end
 
 -- call recursive bencoder function with empty table, stringify that table.
 -- this is the only encode* function visible to module users.
-function encode(x)
+function bencode.encode(x)
 
 	local t = {}
-	local err, val = encode_rec(t,x)
+	local err, val = bencode.encode_rec(t,x)
 	if not err then
 		return concat(t)
 	else
@@ -137,70 +137,72 @@ end
 
 -- decoder functions
 
-local function decode_integer(s, index) 
-	local a, b, int = find(s, "^(%-?%d+)e", index) 
+local function decode_integer(s, index)
+	local _, b, int = find(s, "^(%-?%d+)e", index)
 	if not int then return nil, "not a number", nil end
-	int = tonumber(int) 
+	int = tonumber(int)
 	if not int then return nil, "not a number", int end
-	return int, b + 1 
-end 
+	return int, b + 1
+end
 
-local function decode_list(s, index) 
-	local t = {} 
-	while sub(s, index, index) ~= "e" do 
+local function decode_list(s, index)
+	local t = {}
+	while sub(s, index, index) ~= "e" do
 		local obj, ev
-		obj, index, ev = decode(s, index) 
+		obj, index, ev = bencode.decode(s, index)
 		if not obj then return obj, index, ev end
 		insert(t, obj)
-	end 
-	index = index + 1 
-	return t, index 
-end 
-	 
-local function decode_dictionary(s, index) 
-	local t = {} 
-	while sub(s, index, index) ~= "e" do 
+	end
+	index = index + 1
+	return t, index
+end
+
+local function decode_dictionary(s, index)
+	local t = {}
+	while sub(s, index, index) ~= "e" do
 		local obj1, obj2, ev
 
-		obj1, index, ev = decode(s, index) 
+		obj1, index, ev = bencode.decode(s, index)
 		if not obj1 then return obj1, index, ev end
 
-		obj2, index, ev = decode(s, index) 
+		obj2, index, ev = bencode.decode(s, index)
 		if not obj2 then return obj2, index, ev end
 
-		t[obj1] = obj2 
-	end 
-	index = index + 1 
-	return t, index 
-end 
-	 
-local function decode_string(s, index) 
-	local a, b, len = find(s, "^([0-9]+):", index) 
+		t[obj1] = obj2
+	end
+	index = index + 1
+	return t, index
+end
+
+local function decode_string(s, index)
+	local _, b, len = find(s, "^([0-9]+):", index)
 	if not len then return nil, "not a length", len end
-	index = b + 1 
-	 
-	local v = sub(s, index, index + len - 1) 
+	index = b + 1
+
+	local v = sub(s, index, index + len - 1)
 	if #v < len - 1 then return nil, "truncated string at end of input", v end
-	index = index + len 
-	return v, index 
-end 
-	 
-	 
-function decode(s, index) 
+	index = index + len
+	return v, index
+end
+
+
+function bencode.decode(s, index)
 	if not s then return nil, "no data", nil end
-	index = index or 1 
-	local t = sub(s, index, index) 
+	index = index or 1
+	local t = sub(s, index, index)
 	if not t then return nil, "truncation error", nil end
 
-	if t == "i" then 
-		return decode_integer(s, index + 1) 
-	elseif t == "l" then 
-		return decode_list(s, index + 1) 
-	elseif t == "d" then 
-		return decode_dictionary(s, index + 1) 
-	elseif t >= '0' and t <= '9' then 
-		return decode_string(s, index) 
-	else 
+	if t == "i" then
+		return decode_integer(s, index + 1)
+	elseif t == "l" then
+		return decode_list(s, index + 1)
+	elseif t == "d" then
+		return decode_dictionary(s, index + 1)
+	elseif t >= '0' and t <= '9' then
+		return decode_string(s, index)
+	else
 		return nil, "invalid type", t
-	end 
+	end
 end
+
+return bencode
