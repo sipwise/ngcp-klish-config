@@ -1,0 +1,166 @@
+{
+        h_entry: 891
+        h_id: 6174
+        ref: 2
+        call-id: 3c2047a7-85088e33@192.168.1.115
+        from_uri: sip:vseva@sipwise.com
+        to_uri: sip:0034654205681@sipwise.com
+        state: 4
+        start_ts: 1589974477
+        init_ts: 1589974463
+        end_ts: 0
+        timeout: 1589985477
+        lifetime: 11000
+        dflags: 512
+        sflags: 0
+        iflags: 0
+        caller: {
+                tag: 7ea419179e816b83o1
+                contact: sip:btpsh-5eb3339d-67ae-3fe14@127.0.0.1
+                cseq: 102
+                route_set:
+                socket: udp:127.0.0.1:5062
+        }
+        callee: {
+                tag: 3EC4C82D-5EC515BF000BC368-9B46C700
+                contact: sip:127.0.0.1:5085;transport=udp
+                cseq: 0
+                route_set:
+                socket: udp:127.0.0.1:5062
+        }
+        profiles: {
+        }
+        variables: {
+                {
+                        start_time: 1589974477
+                }
+                {
+                        rtpprx: 1
+                }
+                {
+                        callee_iface: pbx_int
+                }
+                {
+                        caller_iface: ext
+                }
+                {
+                        caller_tp: RTP/AVP
+                }
+                {
+                        acc_dst_leg: MHx8fDB8MDAzNDY1NDIwNTY4OHwwfDM0NjU0MjA1Njg4fHNpcHdpc2UuY29tfDM0NjU0MjA1Njg4fHNpcHdpc2UuY29tfDB8fHx8fHx8fHx8fHwzNDY1NDIwNTY4OHx8fA==
+                }
+                {
+                        sca_active: 1
+                }
+                {
+                        callee_domain: sipwise.com
+                }
+                {
+                        callee_user: 34654205681
+                }
+                {
+                        caller_ua_header_replace: myuseragent
+                }
+                {
+                        caller_ua_header_mode: strip
+                }
+                {
+                        lua_dlg_callid: 3c2047a7-85088e33@192.168.1.115
+                }
+                {
+                        caller_account_id: 83
+                }
+                {
+                        caller_domain: sipwise.com
+                }
+                {
+                        caller_user: vseva
+                }
+        }
+}
+{
+        h_entry: 2909
+        h_id: 7543
+        ref: 2
+        call-id: 3c2047a7-85088e33@192.168.1.115_pbx-1
+        from_uri: sip:vseva@sipwise.com
+        to_uri: sip:0034654205681@sipwise.com
+        state: 4
+        start_ts: 1589974477
+        init_ts: 1589974463
+        end_ts: 0
+        timeout: 1589985477
+        lifetime: 11000
+        dflags: 512
+        sflags: 0
+        iflags: 0
+        caller: {
+                tag: 688788C9-5EC515BF000BC481-C9785700
+                contact: sip:127.0.0.1:5085;transport=udp
+                cseq: 2432
+                route_set:
+                socket: udp:127.0.0.1:5062
+        }
+        callee: {
+                tag: 25F1E05F-5EC515BF000BEADB-6C439700
+                contact: sip:127.0.0.1:5080;transport=udp
+                cseq: 0
+                route_set:
+                socket: udp:127.0.0.1:5062
+        }
+        profiles: {
+        }
+        variables: {
+                {
+                        start_time: 1589974477
+                }
+                {
+                        rtpprx: 1
+                }
+                {
+                        callee_iface: ext
+                }
+                {
+                        caller_iface: ext
+                }
+                {
+                        callee_tp: RTP/AVP
+                }
+                {
+                        caller_tp: RTP/AVP
+                }
+                {
+                        dst_lcr_id: peer:1:blizzweb.at
+                }
+                {
+                        callee_ua_header_mode: strip
+                }
+                {
+                        caller_ua_header_replace: myuseragent
+                }
+                {
+                        caller_ua_header_mode: strip
+                }
+                {
+                        caller_account_id: 83
+                }
+                {
+                        caller_domain: sipwise.com
+                }
+                {
+                        caller_user: vseva
+                }
+                {
+                        lua_dlg_callid: 3c2047a7-85088e33@192.168.1.115_pbx-1
+                }
+                {
+                        no_acc: 1
+                }
+                {
+                        acc_dst_leg: MHx8fDB8MDAzNDY1NDIwNTY4OHwwfDM0NjU0MjA1Njg4fHNpcHdpc2UuY29tfDM0NjU0MjA1Njg4fHNpcHdpc2UuY29tfDB8fHx8fHx8fHx8fHwzNDY1NDIwNTY4OHx8fA==
+                }
+                {
+                        acc_src_leg: ODNlYTU1NTYtNmJmMy00ODQwLTkzNjItNjUxMTYxOWFmYTg5fHZzZXZhfHNpcHdpc2UuY29tfDQzMTMwMTIwNDc0fHxTaXB3aXNlIFBCWHw4M3x8fDB8Y2FsbHw3OS4xNTYuNjkuMjIxfDE1ODk5NzQ0NjMuNzY4NzE4fHx8fHx8fHx8fHx8NDMxMzAxMjA0NzR8fHx8fHwwfA==
+                }
+        }
+}

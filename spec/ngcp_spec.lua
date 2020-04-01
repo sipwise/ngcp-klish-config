@@ -1,5 +1,5 @@
 --
--- Copyright 2013 SipWise Team <development@sipwise.com>
+-- Copyright 2020 SipWise Team <development@sipwise.com>
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -17,15 +17,15 @@
 -- On Debian systems, the complete text of the GNU General
 -- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 --
-require('luaunit')
-local URI = require "uri"
 
-TestUri = {}
-function TestUri:test()
-    local u = URI:new('sip:username1:password@domain.com:5080;user=phone?header1=value1&header2=value2')
-    assertEquals(u:username(), 'username1')
-    assertEquals(u:port(), 5080)
-    assertEquals(u:host(), 'domain.com')
-    assertEquals(u:fragment(), 'user=phone')
-    assertEquals(u:query(), 'header1=value1&header2=value2')
-end
+describe("ngcp", function()
+    local ngcp
+
+    setup(function()
+        ngcp = require("ngcp-klish.ngcp")
+    end)
+
+    before_each(function()
+    end)
+
+end)

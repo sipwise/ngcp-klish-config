@@ -22,8 +22,10 @@ local constants
 local DBI = require "DBI"
 local io = require "io"
 
+local configs = {}
+
 -- return the content of file
-function readAll(file)
+function configs.readAll(file)
     local f = io.open(file, "rb")
     local content = f:read("*all")
     f:close()
@@ -31,16 +33,16 @@ function readAll(file)
 end
 
 -- return the ngcp constants as table
-function get_constants(force)
+function configs.get_constants(force)
 	if not constants or force then
-		constants = yaml.load(readAll('/etc/ngcp-config/constants.yml'))
+		constants = yaml.load(configs.readAll('/etc/ngcp-config/constants.yml'))
 	end
 	return constants
 end
 
 -- connection for provisioning
-function get_connection()
-	get_constants()
+function configs.get_connection()
+	configs.get_constants()
 	local config = {
 		dbname = constants.ossbss.provisioning.database.name,
 		dbuser = constants.ossbss.provisioning.database.user,
@@ -56,8 +58,8 @@ function get_connection()
 	return dbh
 end
 
-function get_users()
-	local dbc = get_connection()
+function configs.get_users()
+	local dbc = configs.get_connection()
 	local res, err = DBI.Do(dbc,
 		"select * from voip_subscribers where account_id is not null")
 	dbc:close()
@@ -67,3 +69,5 @@ function get_users()
 	--affected_rows
 	return res
 end
+
+return configs
