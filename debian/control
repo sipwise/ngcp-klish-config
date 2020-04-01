@@ -14,7 +14,7 @@ Depends:
  jq,
  klish,
  lua-ngcp-klish,
- lua5.1,
+ lua5.2,
  pssh,
  ${misc:Depends},
 Conflicts:

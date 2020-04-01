@@ -17,15 +17,17 @@
 -- On Debian systems, the complete text of the GNU General
 -- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 --
-require('luaunit')
+local lu = require('luaunit')
 local URI = require "uri"
 
+-- luacheck: ignore TestUri
 TestUri = {}
-function TestUri:test()
+
+function TestUri.test()
     local u = URI:new('sip:username1:password@domain.com:5080;user=phone?header1=value1&header2=value2')
-    assertEquals(u:username(), 'username1')
-    assertEquals(u:port(), 5080)
-    assertEquals(u:host(), 'domain.com')
-    assertEquals(u:fragment(), 'user=phone')
-    assertEquals(u:query(), 'header1=value1&header2=value2')
+    lu.assertEquals(u:username(), 'username1')
+    lu.assertEquals(u:port(), 5080)
+    lu.assertEquals(u:host(), 'domain.com')
+    lu.assertEquals(u:fragment(), 'user=phone')
+    lu.assertEquals(u:query(), 'header1=value1&header2=value2')
 end

@@ -23,11 +23,11 @@ local M = {}
 -- importing
 local math = math
 local string = string
-local io = io
+--local io = io
 local socket = require "socket"
-require "ngcp-klish.bencode"
+local bencode = require "ngcp-klish.bencode"
 -- debug
-local utils = require "ngcp-klish.utils"
+--local utils = require "ngcp-klish.utils"
 -- forcing error on globals
 _ENV = nil
 
@@ -47,7 +47,7 @@ function M:server(host)
 end
 
 function M:port(port)
-	self._port = assert(tonumber())
+	self._port = assert(tonumber(port))
 end
 
 function M:cookie()
@@ -89,13 +89,13 @@ function M:ping()
 	return false
 end
 
-function M:offer()
+function M.offer()
 end
 
-function M:answer()
+function M.answer()
 end
 
-function M:delete()
+function M.delete()
 end
 
 function M:query(callid, from_tag, to_tag)
@@ -106,7 +106,7 @@ function M:query(callid, from_tag, to_tag)
 	return _send(self, 'query', param)
 end
 
-function M:start_recording()
+function M.start_recording()
 end
 
 -- end module
