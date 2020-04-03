@@ -5,6 +5,7 @@ set -u
 
 PASS=0
 FAIL=0
+LUA=${LUA:-lua5.1}
 
 run()
 {
@@ -25,7 +26,7 @@ runner:setOutputType('${FORMAT}')
 runner:runSuite()
 EOF
   set +e
-  if lua5.1 - <"${tmpfile}" >"${RESULTS}/${name}.${FORMAT_EXT}"; then
+  if ${LUA} - <"${tmpfile}" >"${RESULTS}/${name}.${FORMAT_EXT}"; then
     echo OK
     (( PASS++ ))
   else
@@ -49,12 +50,12 @@ else
   mkdir -p "${RESULTS}"
 fi
 
-rm -rf "${RESULTS}"/*
+rm -rf "${RESULTS:-./results}"/*
 
-if [[ -z "$@" ]]; then
-  TESTS=("$(find t -name '*.lua' -exec basename {} .lua \;)")
+if [[ -z "$*" ]]; then
+  mapfile -t TESTS < <(find t -name '*.lua' -exec basename {} .lua \;)
 else
-  TESTS=("$@")
+  mapfile -t TESTS < <("$@")
 fi
 
 for t in "${TESTS[@]}"; do
