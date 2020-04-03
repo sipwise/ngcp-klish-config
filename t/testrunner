@@ -1,73 +1,94 @@
 #!/bin/bash
-
-set -e
 set -u
 
 PASS=0
 FAIL=0
-
-run()
-{
-  local name="$1"
-  local filename="$2"
-
-  local tmpfile
-  tmpfile=$(mktemp)
-
-  echo -en "Testing ${filename} -> ${RESULTS}/${name}.${FORMAT_EXT}: "
-  cat >"${tmpfile}" <<EOF
-require "t/${name}"
----- Control test output:
-local lu = require('luaunit')
-lu:setVerbosity(1)
-local runner = lu.LuaUnit.new()
-runner:setOutputType('${FORMAT}')
-runner:runSuite()
-EOF
-  set +e
-  if lua5.1 - <"${tmpfile}" >"${RESULTS}/${name}.${FORMAT_EXT}"; then
-    echo OK
-    (( PASS++ ))
-  else
-    echo FAIL
-    (( FAIL++ ))
-  fi
-  set -e
-  rm -f "${tmpfile}"
-}
+ID=0
+LUA=${LUA:-lua5.1}
+RESULTS=${RESULTS:-./results}
 
 if [ -d /results ]; then
   # Running from Jenkins (RW)
   RESULTS="/results"
   FORMAT=JUNIT
-  FORMAT_EXT=xml
 else
   # Running locally in Docker
   FORMAT=TAP
-  FORMAT_EXT=tap
-  RESULTS="./results"
   mkdir -p "${RESULTS}"
 fi
 
-rm -rf "${RESULTS}"/*
+case ${FORMAT} in
+  TAP) EXT=tap; OUT_FORCE=true ;;
+  JUNIT) EXT=xml; OUT_FORCE=false ;;
+  TEXT) EXT=txt; OUT_FORCE=true ;;
+  *) echo "ERROR: Unknown format ${FORMAT}"; exit 1 ;;
+esac
 
-if [[ -z "$@" ]]; then
-  TESTS=("$(find t -name '*.lua' -exec basename {} .lua \;)")
-else
-  TESTS=("$@")
-fi
+# unique id across files
+# See TT#4590
+function fix_id() {
+  (( ID += 1))
+  local tmp_id
+  tmp_id=$(printf "%05d\\n" "$ID")
+  sed -i "s/id=\"00001\"/id=\"$tmp_id\"/" "$1"
+}
 
-for t in "${TESTS[@]}"; do
-  f="t/${t}.lua"
-  if [ ! -f "${f}" ]; then
-    echo "No ${f} found"
+function run_test() {
+  local tmpfile=$1
+  local output=$2
+
+  if ${OUT_FORCE} ; then
+    ${LUA} - <"${tmpfile}" > "${output}"
   else
-    run "${t}" "${f}"
+    ${LUA} - --name "${output}" <"${tmpfile}"
   fi
-done
+  return $?
+}
+
+function  do_test() {
+  local name="$1"
+  local RES="${RESULTS}/${name}.${EXT}"
+
+  local tmpfile
+  tmpfile=$(mktemp)
+
+  echo -n "testing ${name} -> ${RES}:"
+  cat >"${tmpfile}" <<EOF
+EXPORT_ASSERT_TO_GLOBALS = true
+require "t/${name}"
+---- Control test output:
+local lu = LuaUnit
+lu:setOutputType('${FORMAT}')
+os.exit(lu:run())
+EOF
+
+  if run_test "${tmpfile}" "${RES}"; then
+    ((PASS++))
+    echo "OK"
+  else
+    ((FAIL++))
+    echo "FAIL"
+  fi
+
+  if [[ "${FORMAT}" == JUNIT ]] ; then
+    fix_id "${RES}"
+  fi
+  rm -f "${tmpfile}"
+}
+
+rm -rf "${RESULTS:-./results}"/*
+
+if [[ -z "$*" ]]; then
+  mapfile -t TESTS < <(find t -name '*.lua' -exec basename {} .lua \;)
+  for t in "${TESTS[@]}"; do
+    do_test "$t"
+  done
+else
+  for t in "${@}"; do
+    do_test "$(basename "${t}" .lua)"
+  done
+fi
 
 echo
 echo "Finished test execution: ${PASS} passed, ${FAIL} failed"
 echo "Test results available at ${RESULTS}"
-
-exit "${FAIL}"
