@@ -29,7 +29,6 @@ Depends:
  jq,
  lua-dbi-mysql,
  lua-socket,
- lua-uri,
  lua-yaml,
  ${misc:Depends},
 Description: Lua modules for ngcp-klish-config
