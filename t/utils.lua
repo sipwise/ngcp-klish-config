@@ -61,9 +61,13 @@ TestUtils = {} --class
     function TestUtils:test_table_tostring()
         assertError(table.tostring,nil)
         assertEquals(table.tostring(self.simple_list), "{1,2,3}")
-        assertTrue(table.tostring(self.simple_hash))
-        --print(table.tostring(self.simple_hash) .. "\n")
-        assertTrue(table.tostring(self.complex_hash))
+        local t = table.tostring(self.simple_hash)
+        assertStrContains(t, "one=1")
+        assertStrContains(t, "two=2")
+        assertStrContains(t, "three=3")
+        t = table.tostring(self.complex_hash)
+        assertStrContains(t, "cone={")
+        assertStrContains(t, "ctwo={")
         --print(table.tostring(self.complex_hash))
     end
 
@@ -76,6 +80,22 @@ TestUtils = {} --class
     function TestUtils:test_explode()
         assertItemsEquals(explode(',',"1,2,3"), {'1','2','3'})
         assertItemsEquals(explode('=>',"1=>2=>3"), {'1','2','3'})
+    end
+
+    function TestUtils:uri_get_username()
+        assertEquals(
+            'vseva',
+            uri_get_username('sip:vseva@fake.local')
+        )
+        assertEquals(
+            'vseva',
+            uri_get_username('sip:vseva@127.0.0.1:50602')
+        )
+        local t = 'sip:vseva@[2620:0:2ef0:7070:250:60ff:fe03:32b7]:5060;transport=tcp'
+        assertEquals(
+            'vseva',
+            uri_get_username(t)
+        )
     end
 
     function TestUtils:test_starts()
