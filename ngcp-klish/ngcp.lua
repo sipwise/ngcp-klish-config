@@ -20,13 +20,7 @@
 require 'ngcp-klish.expand'
 require 'ngcp-klish.configs'
 local MP = require 'ngcp-klish.rtpengine'
-local URI = require 'uri'
 require 'ngcp-klish.utils'
-
-local function uri_get_username(str)
-  local uri = URI:new(str)
-  return uri:username()
-end
 
 -- templates
 local templates = {

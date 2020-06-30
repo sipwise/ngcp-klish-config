@@ -152,6 +152,10 @@ function string.ends(String,End)
    return End=='' or string.sub(String,-string.len(End))==End
 end
 
+function uri_get_username(str)
+  return str:match('sip:([^@]+)')
+end
+
 -- Stack Table
 -- Uses a table as stack, use <table>:push(value) and <table>:pop()
 -- Lua 5.1 compatible
