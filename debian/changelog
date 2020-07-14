@@ -1,3 +1,11 @@
+ngcp-klish-config (8.5.1.0+0~mr8.5.1.0) unstable; urgency=medium
+
+  [ Victor Seva ]
+  * [595a5ca] TT#64357 switch to lua5.2
+  * [5522960] TT#64357 remove lua-uri dependence
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Tue, 14 Jul 2020 11:52:59 +0200
+
 ngcp-klish-config (8.5.0.0+0~mr8.5.0.0) unstable; urgency=medium
 
   [ Victor Seva ]
