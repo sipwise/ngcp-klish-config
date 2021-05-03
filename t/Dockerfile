@@ -1,11 +1,11 @@
-# DOCKER_NAME=ngcp-klish-config-buster
-FROM docker.mgm.sipwise.com/sipwise-buster:latest
+# DOCKER_NAME=ngcp-klish-config-bullseye
+FROM docker.mgm.sipwise.com/sipwise-bullseye:latest
 
 # Important! Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT 2020-05-20
+ENV REFRESHED_AT 2021-05-03
 
 RUN apt-get update && \
     apt-get install --assume-yes \
@@ -26,15 +26,15 @@ WORKDIR /code/
 # To build the base image from scratch (or jump to the next section if
 # you do not want to build it yourself):
 #
-# % docker build --tag="ngcp-klish-config-buster" -f t/Dockerfile .
-# % docker run --rm -i -t -v $(pwd):/code:rw ngcp-klish-config-buster:latest bash
+# % docker build --tag="ngcp-klish-config-bullseye" -f t/Dockerfile .
+# % docker run --rm -i -t -v $(pwd):/code:rw ngcp-klish-config-bullseye:latest bash
 #
 # To use the existing docker image:
 #
-# % docker pull docker.mgm.sipwise.com/ngcp-klish-config-buster
+# % docker pull docker.mgm.sipwise.com/ngcp-klish-config-bullseye
 # NOTE: run the following command from the root folder of the git repository:
 # % docker run --rm -i -t -v $(pwd):/code:rw \
-#   docker.mgm.sipwise.com/ngcp-klish-config-buster:latest bash
+#   docker.mgm.sipwise.com/ngcp-klish-config-bullseye:latest bash
 #
 # Inside docker (the command is in the history, just press the UP button):
 #   ./t/testrunner
