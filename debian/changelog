@@ -1,3 +1,10 @@
+ngcp-klish-config (10.0.0.0+0~mr10.0.0.0) unstable; urgency=medium
+
+  [ Manuel Montecelo ]
+  * [fe5996e] TT#118659 Switch Dockerfile from Debian buster to bullseye
+
+ -- Sipwise Jenkins Builder <jenkins@sipwise.com>  Mon, 14 Jun 2021 16:36:53 +0200
+
 ngcp-klish-config (9.5.0.0+0~mr9.5.0.0) unstable; urgency=medium
 
   * New release.
