@@ -17,8 +17,6 @@ Depends:
  lua5.2,
  pssh,
  ${misc:Depends},
-Conflicts:
- klish-default-config,
 Description: NGCP config for klish
  This package provides the NGCP config for klish.
 
