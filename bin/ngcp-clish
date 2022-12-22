@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ $# -gt 0 ]; then
-  clish -x /etc/clish/clish-enable/ -c "$@"
-else
-  echo "Entering 'clish-enable' view (press Ctrl+Z to exit)..."
-  clish -x /etc/clish/clish-enable/
-fi

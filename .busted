@@ -1,6 +1,0 @@
-return {
-  default = {
-    lua = "/usr/bin/lua5.2",
-    helper = "./spec/helper.lua",
-  },
-}
